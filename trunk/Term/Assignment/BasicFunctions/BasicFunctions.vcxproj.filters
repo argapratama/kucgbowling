@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{0c5dea46-6c84-4f4e-87ee-6eb0b53a68b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Dialog">
+      <UniqueIdentifier>{18227542-c706-4a3c-8f4a-79cfa7cb398c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Precompiled Header">
+      <UniqueIdentifier>{40e54c79-e272-4836-9081-6df87c9a2b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\MainEntry">
+      <UniqueIdentifier>{9ac9c5c0-2024-4e1d-a6b6-432efcfc6526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Exception">
+      <UniqueIdentifier>{028eae87-b6bc-4699-aa50-286fad3f642b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Library Class">
+      <UniqueIdentifier>{2a4136ac-1e00-464a-86c1-e1a55b72ca67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application Class">
+      <UniqueIdentifier>{9a0524f3-0d9b-4482-a806-49d3b91b9244}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Library Class\OpenGl">
+      <UniqueIdentifier>{39f08536-d861-4f36-8919-b62592a73f5a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\BasicFunctions.rc2">
+      <Filter>Resource</Filter>
+    </None>
+    <None Include="res\BasicFunctions.ico">
+      <Filter>Resource</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BasicFunctionsDlg.h">
+      <Filter>Source\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicFunctions.h">
+      <Filter>Source\MainEntry</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGlPanel.h">
+      <Filter>Source\Dialog</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Source\Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Source\Precompiled Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Exception.h">
+      <Filter>Source\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGlException.h">
+      <Filter>Source\Exception</Filter>
+    </ClInclude>
+    <ClInclude Include="TString.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="PrimitiveType.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderingContext.h">
+      <Filter>Source\Library Class\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelFormat.h">
+      <Filter>Source\Library Class\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelFormatController.h">
+      <Filter>Source\Library Class\OpenGl</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawingState.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Drawer.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Lighting.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BasicFunctionsDlg.cpp">
+      <Filter>Source\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicFunctions.cpp">
+      <Filter>Source\MainEntry</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlPanel.cpp">
+      <Filter>Source\Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source\Precompiled Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>Source\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="OpenGlException.cpp">
+      <Filter>Source\Exception</Filter>
+    </ClCompile>
+    <ClCompile Include="TString.cpp">
+      <Filter>Source\Library Class</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderingContext.cpp">
+      <Filter>Source\Library Class\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelFormat.cpp">
+      <Filter>Source\Library Class\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelFormatController.cpp">
+      <Filter>Source\Library Class\OpenGl</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawingState.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Drawer.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Lighting.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Color.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BasicFunctions.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
