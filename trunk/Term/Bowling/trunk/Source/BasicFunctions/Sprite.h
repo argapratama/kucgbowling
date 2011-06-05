@@ -54,7 +54,7 @@ public:
     Sprite(void);
     ~Sprite(void);
 
-    bool Load(const String& fileName);
+    bool Load(const String& fileName, const String& textureName);
 
     void RotateXMore(float angle);
     void RotateYMore(float angle);
