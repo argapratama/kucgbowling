@@ -240,31 +240,46 @@ BOOL CBasicFunctionsDlg::OnInitDialog()
     speedSlider_.SetRangeMax(2000);
     speedSlider_.SetPos(100);
 
-    if(!openGlPanel_.Sprite().Load(L"Bowling_Pin.obj"))
+	if(!openGlPanel_.Sprite().Load(L"bowling_ball.obj", L"green_ball_skin.bmp"))
     {
-        MessageBox(L"Bowling_Pin.obj doesn't exist. Please restart this application ^^;;");
+        MessageBox(L"bowling_ball.obj doesn't exist. Please restart this application ^^;;");
     }
-    
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite2());
-	openGlPanel_.Sprite2().TranslateMore(-0.6, 0.3, -1.0);
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite3());
-	openGlPanel_.Sprite3().TranslateMore(0.6, 0.3, -1.0);
+	openGlPanel_.Sprite().Scale(0.2, 0.2, 0.2);
+	openGlPanel_.Sprite().TranslateMore(-2.0, 0.0, 0.0);
+	if(!openGlPanel_.SpritePin().Load(L"bowling_pin.obj", L""))
+    {
+        MessageBox(L"bowling_pin.obj doesn't exist. Please restart this application ^^;;");
+    }
+	
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin2());
+	openGlPanel_.SpritePin2().TranslateMore(-0.6, 0.3, -1.0);
+	openGlPanel_.SpritePin2().SetDrawTexture(false);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin3());
+	openGlPanel_.SpritePin3().TranslateMore(0.6, 0.3, -1.0);
+	openGlPanel_.SpritePin3().SetDrawTexture(false);
 
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite4());
-	openGlPanel_.Sprite4().TranslateMore(-1.2, 0.6, -2.0);
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite5());
-	openGlPanel_.Sprite5().TranslateMore(0, 0.6, -2.0);
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite6());
-	openGlPanel_.Sprite6().TranslateMore(1.2, 0.6, -2.0);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin4());
+	openGlPanel_.SpritePin4().TranslateMore(-1.2, 0.6, -2.0);
+	openGlPanel_.SpritePin4().SetDrawTexture(false);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin5());
+	openGlPanel_.SpritePin5().TranslateMore(0, 0.6, -2.0);
+	openGlPanel_.SpritePin5().SetDrawTexture(false);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin6());
+	openGlPanel_.SpritePin6().TranslateMore(1.2, 0.6, -2.0);
+	openGlPanel_.SpritePin6().SetDrawTexture(false);
 
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite7());
-	openGlPanel_.Sprite7().TranslateMore(-1.8, 0.9, -3.0);
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite8());
-	openGlPanel_.Sprite8().TranslateMore(-0.6, 0.9, -3.0);
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite9());
-	openGlPanel_.Sprite9().TranslateMore(0.6, 0.9, -3.0);
-	openGlPanel_.Sprite().CopyTo(openGlPanel_.Sprite10());
-	openGlPanel_.Sprite10().TranslateMore(1.8, 0.9, -3.0);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin7());
+	openGlPanel_.SpritePin7().TranslateMore(-1.8, 0.9, -3.0);
+	openGlPanel_.SpritePin7().SetDrawTexture(false);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin8());
+	openGlPanel_.SpritePin8().TranslateMore(-0.6, 0.9, -3.0);
+	openGlPanel_.SpritePin8().SetDrawTexture(false);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin9());
+	openGlPanel_.SpritePin9().TranslateMore(0.6, 0.9, -3.0);
+	openGlPanel_.SpritePin9().SetDrawTexture(true);
+	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin10());
+	openGlPanel_.SpritePin10().TranslateMore(1.8, 0.9, -3.0);
+	openGlPanel_.SpritePin10().SetDrawTexture(false);
     //openGlPanel_.Sprite().CopyTo(openGlPanel_.AnotherSprite());
 	//openGlPanel_.AnotherSprite().TranslateMore(1.0, 0, 0);
     /*openGlPanel_.TopCamera().MoveTo(0.0, 6.0, 0.0);

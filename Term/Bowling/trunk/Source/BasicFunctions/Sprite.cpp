@@ -37,7 +37,7 @@ AUX_RGBImageRec* LoadBitmap(String filePath)					// Loads A Bitmap Image
     return auxDIBImageLoad(filePath.c_str());				// Load The Bitmap And Return A Pointer
 }
 
-bool Sprite::Load(const String& fileName)
+bool Sprite::Load(const String& fileName, const String& textureName)
 {
     // HappyBuddha.obj
 
@@ -81,9 +81,9 @@ bool Sprite::Load(const String& fileName)
         // vt 1.0 1.0 1.0
         else if(line.size() > 2 && line[0] == L'v' && line[1] == L't')
         {
-            float x;
-            float y;
-            float z;
+            float x = 0;
+            float y = 0;
+            float z = 0;
             swscanf(line.c_str(), L"vt %f %f %f", &x, &y, &z);
 
             texels_.push_back(Vector3(x, y, z));
@@ -100,7 +100,33 @@ bool Sprite::Load(const String& fileName)
             normals_.push_back(Vector3(x, y, z));
         }
 
-        // f 0/0 1/2 3/3 2/1
+		// f 0/0 1/2 3/3 2/1
+        else if(line.size() > 2 && line[0] == L'f' && line[1] == L' ' && cnt == 4)
+        {
+            QuadVertice vertice;
+            QuadVertice textureVertice;
+			QuadVertice normalVertice;
+            vertice.Index[0];
+            swscanf(line.c_str(), L"f %d/%d %d/%d %d/%d %d/%d", 
+				&vertice.Index[0], &textureVertice.Index[0],
+                &vertice.Index[1], &textureVertice.Index[1],
+                &vertice.Index[2], &textureVertice.Index[2],
+                &vertice.Index[3], &textureVertice.Index[3]);
+
+            // index가 1-base 이므로 0-base로 바꿔준다.
+            vertice.Index[0]--;
+            vertice.Index[1]--;
+            vertice.Index[2]--;
+            vertice.Index[3]--;
+            textureVertice.Index[0]--;
+            textureVertice.Index[1]--;
+            textureVertice.Index[2]--;
+            textureVertice.Index[3]--;
+
+            faces_.push_back(vertice);
+            textureFaces_.push_back(textureVertice);
+        }
+        // f 0/0/0 1/2/3 3/3/3 2/1/3
         else if(line.size() > 2 && line[0] == L'f' && line[1] == L' ' && cnt == 8)
         {
             QuadVertice vertice;
@@ -131,6 +157,7 @@ bool Sprite::Load(const String& fileName)
             textureFaces_.push_back(textureVertice);
 			normalVertices_.push_back(normalVertice);
         }
+		// f 0/0/0 1/2/3 3/3/3
 		else if(line.size() > 2 && line[0] == L'f' && line[1] == L' ' && cnt == 6)
         {
             TriangleVertice vertice;
@@ -164,33 +191,36 @@ bool Sprite::Load(const String& fileName)
     //
     // Face Normal 계산
     //
-    //vertexNormals_.resize(vertice_.size());
-    //for(int i = 0; i < faces_.size(); ++i)
-    //{
-    //    const Vector3& vertex1 = vertice_[faces_[i].Index[0]];
-    //    const Vector3& vertex2 = vertice_[faces_[i].Index[1]];
-    //    const Vector3& vertex3 = vertice_[faces_[i].Index[2]];
-    //    // 법선을 구하는 데는 벡터 두개만 있으면 되므로 4번째 점(vertex4)은 보지 않기로 함.
+	if(normalVertices_.size() == 0)
+    {
+		vertexNormals_.resize(vertice_.size());
+		for(int i = 0; i < faces_.size(); ++i)
+		{
+			const Vector3& vertex1 = vertice_[faces_[i].Index[0]];
+			const Vector3& vertex2 = vertice_[faces_[i].Index[1]];
+			const Vector3& vertex3 = vertice_[faces_[i].Index[2]];
+			// 법선을 구하는 데는 벡터 두개만 있으면 되므로 4번째 점(vertex4)은 보지 않기로 함.
 
-    //    Vector3 first = vertex2 - vertex1;
-    //    Vector3 second = vertex3 - vertex2;
-    //    Vector3 normal = first.Cross(second);
-    //    normal.Normalize();
-    //    faceNormals_.push_back(normal);
+			Vector3 first = vertex2 - vertex1;
+			Vector3 second = vertex3 - vertex2;
+			Vector3 normal = first.Cross(second);
+			normal.Normalize();
+			faceNormals_.push_back(normal);
 
-    //    // 이제 이 Face에 속한 각 Vertex들의 Normal 벡터값을 증가시켜줌
-    //    vertexNormals_[faces_[i].Index[0]] += normal;
-    //    vertexNormals_[faces_[i].Index[1]] += normal;
-    //    vertexNormals_[faces_[i].Index[2]] += normal;
-    //    vertexNormals_[faces_[i].Index[3]] += normal;
-    //}
+			// 이제 이 Face에 속한 각 Vertex들의 Normal 벡터값을 증가시켜줌
+			vertexNormals_[faces_[i].Index[0]] += normal;
+			vertexNormals_[faces_[i].Index[1]] += normal;
+			vertexNormals_[faces_[i].Index[2]] += normal;
+			vertexNormals_[faces_[i].Index[3]] += normal;
+		}
+	}
 
     // Texture, FileName: "check.bmp"
     AUX_RGBImageRec* TextureImage[1];
     memset(TextureImage,0,sizeof(void *)*1);
 
     // Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit
-	if (TextureImage[0] = LoadBitmap(L"check.bmp"))
+	if (TextureImage[0] = LoadBitmap(textureName))
 	{
         glGenTextures(3, &texture_[0]);	
         // Create Nearest Filtered Texture
@@ -255,7 +285,6 @@ void Sprite::Draw()
     glRotatef(rotateAngle_, rotateAxisEnd_.X - rotateAxisBegin_.X, rotateAxisEnd_.Y - rotateAxisBegin_.Y, rotateAxisEnd_.Z - rotateAxisBegin_.Z);
     glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
 
-    glColor3f(1.0, 1.0, 1.0);
 
     if(meshMode_ == MeshMode_Point)
     {
@@ -347,11 +376,17 @@ void Sprite::Draw()
             const Vector3& texel2 = texels_[textureFaces_[i].Index[1]];
             const Vector3& texel3 = texels_[textureFaces_[i].Index[2]];
             const Vector3& texel4 = texels_[textureFaces_[i].Index[3]];
-			const Vector3& normal1 = normals_[normalVertices_[i].Index[0]];
-            const Vector3& normal2 = normals_[normalVertices_[i].Index[1]];
-            const Vector3& normal3 = normals_[normalVertices_[i].Index[2]];
-            const Vector3& normal4 = normals_[normalVertices_[i].Index[3]];
-
+			Vector3 normal1;
+            Vector3 normal2;
+            Vector3 normal3;
+            Vector3 normal4;
+			if(normals_.size() > 0)
+			{
+				normal1 = normals_[normalVertices_[i].Index[0]];
+				normal2 = normals_[normalVertices_[i].Index[1]];
+				normal3 = normals_[normalVertices_[i].Index[2]];
+				normal4 = normals_[normalVertices_[i].Index[3]];
+			}
             //if(doDrawNormal_)
             //{
             //    // 시작점은 4점의 평균
@@ -370,34 +405,38 @@ void Sprite::Draw()
             //    glColor3f(1.0, 1.0, 1.0);
             //}
             
+			if(vertexNormals_.size() > 0)
+			{
+				normal1 = vertexNormals_[faces_[i].Index[0]];
+				normal2 = vertexNormals_[faces_[i].Index[1]];
+				normal3 = vertexNormals_[faces_[i].Index[2]];
+				normal4 = vertexNormals_[faces_[i].Index[3]];
+			}
             /*const Vector3& vertexNormal1 = vertexNormals_[faces_[i].Index[0]];
             const Vector3& vertexNormal2 = vertexNormals_[faces_[i].Index[1]];
             const Vector3& vertexNormal3 = vertexNormals_[faces_[i].Index[2]];
             const Vector3& vertexNormal4 = vertexNormals_[faces_[i].Index[3]];*/
-
             if(doDrawTexture_)
                 glBindTexture(GL_TEXTURE_2D, texture_[0]);
             else
                 glBindTexture(GL_TEXTURE_2D, 0);
 
             glBegin(GL_QUADS);
-
-            glNormal3f(normal1.X, normal1.Y, normal1.Z);
+			glNormal3f(normal1.X, normal1.Y, normal1.Z);
             if(doDrawTexture_)
                 glTexCoord2f(texel1.X, texel1.Y); 
             glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
-            
-            glNormal3f(normal2.X, normal2.Y, normal2.Z);
+			glNormal3f(normal2.X, normal2.Y, normal2.Z);
             if(doDrawTexture_)
                 glTexCoord2f(texel2.X, texel2.Y); 
             glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
 
-            glNormal3f(normal3.X, normal3.Y, normal3.Z);
+			glNormal3f(normal3.X, normal3.Y, normal3.Z);
             if(doDrawTexture_) 
                 glTexCoord2f(texel3.X, texel3.Y); 
             glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
 
-            glNormal3f(normal4.X, normal4.Y, normal4.Z);
+			glNormal3f(normal4.X, normal4.Y, normal4.Z);
             if(doDrawTexture_) 
                 glTexCoord2f(texel4.X, texel4.Y); 
             glVertex3f(vertex4.X, vertex4.Y, vertex4.Z);
@@ -419,25 +458,24 @@ void Sprite::Draw()
 
 			glBegin(GL_TRIANGLES);
 
-            glNormal3f(normal1.X, normal1.Y, normal1.Z);
+           // glNormal3f(normal1.X, normal1.Y, normal1.Z);
             if(doDrawTexture_)
                 glTexCoord2f(texel1.X, texel1.Y); 
             glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
             
-            glNormal3f(normal2.X, normal2.Y, normal2.Z);
+           // glNormal3f(normal2.X, normal2.Y, normal2.Z);
             if(doDrawTexture_)
                 glTexCoord2f(texel2.X, texel2.Y); 
             glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
 
-            glNormal3f(normal3.X, normal3.Y, normal3.Z);
+           // glNormal3f(normal3.X, normal3.Y, normal3.Z);
             if(doDrawTexture_) 
                 glTexCoord2f(texel3.X, texel3.Y); 
             glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
 
             glEnd();
-            glBindTexture(GL_TEXTURE_2D, 0);
 		}
-        
+		glBindTexture(GL_TEXTURE_2D, 0);
     }
 }
 

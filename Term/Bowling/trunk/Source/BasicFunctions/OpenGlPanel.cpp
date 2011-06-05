@@ -118,17 +118,17 @@ void OpenGlPanel::DrawScene()
     //sprite_.Draw();
 	glViewport(0, 0, width_, height_);
 	camera_.Apply();
-    sprite_.Draw();
-	//anotherSprite_.Draw();
-	sprite2_.Draw();
-	sprite3_.Draw();
-	sprite4_.Draw();
-	sprite5_.Draw();
-	sprite6_.Draw();
-	sprite7_.Draw();
-	sprite8_.Draw();
-	sprite9_.Draw();
-	sprite10_.Draw();
+	sprite_.Draw();
+	spritePin_.Draw();
+	spritePin2_.Draw();
+	spritePin3_.Draw();
+	spritePin4_.Draw();
+	spritePin5_.Draw();
+	spritePin6_.Draw();
+	spritePin7_.Draw();
+	spritePin8_.Draw();
+	spritePin9_.Draw();
+	spritePin10_.Draw();
     SwapBuffers(clientDc_->m_hDC);
 }
 
@@ -198,49 +198,54 @@ Virgin::Sprite& OpenGlPanel::Sprite()
     return sprite_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite2()
+Virgin::Sprite& OpenGlPanel::SpritePin()
 {
-    return sprite2_;
+    return spritePin_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite3()
+Virgin::Sprite& OpenGlPanel::SpritePin2()
 {
-    return sprite3_;
+    return spritePin2_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite4()
+Virgin::Sprite& OpenGlPanel::SpritePin3()
 {
-    return sprite4_;
+    return spritePin3_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite5()
+Virgin::Sprite& OpenGlPanel::SpritePin4()
 {
-    return sprite5_;
+    return spritePin4_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite6()
+Virgin::Sprite& OpenGlPanel::SpritePin5()
 {
-    return sprite6_;
+    return spritePin5_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite7()
+Virgin::Sprite& OpenGlPanel::SpritePin6()
 {
-    return sprite7_;
+    return spritePin6_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite8()
+Virgin::Sprite& OpenGlPanel::SpritePin7()
 {
-    return sprite8_;
+    return spritePin7_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite9()
+Virgin::Sprite& OpenGlPanel::SpritePin8()
 {
-    return sprite9_;
+    return spritePin8_;
 }
 
-Virgin::Sprite& OpenGlPanel::Sprite10()
+Virgin::Sprite& OpenGlPanel::SpritePin9()
 {
-    return sprite10_;
+    return spritePin9_;
+}
+
+Virgin::Sprite& OpenGlPanel::SpritePin10()
+{
+    return spritePin10_;
 }
 
 Virgin::Camera& OpenGlPanel::Camera()

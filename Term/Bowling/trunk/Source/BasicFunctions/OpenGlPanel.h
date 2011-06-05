@@ -16,15 +16,16 @@ public:
     void Create(CRect rect, CWnd* parent);
 
     Virgin::Sprite& Sprite();
-	Virgin::Sprite& Sprite2();
-	Virgin::Sprite& Sprite3();
-	Virgin::Sprite& Sprite4();
-	Virgin::Sprite& Sprite5();
-	Virgin::Sprite& Sprite6();
-	Virgin::Sprite& Sprite7();
-	Virgin::Sprite& Sprite8();
-	Virgin::Sprite& Sprite9();
-	Virgin::Sprite& Sprite10();
+	Virgin::Sprite& SpritePin();
+	Virgin::Sprite& SpritePin2();
+	Virgin::Sprite& SpritePin3();
+	Virgin::Sprite& SpritePin4();
+	Virgin::Sprite& SpritePin5();
+	Virgin::Sprite& SpritePin6();
+	Virgin::Sprite& SpritePin7();
+	Virgin::Sprite& SpritePin8();
+	Virgin::Sprite& SpritePin9();
+	Virgin::Sprite& SpritePin10();
     Virgin::Camera& Camera();
     Virgin::Light& Light();
 
@@ -51,15 +52,16 @@ private:
     CClientDC* clientDc_;   // * Todo: OnPaint의 CPaintDC로 대체해볼 것
     float rotation_;
     Virgin::Sprite sprite_;
-	Virgin::Sprite sprite2_;
-	Virgin::Sprite sprite3_;
-	Virgin::Sprite sprite4_;
-	Virgin::Sprite sprite5_;
-	Virgin::Sprite sprite6_;
-	Virgin::Sprite sprite7_;
-	Virgin::Sprite sprite8_;
-	Virgin::Sprite sprite9_;
-	Virgin::Sprite sprite10_;
+	Virgin::Sprite spritePin_;
+	Virgin::Sprite spritePin2_;
+	Virgin::Sprite spritePin3_;
+	Virgin::Sprite spritePin4_;
+	Virgin::Sprite spritePin5_;
+	Virgin::Sprite spritePin6_;
+	Virgin::Sprite spritePin7_;
+	Virgin::Sprite spritePin8_;
+	Virgin::Sprite spritePin9_;
+	Virgin::Sprite spritePin10_;
     Virgin::Camera camera_;
     Virgin::Light light_;
 
