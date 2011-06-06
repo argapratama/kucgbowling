@@ -129,6 +129,15 @@ void OpenGlPanel::DrawScene()
 	spritePin8_.Draw();
 	spritePin9_.Draw();
 	spritePin10_.Draw();
+
+	glColor3f(0.0, 0.0, 1.0);
+	glBegin(GL_QUADS);
+	glVertex2f(-50.0f,0.0f);
+	glVertex2f(50.0f,0.0f);
+	glVertex2f(50.0f,-20.0f);
+	glVertex2f(-50.0f,-20.0f);
+	glEnd();
+
     SwapBuffers(clientDc_->m_hDC);
 }
 
