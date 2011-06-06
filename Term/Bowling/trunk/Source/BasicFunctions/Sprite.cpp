@@ -258,8 +258,9 @@ bool Sprite::Load(const String& fileName, const String& textureName)
 
 void Sprite::Draw()
 {
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    /*glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();*/
+	glPushMatrix();
 
     float ambient[] = { 0.3, 0.3, 0.3, 1.0 };
     float diffuse[] = { 0.9, 0.9, 0.9, 1.0 };
@@ -477,6 +478,7 @@ void Sprite::Draw()
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
     }
+	glPopMatrix();
 }
 
 void Sprite::RotateXMore(float angle)

@@ -84,6 +84,7 @@ void OpenGlPanel::OnSize(UINT nType, int cx, int cy)
 
 void OpenGlPanel::InitializeOpenGl()
 {
+	glutInitDisplayMode(GLUT_DEPTH | GLUT_DOUBLE | GLUT_RGBA | GLUT_STENCIL );
     glEnable(GL_TEXTURE_2D);
     glShadeModel(GL_SMOOTH);
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -91,11 +92,15 @@ void OpenGlPanel::InitializeOpenGl()
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
+	glDisable(GL_BLEND);
+	glEnable(GL_ALPHA_TEST);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 void OpenGlPanel::DrawScene()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
     // Top Left(TOP VIEW)
     //glViewport(0, height_/2, width_/2, height_/2);
@@ -117,7 +122,48 @@ void OpenGlPanel::DrawScene()
     //camera_.Apply();
     //sprite_.Draw();
 	glViewport(0, 0, width_, height_);
+	glClearStencil(0);
 	camera_.Apply();
+	glEnable(GL_STENCIL_TEST);
+	glStencilFunc(GL_ALWAYS, 1,1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	/*glPushMatrix();
+	glColor4f(0.25,0.25,0.25, 1.0);
+	glColorMask(1,1,1,1);
+	glBegin(GL_POLYGON);
+	glVertex3f(-50.0f,0.0f, 0);
+	glVertex3f(50.0f,0.0f, 0);
+	glVertex3f(50.0f,-20.0f, 0);
+	glVertex3f(-50.0f,-20.0f, 0);
+	glEnd();
+	glPopMatrix();*/
+	glEnable(GL_BLEND);
+	glColor4f(0.49, 0.49, 0.49, 1);
+	glStencilFunc(GL_EQUAL, 1,1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	glDisable(GL_DEPTH_TEST);
+	glPushMatrix();
+	glScalef(1,-1,1);
+	glTranslatef(0, 2, 0);
+	sprite_.Draw();
+	glPopMatrix();
+	glPushMatrix();
+	glScalef(1,-1,1);
+	glTranslatef(0, 3, 0);
+	spritePin_.Draw();	
+	spritePin2_.Draw();
+	spritePin3_.Draw();
+	spritePin4_.Draw();
+	spritePin5_.Draw();
+	spritePin6_.Draw();
+	spritePin7_.Draw();
+	spritePin8_.Draw();
+	spritePin9_.Draw();
+	spritePin10_.Draw();
+	glPopMatrix();
+	glDisable(GL_BLEND);
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_STENCIL_TEST);
 	sprite_.Draw();
 	spritePin_.Draw();
 	spritePin2_.Draw();
@@ -129,15 +175,6 @@ void OpenGlPanel::DrawScene()
 	spritePin8_.Draw();
 	spritePin9_.Draw();
 	spritePin10_.Draw();
-
-	glColor3f(0.0, 0.0, 1.0);
-	glBegin(GL_QUADS);
-	glVertex2f(-50.0f,0.0f);
-	glVertex2f(50.0f,0.0f);
-	glVertex2f(50.0f,-20.0f);
-	glVertex2f(-50.0f,-20.0f);
-	glEnd();
-
     SwapBuffers(clientDc_->m_hDC);
 }
 
