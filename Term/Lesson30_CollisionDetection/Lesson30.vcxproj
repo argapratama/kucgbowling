@@ -85,7 +85,6 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>.\Debug\Lesson30.exe</OutputFile>
       <AdditionalDependencies>winmm.lib;opengl32.lib;glu32.lib;glaux.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\OpenGL</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -123,7 +122,6 @@
       <SubSystem>Windows</SubSystem>
       <OutputFile>.\Release\Lesson30.exe</OutputFile>
       <AdditionalDependencies>winmm.lib;opengl32.lib;glu32.lib;glaux.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>E:\OpenGL</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

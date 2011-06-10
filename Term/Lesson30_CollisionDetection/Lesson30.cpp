@@ -32,8 +32,10 @@ TVector pos(0,-50,1000);                  //initial position of camera
 float camera_rotation=0;                  //holds rotation around the Y axis
 
 
-TVector veloc(0.5,-0.1,0.5);              //initial velocity of balls
+//TVector veloc(0.5,-0.1,0.5);              //initial velocity of balls
 TVector accel(0,-0.05,0);                 //acceleration ie. gravity of balls
+TVector veloc(0.0,-0.0,0.0);
+//TVector accel(0,0,0);
 
 TVector ArrayVel[10];                     //holds velocity of balls
 TVector ArrayPos[10];                     //position of balls
@@ -60,10 +62,10 @@ struct Explosion{
 };
 
 Plane pl1,pl2,pl3,pl4,pl5;                //the 5 planes of the room
-Cylinder cyl1,cyl2,cyl3;                  //the 2 cylinders of the room
+Cylinder cyl1;                  //the 2 cylinders of the room
 GLUquadricObj *cylinder_obj;              //Quadratic object to render the cylinders
 GLuint texture[4], dlist;                 //stores texture objects and display list
-Explosion ExplosionArray[20];             //holds max 20 explosions at once
+//Explosion ExplosionArray[20];             //holds max 20 explosions at once
 //Perform Intersection tests with primitives
 int TestIntersionPlane(const Plane& plane,const TVector& position,const TVector& direction, double& lamda, TVector& pNormal);
 int TestIntersionCylinder(const Cylinder& cylinder,const TVector& position,const TVector& direction, double& lamda, TVector& pNormal,TVector& newposition);
@@ -191,20 +193,20 @@ int DrawGLScene(GLvoid)	            // Here's Where We Do All The Drawing
     glLoadIdentity();
 
     //set camera in hookmode 
-	if (hook_toball1)
+	/*if (hook_toball1)
 	{
 		TVector unit_followvector=ArrayVel[0];
 		unit_followvector.unit();
  		gluLookAt(ArrayPos[0].X()+250,ArrayPos[0].Y()+250 ,ArrayPos[0].Z(), ArrayPos[0].X()+ArrayVel[0].X() ,ArrayPos[0].Y()+ArrayVel[0].Y() ,ArrayPos[0].Z()+ArrayVel[0].Z() ,0,1,0);  
     
     }
-	else
+	else*/
 	    gluLookAt(pos.X(),pos.Y(),pos.Z(), pos.X()+dir.X(),pos.Y()+dir.Y(),pos.Z()+dir.Z(), 0,1.0,0.0);
 	
 
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
-    glRotatef(camera_rotation,0,1,0);
+    //glRotatef(camera_rotation,0,1,0);
 
 	//render balls
 	for (i=0;i<NrOfBalls;i++)
@@ -280,7 +282,7 @@ int DrawGLScene(GLvoid)	            // Here's Where We Do All The Drawing
 	gluCylinder(cylinder_obj, 60, 60, 1000, 20, 2);
 	glPopMatrix();
 
-  	glPushMatrix();
+  	/*glPushMatrix();
   	glTranslatef(200,-300,-500);
 	gluCylinder(cylinder_obj, 60, 60, 1000, 20, 2);
 	glPopMatrix();
@@ -290,13 +292,13 @@ int DrawGLScene(GLvoid)	            // Here's Where We Do All The Drawing
 	glRotatef(135, 1,0,0);
 	glTranslatef(0,0,-500);
 	gluCylinder(cylinder_obj, 30, 30, 1000, 20, 2);
-	glPopMatrix();
+	glPopMatrix();*/
 	
 	//render/blend explosions
 	glEnable(GL_BLEND);
 	glDepthMask(GL_FALSE);
     glBindTexture(GL_TEXTURE_2D, texture[1]);   
-	for(i=0; i<20; i++)
+	/*for(i=0; i<20; i++)
 	{
 		if(ExplosionArray[i]._Alpha>=0)
 		{
@@ -309,7 +311,7 @@ int DrawGLScene(GLvoid)	            // Here's Where We Do All The Drawing
            glCallList(dlist);
 	       glPopMatrix();
 		}
-	}
+	}*/
 	glDepthMask(GL_TRUE);
 	glDisable(GL_BLEND);
     glDisable(GL_TEXTURE_2D);
@@ -737,12 +739,12 @@ void idle()
   int BallNr=0,dummy=0,BallColNr1,BallColNr2;
   TVector Nc;
 
-  if (!hook_toball1)
+  /*if (!hook_toball1)
   {
 	  camera_rotation+=0.1f;
 	  if (camera_rotation>360)
 		  camera_rotation=0;
-  }
+  }*/
  
 	  RestTime=Time;
 	  lamda=1000;
@@ -772,6 +774,7 @@ void idle()
 				  rt4=rt*RestTime/rt2;
 
 				  //if smaller than the one already stored replace and in timestep
+				  // 이 조건이 없으면 그냥 투과해버림
 				  if (rt4<=lamda)
 				  { 
 				    if (rt4<=RestTime+ZERO)
@@ -781,6 +784,8 @@ void idle()
 							point=OldPos[i]+uveloc*rt;
 							lamda=rt4;
 							BallNr=i;
+							TVector v(0, 0, 0);
+							ArrayVel[i] = v;
 						  }
 				  }
 			  }
@@ -873,41 +878,7 @@ void idle()
 				  }
 				 
 			  }
-			  if (TestIntersionCylinder(cyl2,OldPos[i],uveloc,rt,norm,Nc))
-			  {
-				  rt4=rt*RestTime/rt2;
-
-				  if (rt4<=lamda)
-				  { 
-				    if (rt4<=RestTime+ZERO)
-						if (! ((rt<=ZERO)&&(uveloc.dot(norm)>ZERO)) )
-						 {
-							normal=norm;
-							point=Nc;
-							lamda=rt4;
-							BallNr=i;
-						 }
-				  }
-				 
-			  }
-			  if (TestIntersionCylinder(cyl3,OldPos[i],uveloc,rt,norm,Nc))
-			  {
-				  rt4=rt*RestTime/rt2;
-
-				  if (rt4<=lamda)
-				  { 
-				    if (rt4<=RestTime+ZERO)
-						if (! ((rt<=ZERO)&&(uveloc.dot(norm)>ZERO)) )
-						 {
-							normal=norm;
-							point=Nc;
-							lamda=rt4;
-							BallNr=i;
-						 }
-				  }
-				 
-			  }
-	   }
+		}
 
 	   //After all balls were teste with planes/cylinders test for collision
 	   //between them and replace if collision time smaller
@@ -948,16 +919,16 @@ void idle()
 					  ArrayVel[BallColNr2]=V2x+V2y;
 
 					  //Update explosion array
-                      for(int j=0;j<20;j++)
-					  {
-						  if (ExplosionArray[j]._Alpha<=0)
-						  {
-							  ExplosionArray[j]._Alpha=1;
-                              ExplosionArray[j]._Position=ArrayPos[BallColNr1];
-							  ExplosionArray[j]._Scale=1;
-							  break;
-						  }
-					  }
+       //               for(int j=0;j<20;j++)
+					  //{
+						 // if (ExplosionArray[j]._Alpha<=0)
+						 // {
+							//  ExplosionArray[j]._Alpha=1;
+       //                       ExplosionArray[j]._Position=ArrayPos[BallColNr1];
+							//  ExplosionArray[j]._Scale=1;
+							//  break;
+						 // }
+					  //}
 
 					  continue;
 				  }
@@ -979,10 +950,12 @@ void idle()
 					  rt2=ArrayVel[BallNr].mag();
 					  ArrayVel[BallNr].unit();
 					  ArrayVel[BallNr]=TVector::unit( (normal*(2*normal.dot(-ArrayVel[BallNr]))) + ArrayVel[BallNr] );
+					  TVector v;
+					  //ArrayVel[BallNr]= v;
 					  ArrayVel[BallNr]=ArrayVel[BallNr]*rt2;
 							
 					  //Update explosion array
-					  for(int j=0;j<20;j++)
+					  /*for(int j=0;j<20;j++)
 					  {
 						  if (ExplosionArray[j]._Alpha<=0)
 						  {
@@ -991,7 +964,7 @@ void idle()
 							  ExplosionArray[j]._Scale=1;
 							  break;
 						  }
-					  }
+					  }*/
 			}
 			else RestTime=0;
 
@@ -1023,23 +996,23 @@ void InitVars()
 	cyl1._Position=TVector(0,0,0);
 	cyl1._Axis=TVector(0,1,0);
 	cyl1._Radius=60+20;
-	cyl2._Position=TVector(200,-300,0);
+	/*cyl2._Position=TVector(200,-300,0);
 	cyl2._Axis=TVector(0,0,1);
 	cyl2._Radius=60+20;
 	cyl3._Position=TVector(-200,0,0);
 	cyl3._Axis=TVector(0,1,1);
     cyl3._Axis.unit();
-	cyl3._Radius=30+20;
+	cyl3._Radius=30+20;*/
 	//create quadratic object to render cylinders
 	cylinder_obj= gluNewQuadric();
 	gluQuadricTexture(cylinder_obj, GL_TRUE);
 
     //Set initial positions and velocities of balls
 	//also initialize array which holds explosions
-	NrOfBalls=10;
+	NrOfBalls=1;
 	ArrayVel[0]=veloc;
 	ArrayPos[0]=TVector(199,180,10);
-	ExplosionArray[0]._Alpha=0;
+	/*ExplosionArray[0]._Alpha=0;
 	ExplosionArray[0]._Scale=1;
 	ArrayVel[1]=veloc;
 	ArrayPos[1]=TVector(0,150,100);
@@ -1060,7 +1033,7 @@ void InitVars()
 	{
          ExplosionArray[i]._Alpha=0;
 	     ExplosionArray[i]._Scale=1;
-	}
+	}*/
 }
 
 /*************************************************************************************/
