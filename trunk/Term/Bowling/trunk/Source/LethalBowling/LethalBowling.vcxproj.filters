@@ -37,6 +37,7 @@
     <None Include="res\BasicFunctions.ico">
       <Filter>Resource</Filter>
     </None>
+    <None Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicFunctionsDlg.h">

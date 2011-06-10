@@ -14,6 +14,7 @@
     <ProjectGuid>{003ED073-43D2-4684-A71A-FD665BC51C9D}</ProjectGuid>
     <RootNamespace>BasicFunctions</RootNamespace>
     <Keyword>MFCProj</Keyword>
+    <ProjectName>LethalBowling</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -43,16 +44,21 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>E:\OpenGL;$(IncludePath)</IncludePath>
     <LibraryPath>E:\OpenGL;$(LibraryPath)</LibraryPath>
+    <OutDir>../../Executable/$(Configuation)</OutDir>
+    <IntDir>../../Object/$(ProjectName)/$(Configuration)</IntDir>
+    <TargetName>$(ProjectName)d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>E:\OpenGL;$(IncludePath)</IncludePath>
     <LibraryPath>E:\OpenGL;$(LibraryPath)</LibraryPath>
+    <OutDir>../../Executable/$(Configuation)</OutDir>
+    <IntDir>../../Object/$(ProjectName)/$(Configuration)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ForcedIncludeFiles>stdafx.h</ForcedIncludeFiles>
@@ -75,7 +81,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -104,6 +110,7 @@
   <ItemGroup>
     <None Include="res\BasicFunctions.ico" />
     <None Include="res\BasicFunctions.rc2" />
+    <None Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicFunctions.h" />
