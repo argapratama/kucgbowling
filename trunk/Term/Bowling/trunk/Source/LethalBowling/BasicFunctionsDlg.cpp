@@ -121,6 +121,7 @@ void CBasicFunctionsDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_LIGHT_CHECK, lightCheck_);
     DDX_Control(pDX, IDC_USER_VIEW_SELECTED_CHECK, userViewSelectedCheck_);
     DDX_Control(pDX, IDC_DRAW_TEXTURE_CHECK, drawTextureCheck_);
+    DDX_Control(pDX, IDC_SHOW_COLLISION_INFO_CHECK, showCollisionInfoCheck_);
 }
 
 BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
@@ -179,6 +180,7 @@ BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
     ON_BN_CLICKED(IDC_USER_VIEW_SELECTED_CHECK, &CBasicFunctionsDlg::OnBnClickedUserViewSelectedCheck)
     ON_BN_CLICKED(IDC_RESET_CAMERA_ROTATION_BUTTON, &CBasicFunctionsDlg::OnBnClickedResetCameraRotationButton)
     ON_BN_CLICKED(IDC_DRAW_TEXTURE_CHECK, &CBasicFunctionsDlg::OnBnClickedDrawTextureCheck)
+    ON_BN_CLICKED(IDC_SHOW_COLLISION_INFO_CHECK, &CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck)
 END_MESSAGE_MAP()
 
 
@@ -817,4 +819,17 @@ void CBasicFunctionsDlg::OnBnClickedDrawTextureCheck()
 World& CBasicFunctionsDlg::World()
 {
     return World::Instance();
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck()
+{
+    if(showCollisionInfoCheck_.GetCheck())
+    {
+        World().ShowCollisionInfo();
+    }
+    else
+    {
+        World().HideCollisionInfo();
+    }
 }

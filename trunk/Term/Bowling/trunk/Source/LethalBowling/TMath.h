@@ -24,6 +24,18 @@ public:
         return sqrt(value);
     }
 
+    template<typename T>
+    static T Min(T value1, T value2)
+    {
+        return (value1 > value2) ? value2 : value1;
+    }
+
+    template<typename T>
+    static T Max(T value1, T value2)
+    {
+        return (value1 > value2) ? value1 : value2;
+    }
+
     //
     // »ï°¢ ÇÔ¼ö
     //

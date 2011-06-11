@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "TMath.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include <GLAUX.H>
@@ -253,14 +254,17 @@ bool Sprite::Load(const String& fileName, const String& textureName)
 		free(TextureImage[0]);						// Free The Image Structure
 	}
 
+    CalculateModelCenter();
+
     return true;
 }
 
 void Sprite::Draw()
 {
-    /*glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();*/
-	glPushMatrix();
+    glPushMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+    //glLoadIdentity();
 
     float ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
     float diffuse[] = { 0.9f, 0.9f, 0.9f, 1.0f };
@@ -286,6 +290,8 @@ void Sprite::Draw()
     glRotatef(rotateAngle_, rotateAxisEnd_.X - rotateAxisBegin_.X, rotateAxisEnd_.Y - rotateAxisBegin_.Y, rotateAxisEnd_.Z - rotateAxisBegin_.Z);
     glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
 
+    // Model Center 만큼을 보정해서 원점으로 이동
+    glTranslatef(-modelCenter_.X, -modelCenter_.Y, -modelCenter_.Z);
 
     if(meshMode_ == MeshMode_Point)
     {
@@ -584,6 +590,39 @@ void Sprite::CopyTo(Sprite& rhs) const
 void Sprite::SetDrawTexture(bool drawTexture)
 {
     doDrawTexture_ = drawTexture;
+}
+
+Vector3 Sprite::Location() const
+{
+    return location_;
+}
+
+void Sprite::CalculateModelCenter()
+{
+    Vector3 maxVertex;
+    Vector3 minVertex;
+    if(vertice_.size() >= 1)
+    {
+        maxVertex = vertice_[0];
+        minVertex = vertice_[0];
+    }
+
+    // X, Y, Z의 최대/최소값을 구한 다음 중간값 구함
+    for(uint i = 0; i < vertice_.size(); ++i)
+    {
+        maxVertex.X = Math::Max(maxVertex.X, vertice_[i].X);
+        maxVertex.Y = Math::Max(maxVertex.Y, vertice_[i].Y);
+        maxVertex.Z = Math::Max(maxVertex.Z, vertice_[i].Z);
+
+        minVertex.X = Math::Min(minVertex.X, vertice_[i].X);
+        minVertex.Y = Math::Min(minVertex.Y, vertice_[i].Y);
+        minVertex.Z = Math::Min(minVertex.Z, vertice_[i].Z);
+    }
+
+    modelCenter_ = (maxVertex + minVertex) / 2;
+
+    float a = (maxVertex.X - minVertex.X);
+    float b = a / 2;
 }
 
 }

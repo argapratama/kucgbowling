@@ -121,4 +121,6 @@ public:
     afx_msg void OnBnClickedResetCameraRotationButton();
     CButton drawTextureCheck_;
     afx_msg void OnBnClickedDrawTextureCheck();
+    afx_msg void OnBnClickedShowCollisionInfoCheck();
+    CButton showCollisionInfoCheck_;
 };
