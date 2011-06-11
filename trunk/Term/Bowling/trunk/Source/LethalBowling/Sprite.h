@@ -8,27 +8,6 @@
 namespace Virgin
 {
 
-using ::OpenGl::Vector3;
-
-struct Vector3D
-{
-public:
-    Vector3D()
-        : X(0), Y(0), Z(0)
-    {
-    }
-
-    Vector3D(int x, int y, int z)
-        : X(x), Y(y), Z(z)
-    {
-    }
-
-public:
-    int X;
-    int Y;
-    int Z;
-};
-
 struct QuadVertice
 {
 public:
@@ -106,6 +85,33 @@ private:
     bool doDrawTexture_;
 
     uint texture_[3];
+
+    //
+    // 물리 모델링
+    //
+
+    // 질량 특성
+    float mass_;        // 질량
+    float massCenter_;  // 질량 중심    // * Todo: 좌표가 필요함
+    float moment_;      // 관성 모멘트(회전 저항력)(Inertia)   // * Todo: 축별로 다름   
+    
+    // 물체에 작용하는 힘
+    std::vector<float> forces_; // * Todo: 방향도 필요함
+    std::vector<float> momentForces_;
+
+    // 선가속도, 각가속도
+    float linearAcceleration_;  // * Todo: 방향도 필요함
+    float angleAcceleration_;
+
+    // 선속도, 각속도
+    float linearVelocity_;  // * Todo: 방향도 필요함
+    float angleVelocity_;
+
+    // 선 변위, 각 변위
+    float linearDisplacement_;  // * Todo: 방향도 필요함
+    float angleDisplacement_;
+
+    // + 현재 위치, 방향
 };
 
 }

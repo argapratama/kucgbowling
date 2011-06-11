@@ -194,7 +194,7 @@ bool Sprite::Load(const String& fileName, const String& textureName)
 	if(normalVertices_.size() == 0)
     {
 		vertexNormals_.resize(vertice_.size());
-		for(int i = 0; i < faces_.size(); ++i)
+		for(uint i = 0; i < faces_.size(); ++i)
 		{
 			const Vector3& vertex1 = vertice_[faces_[i].Index[0]];
 			const Vector3& vertex2 = vertice_[faces_[i].Index[1]];
@@ -220,7 +220,7 @@ bool Sprite::Load(const String& fileName, const String& textureName)
     memset(TextureImage,0,sizeof(void *)*1);
 
     // Load The Bitmap, Check For Errors, If Bitmap's Not Found Quit
-	if (TextureImage[0] = LoadBitmap(textureName))
+	if ((TextureImage[0] = LoadBitmap(textureName)) != nullptr)
 	{
         glGenTextures(3, &texture_[0]);	
         // Create Nearest Filtered Texture
@@ -262,9 +262,9 @@ void Sprite::Draw()
     glLoadIdentity();*/
 	glPushMatrix();
 
-    float ambient[] = { 0.3, 0.3, 0.3, 1.0 };
-    float diffuse[] = { 0.9, 0.9, 0.9, 1.0 };
-    float specular[] = { 0.7, 0.7, 0.7, 1.0 };
+    float ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+    float diffuse[] = { 0.9f, 0.9f, 0.9f, 1.0f };
+    float specular[] = { 0.7f, 0.7f, 0.7f, 1.0f };
     glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
@@ -290,7 +290,7 @@ void Sprite::Draw()
     if(meshMode_ == MeshMode_Point)
     {
         glBindTexture(GL_TEXTURE_2D, 0);
-        for(int i = 0; i < faces_.size(); ++i)
+        for(uint i = 0; i < faces_.size(); ++i)
         {
             glBegin(GL_POINTS);
 
@@ -329,7 +329,7 @@ void Sprite::Draw()
     else if(meshMode_ == MeshMode_Wireframe)
     {
         glBindTexture(GL_TEXTURE_2D, 0);
-        for(int i = 0; i < faces_.size(); ++i)
+        for(uint i = 0; i < faces_.size(); ++i)
         {
             const Vector3& vertex1 = vertice_[faces_[i].Index[0]];
             const Vector3& vertex2 = vertice_[faces_[i].Index[1]];
@@ -367,7 +367,7 @@ void Sprite::Draw()
     }
     else if(meshMode_ == MeshMode_QuadMesh)
     {
-        for(int i = 0; i < faces_.size(); ++i)
+        for(uint i = 0; i < faces_.size(); ++i)
         {
             const Vector3& vertex1 = vertice_[faces_[i].Index[0]];
             const Vector3& vertex2 = vertice_[faces_[i].Index[1]];
@@ -445,7 +445,7 @@ void Sprite::Draw()
             glEnd();
 		}
 
-		for(int i = 0; i < triFaces_.size(); ++i)
+		for(uint i = 0; i < triFaces_.size(); ++i)
         {
 			const Vector3& vertex1 = vertice_[triFaces_[i].Index[0]];
             const Vector3& vertex2 = vertice_[triFaces_[i].Index[1]];

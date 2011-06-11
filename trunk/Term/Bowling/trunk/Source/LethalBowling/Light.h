@@ -5,7 +5,6 @@
 
 namespace Virgin
 {
-using namespace OpenGl;
 
 class Light
 {

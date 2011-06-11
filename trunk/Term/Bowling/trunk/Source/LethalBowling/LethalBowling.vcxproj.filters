@@ -82,9 +82,6 @@
     <ClInclude Include="Resource.h">
       <Filter>Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Source\Library Class</Filter>
-    </ClInclude>
     <ClInclude Include="Sprite.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
@@ -101,6 +98,36 @@
       <Filter>Source\Application Class</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetector.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSpan.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="TMath.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Environment.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
   </ItemGroup>
@@ -154,6 +181,27 @@
       <Filter>Source\Application Class</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetector.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSpan.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="TMath.cpp">
       <Filter>Source\Application Class</Filter>
     </ClCompile>
   </ItemGroup>

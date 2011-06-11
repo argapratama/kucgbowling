@@ -490,8 +490,8 @@ void CBasicFunctionsDlg::UpdateAndDraw()
     openGlPanel_.AnotherSprite().RotateZMore(rotateZAngle);
     openGlPanel_.AnotherSprite().ScaleRate(magnitudeRate, magnitudeRate, magnitudeRate);
 
-    OpenGl::Vector3 values;
-    OpenGl::Vector3 values2;
+    Vector3 values;
+    Vector3 values2;
 
     // Scaling
     values.X = ToFloat(scaleXEdit_);
