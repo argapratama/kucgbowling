@@ -28,6 +28,9 @@ public:
     Camera& GetCamera();
     Light& GetLight();
 
+    void ShowCollisionInfo();
+    void HideCollisionInfo();
+
 private:
     Sprite ball_;
     Sprite ball2_;
@@ -39,6 +42,8 @@ private:
     Camera topCamera_;
     Camera sideCamera_;
     Camera frontCamera_;
+
+    bool doShowCollisionInfo_;
 };
 
 }

@@ -45,12 +45,16 @@ public:
     void ScaleFrom(const Vector3& from, float x, float y, float z);
     void Reset();
 
+    Vector3 Location() const;
+
     void Draw();
     void SetMeshMode(MeshMode mode);
     void SetDrawNormal(bool drawNormal);
     void SetDrawTexture(bool drawTexture);
 
     void CopyTo(Sprite& rhs) const;
+
+    void CalculateModelCenter();
 
 private:
     std::vector<Vector3> vertice_;
@@ -90,9 +94,11 @@ private:
     // 물리 모델링
     //
 
+    Vector3 modelCenter_;   // 모델 좌표 기준으로, 모델의 중점(Cube로 보았을 때)
+
     // 질량 특성
     float mass_;        // 질량
-    float massCenter_;  // 질량 중심    // * Todo: 좌표가 필요함
+    Vector3 massCenter_;  // 질량 중심    // * Todo: 좌표가 필요함
     float moment_;      // 관성 모멘트(회전 저항력)(Inertia)   // * Todo: 축별로 다름   
     
     // 물체에 작용하는 힘
