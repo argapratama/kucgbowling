@@ -3,9 +3,8 @@
 #include "TString.h"
 #include "PrimitiveType.h"
 
-namespace Exception
+namespace Virgin
 {
-using namespace Virgin;
 
 class Exception
 {

@@ -29,6 +29,12 @@
     <Filter Include="Source\Library Class\OpenGl">
       <UniqueIdentifier>{39f08536-d861-4f36-8919-b62592a73f5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\Application Class\Physics">
+      <UniqueIdentifier>{8e7eb943-6619-4cf8-8007-9896623e3075}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Application Class\CollisionDetector">
+      <UniqueIdentifier>{c825669e-f77c-4f10-a02a-56c9bb897f5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\BasicFunctions.rc2">
@@ -100,25 +106,10 @@
     <ClInclude Include="Color.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
-    <ClInclude Include="Physics.h">
-      <Filter>Source\Application Class</Filter>
-    </ClInclude>
     <ClInclude Include="RigidBody.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionDetector.h">
-      <Filter>Source\Application Class</Filter>
-    </ClInclude>
-    <ClInclude Include="DateTime.h">
-      <Filter>Source\Application Class</Filter>
-    </ClInclude>
-    <ClInclude Include="TimeSpan.h">
-      <Filter>Source\Application Class</Filter>
-    </ClInclude>
     <ClInclude Include="Quaternion.h">
-      <Filter>Source\Application Class</Filter>
-    </ClInclude>
-    <ClInclude Include="TMath.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
     <ClInclude Include="Vector.h">
@@ -128,6 +119,24 @@
       <Filter>Source\Library Class</Filter>
     </ClInclude>
     <ClInclude Include="Environment.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Source\Application Class\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetector.h">
+      <Filter>Source\Application Class\CollisionDetector</Filter>
+    </ClInclude>
+    <ClInclude Include="TMath.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="DateTime.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeSpan.h">
+      <Filter>Source\Library Class</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
   </ItemGroup>
@@ -183,25 +192,28 @@
     <ClCompile Include="Color.cpp">
       <Filter>Source\Application Class</Filter>
     </ClCompile>
-    <ClCompile Include="Physics.cpp">
-      <Filter>Source\Application Class</Filter>
-    </ClCompile>
     <ClCompile Include="RigidBody.cpp">
-      <Filter>Source\Application Class</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionDetector.cpp">
-      <Filter>Source\Application Class</Filter>
-    </ClCompile>
-    <ClCompile Include="DateTime.cpp">
-      <Filter>Source\Application Class</Filter>
-    </ClCompile>
-    <ClCompile Include="TimeSpan.cpp">
       <Filter>Source\Application Class</Filter>
     </ClCompile>
     <ClCompile Include="Quaternion.cpp">
       <Filter>Source\Application Class</Filter>
     </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source\Application Class\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionDetector.cpp">
+      <Filter>Source\Application Class\CollisionDetector</Filter>
+    </ClCompile>
+    <ClCompile Include="DateTime.cpp">
+      <Filter>Source\Library Class</Filter>
+    </ClCompile>
+    <ClCompile Include="TimeSpan.cpp">
+      <Filter>Source\Library Class</Filter>
+    </ClCompile>
     <ClCompile Include="TMath.cpp">
+      <Filter>Source\Library Class</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
       <Filter>Source\Application Class</Filter>
     </ClCompile>
   </ItemGroup>

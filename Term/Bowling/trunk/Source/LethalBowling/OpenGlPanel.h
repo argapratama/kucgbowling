@@ -15,27 +15,8 @@ public:
 
     void Create(CRect rect, CWnd* parent);
 
-    Virgin::Sprite& Sprite();
-	Virgin::Sprite& SpritePin();
-	Virgin::Sprite& SpritePin2();
-	Virgin::Sprite& SpritePin3();
-	Virgin::Sprite& SpritePin4();
-	Virgin::Sprite& SpritePin5();
-	Virgin::Sprite& SpritePin6();
-	Virgin::Sprite& SpritePin7();
-	Virgin::Sprite& SpritePin8();
-	Virgin::Sprite& SpritePin9();
-	Virgin::Sprite& SpritePin10();
-    Virgin::Camera& Camera();
-    Virgin::Light& Light();
-
-    Virgin::Sprite& AnotherSprite() { return anotherSprite_; }
-    Virgin::Camera& TopCamera() { return topCamera_; }
-    Virgin::Camera& FrontCamera() { return frontCamera_; }
-    Virgin::Camera& SideCamera() { return sideCamera_; }
-
     void SetManipulatingSprite(bool isSprite) { isManipulatingSprite_ = isSprite; }
-    Virgin::Sprite& GetManipulatingSprite() { return isManipulatingSprite_ ? sprite_ : anotherSprite_; }
+    Virgin::Sprite& GetManipulatingSprite();
 
 protected:
 	DECLARE_MESSAGE_MAP()
@@ -50,25 +31,6 @@ private:
 
 private:
     CClientDC* clientDc_;   // * Todo: OnPaint의 CPaintDC로 대체해볼 것
-    float rotation_;
-    Virgin::Sprite sprite_;
-	Virgin::Sprite spritePin_;
-	Virgin::Sprite spritePin2_;
-	Virgin::Sprite spritePin3_;
-	Virgin::Sprite spritePin4_;
-	Virgin::Sprite spritePin5_;
-	Virgin::Sprite spritePin6_;
-	Virgin::Sprite spritePin7_;
-	Virgin::Sprite spritePin8_;
-	Virgin::Sprite spritePin9_;
-	Virgin::Sprite spritePin10_;
-    Virgin::Camera camera_;
-    Virgin::Light light_;
-
-    Virgin::Sprite anotherSprite_;
-    Virgin::Camera topCamera_;
-    Virgin::Camera sideCamera_;
-    Virgin::Camera frontCamera_;
 
     OpenGl::RenderingContext* renderingContext_;
     
