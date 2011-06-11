@@ -143,6 +143,7 @@
     <ClInclude Include="TimeSpan.h" />
     <ClInclude Include="TString.h" />
     <ClInclude Include="Vector.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicFunctions.cpp" />
@@ -172,6 +173,7 @@
     </ClCompile>
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="TString.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicFunctions.rc" />

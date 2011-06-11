@@ -1,7 +1,7 @@
 #include "Exception.h"
 #include <Windows.h>
 
-namespace Exception
+namespace Virgin
 {
 Exception::Exception()
     : errorCode_(GetLastError())

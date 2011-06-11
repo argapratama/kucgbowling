@@ -2,6 +2,7 @@
 #include "afxwin.h"
 #include "OpenGlPanel.h"
 #include "afxcmn.h"
+#include "World.h"
 
 class CBasicFunctionsDlg : public CDialogEx
 {
@@ -25,6 +26,10 @@ protected:
 private:
     static float ToFloat(const CWnd& wnd);
     Virgin::Sprite& GetSelectedSprite();
+    void InitializeWorld();
+    void InitializeControls();
+
+    static Virgin::World& World();
 
 protected:
 	HICON m_hIcon;

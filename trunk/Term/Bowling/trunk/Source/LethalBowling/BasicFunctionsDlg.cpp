@@ -218,6 +218,75 @@ BOOL CBasicFunctionsDlg::OnInitDialog()
     ScreenToClient(&rect);
     openGlPanel_.Create(rect, this);
     
+    InitializeWorld();
+    InitializeControls();
+
+	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
+}
+
+void CBasicFunctionsDlg::InitializeWorld()
+{
+    World().ResizePinCount(10);
+
+	if(!World().GetBall().Load(L"bowling_ball.obj", L"green_ball_skin.bmp"))
+    {
+        MessageBox(L"bowling_ball.obj doesn't exist. Please restart this application ^^;;");
+    }
+	World().GetBall().TranslateMore(6.0, -0.8, 1.0);
+	
+	if(!World().GetPin(0).Load(L"bowling_pin.obj", L""))
+    {
+        MessageBox(L"bowling_pin.obj doesn't exist. Please restart this application ^^;;");
+    }
+
+	World().GetPin(0).TranslateMore(-2.0, -0.0, 0.0);
+	World().GetPin(0).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(0).CopyTo(World().GetPin(1));
+	World().GetPin(1).TranslateMore(-2.6, 0.0, 0.5);
+	World().GetPin(1).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(1).SetDrawTexture(false);
+	World().GetPin(0).CopyTo(World().GetPin(2));
+	World().GetPin(2).TranslateMore(-2.6, 0.0, -0.5);
+	World().GetPin(2).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(2).SetDrawTexture(false);
+
+	World().GetPin(0).CopyTo(World().GetPin(3));
+	World().GetPin(3).TranslateMore(-3.2, 0.0, 1.0);
+	World().GetPin(3).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(3).SetDrawTexture(false);
+	World().GetPin(0).CopyTo(World().GetPin(4));
+	World().GetPin(4).TranslateMore(-3.2, 0, 0.0);
+	World().GetPin(4).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(4).SetDrawTexture(false);
+	World().GetPin(0).CopyTo(World().GetPin(5));
+	World().GetPin(5).TranslateMore(-3.2, 0.0, -1.0);
+	World().GetPin(5).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(5).SetDrawTexture(false);
+
+	World().GetPin(0).CopyTo(World().GetPin(6));
+	World().GetPin(6).TranslateMore(-3.8, 0.0, 1.5);
+	World().GetPin(6).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(6).SetDrawTexture(false);
+	World().GetPin(0).CopyTo(World().GetPin(7));
+	World().GetPin(7).TranslateMore(-3.8, 0.0, 0.5);
+	World().GetPin(7).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(7).SetDrawTexture(false);
+	World().GetPin(0).CopyTo(World().GetPin(8));
+	World().GetPin(8).TranslateMore(-3.8, 0.0, -0.5);
+	World().GetPin(8).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(8).SetDrawTexture(true);
+	World().GetPin(0).CopyTo(World().GetPin(9));
+	World().GetPin(9).TranslateMore(-3.8, 0.0, -1.5);
+	World().GetPin(9).ScaleRate(1.5, 1.5, 1.5);
+	World().GetPin(9).SetDrawTexture(false);
+
+    // The Main Light
+    World().GetLight().MoveTo(1.0, 1.0, 1.0);
+    World().GetLight().Enable();
+}
+
+void CBasicFunctionsDlg::InitializeControls()
+{
     scaleXEdit_.SetWindowText(L"1.0");
     scaleYEdit_.SetWindowText(L"1.0");
     scaleZEdit_.SetWindowText(L"1.0");
@@ -240,67 +309,6 @@ BOOL CBasicFunctionsDlg::OnInitDialog()
     speedSlider_.SetRangeMax(2000);
     speedSlider_.SetPos(100);
 
-	if(!openGlPanel_.Sprite().Load(L"bowling_ball.obj", L"green_ball_skin.bmp"))
-    {
-        MessageBox(L"bowling_ball.obj doesn't exist. Please restart this application ^^;;");
-    }
-	openGlPanel_.Sprite().TranslateMore(6.0, -0.8, 1.0);
-	
-	if(!openGlPanel_.SpritePin().Load(L"bowling_pin.obj", L""))
-    {
-        MessageBox(L"bowling_pin.obj doesn't exist. Please restart this application ^^;;");
-    }
-	openGlPanel_.SpritePin().TranslateMore(-2.0, -0.0, 0.0);
-	openGlPanel_.SpritePin().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin2());
-	openGlPanel_.SpritePin2().TranslateMore(-2.6, 0.0, 0.5);
-	openGlPanel_.SpritePin2().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin2().SetDrawTexture(false);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin3());
-	openGlPanel_.SpritePin3().TranslateMore(-2.6, 0.0, -0.5);
-	openGlPanel_.SpritePin3().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin3().SetDrawTexture(false);
-
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin4());
-	openGlPanel_.SpritePin4().TranslateMore(-3.2, 0.0, 1.0);
-	openGlPanel_.SpritePin4().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin4().SetDrawTexture(false);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin5());
-	openGlPanel_.SpritePin5().TranslateMore(-3.2, 0, 0.0);
-	openGlPanel_.SpritePin5().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin5().SetDrawTexture(false);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin6());
-	openGlPanel_.SpritePin6().TranslateMore(-3.2, 0.0, -1.0);
-	openGlPanel_.SpritePin6().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin6().SetDrawTexture(false);
-
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin7());
-	openGlPanel_.SpritePin7().TranslateMore(-3.8, 0.0, 1.5);
-	openGlPanel_.SpritePin7().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin7().SetDrawTexture(false);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin8());
-	openGlPanel_.SpritePin8().TranslateMore(-3.8, 0.0, 0.5);
-	openGlPanel_.SpritePin8().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin8().SetDrawTexture(false);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin9());
-	openGlPanel_.SpritePin9().TranslateMore(-3.8, 0.0, -0.5);
-	openGlPanel_.SpritePin9().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin9().SetDrawTexture(true);
-	openGlPanel_.SpritePin().CopyTo(openGlPanel_.SpritePin10());
-	openGlPanel_.SpritePin10().TranslateMore(-3.8, 0.0, -1.5);
-	openGlPanel_.SpritePin10().ScaleRate(1.5, 1.5, 1.5);
-	openGlPanel_.SpritePin10().SetDrawTexture(false);
-    //openGlPanel_.Sprite().CopyTo(openGlPanel_.AnotherSprite());
-	//openGlPanel_.AnotherSprite().TranslateMore(1.0, 0, 0);
-    /*openGlPanel_.TopCamera().MoveTo(0.0, 6.0, 0.0);
-    openGlPanel_.TopCamera().SetUpVector(0.0, 0.0, -1.0);
-    openGlPanel_.FrontCamera().MoveTo(0.0, 0.0, 6.0);
-    openGlPanel_.SideCamera().MoveTo(6.0, 0.0, 0.0);*/
-
-    // The Main Light
-    openGlPanel_.Light().MoveTo(1.0, 1.0, 1.0);
-    openGlPanel_.Light().Enable();
-
     ambientREdit_.SetWindowText(L"0.5");
     ambientGEdit_.SetWindowText(L"0.5");
     ambientBEdit_.SetWindowText(L"0.5");
@@ -316,8 +324,6 @@ BOOL CBasicFunctionsDlg::OnInitDialog()
     lightCheck_.SetCheck(TRUE);
     Lighting().EnableLighting();
     drawTextureCheck_.SetCheck(TRUE);
-
-	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
 void CBasicFunctionsDlg::OnSysCommand(UINT nID, LPARAM lParam)
@@ -478,17 +484,17 @@ void CBasicFunctionsDlg::UpdateAndDraw()
         magnitudeRate -= ScaleRate;
     }
 
-	openGlPanel_.Sprite().TranslateMore(moveX, moveY, moveZ);
-    openGlPanel_.Sprite().RotateXMore(rotateXAngle);
-    openGlPanel_.Sprite().RotateYMore(rotateYAngle);
-    openGlPanel_.Sprite().RotateZMore(rotateZAngle);
-    openGlPanel_.Sprite().ScaleRate(magnitudeRate, magnitudeRate, magnitudeRate);
+	World().GetBall().TranslateMore(moveX, moveY, moveZ);
+    World().GetBall().RotateXMore(rotateXAngle);
+    World().GetBall().RotateYMore(rotateYAngle);
+    World().GetBall().RotateZMore(rotateZAngle);
+    World().GetBall().ScaleRate(magnitudeRate, magnitudeRate, magnitudeRate);
 
-	openGlPanel_.AnotherSprite().TranslateMore(moveX, moveY, moveZ);
-    openGlPanel_.AnotherSprite().RotateXMore(rotateXAngle);
-    openGlPanel_.AnotherSprite().RotateYMore(rotateYAngle);
-    openGlPanel_.AnotherSprite().RotateZMore(rotateZAngle);
-    openGlPanel_.AnotherSprite().ScaleRate(magnitudeRate, magnitudeRate, magnitudeRate);
+	World().GetBall2().TranslateMore(moveX, moveY, moveZ);
+    World().GetBall2().RotateXMore(rotateXAngle);
+    World().GetBall2().RotateYMore(rotateYAngle);
+    World().GetBall2().RotateZMore(rotateZAngle);
+    World().GetBall2().ScaleRate(magnitudeRate, magnitudeRate, magnitudeRate);
 
     Vector3 values;
     Vector3 values2;
@@ -504,32 +510,32 @@ void CBasicFunctionsDlg::UpdateAndDraw()
     //
     if(cameraAutoRotateCheck_.GetCheck())
     {
-        openGlPanel_.Camera().RotateYMore(RotateUnit);
+        World().GetCamera().RotateYMore(RotateUnit);
     }
 
     values.X = ToFloat(cameraLocationXEdit_);
     values.Y = ToFloat(cameraLocationYEdit_);
     values.Z = ToFloat(cameraLocationZEdit_);
-    openGlPanel_.Camera().MoveTo(values.X, values.Y, values.Z);
+    World().GetCamera().MoveTo(values.X, values.Y, values.Z);
 
     values.X = ToFloat(cameraLookAtXEdit_);
     values.Y = ToFloat(cameraLookAtYEdit_);
     values.Z = ToFloat(cameraLookAtZEdit_);
-    openGlPanel_.Camera().LookAt(values.X, values.Y, values.Z);
+    World().GetCamera().LookAt(values.X, values.Y, values.Z);
 
     values.X = ToFloat(cameraUpXEdit_);
     values.Y = ToFloat(cameraUpYEdit_);
     values.Z = ToFloat(cameraUpZEdit_);
-    openGlPanel_.Camera().SetUpVector(values.X, values.Y, values.Z);
+    World().GetCamera().SetUpVector(values.X, values.Y, values.Z);
 
-    openGlPanel_.Camera().Apply();
+    World().GetCamera().Apply();
 
     // 
     // Light
     //
-    openGlPanel_.Light().SetAmbient(ToFloat(ambientREdit_), ToFloat(ambientGEdit_), ToFloat(ambientBEdit_));
-    openGlPanel_.Light().SetDiffuse(ToFloat(diffuseREdit_), ToFloat(diffuseGEdit_), ToFloat(diffuseBEdit_));
-    openGlPanel_.Light().SetSpecular(ToFloat(specularREdit_), ToFloat(specularGEdit_), ToFloat(specularBEdit_));
+    World().GetLight().SetAmbient(ToFloat(ambientREdit_), ToFloat(ambientGEdit_), ToFloat(ambientBEdit_));
+    World().GetLight().SetDiffuse(ToFloat(diffuseREdit_), ToFloat(diffuseGEdit_), ToFloat(diffuseBEdit_));
+    World().GetLight().SetSpecular(ToFloat(specularREdit_), ToFloat(specularGEdit_), ToFloat(specularBEdit_));
 
     openGlPanel_.Invalidate();
 }
@@ -644,8 +650,8 @@ BOOL CBasicFunctionsDlg::PreTranslateMessage(MSG* pMsg)
 
 void CBasicFunctionsDlg::OnBnClickedResetSpriteButton()
 {
-    openGlPanel_.Sprite().Reset();
-    openGlPanel_.AnotherSprite().Reset();
+    World().GetBall().Reset();
+    World().GetBall2().Reset();
 }
 
 
@@ -677,7 +683,7 @@ void CBasicFunctionsDlg::OnEditChange()
 
 void CBasicFunctionsDlg::OnBnClickedTestButton()
 {
-    //openGlPanel_.Sprite().Load(L"HappyBuddha.obj");
+    //World().GetBall().Load(L"HappyBuddha.obj");
     CFileDialog fileDialog(TRUE, L"obj", NULL, OFN_FILEMUSTEXIST | OFN_LONGNAMES, L"Object (*.obj) | *.obj", this);
     INT_PTR result = fileDialog.DoModal();
     if(result == IDOK)
@@ -690,28 +696,28 @@ void CBasicFunctionsDlg::OnBnClickedTestButton()
 
 void CBasicFunctionsDlg::OnBnClickedDrawNormalCheck()
 {
-    openGlPanel_.Sprite().SetDrawNormal(drawNormalCheck_.GetCheck() != 0);
+    World().GetBall().SetDrawNormal(drawNormalCheck_.GetCheck() != 0);
 }
 
 
 void CBasicFunctionsDlg::OnBnClickedMeshPointButton()
 {
-    openGlPanel_.Sprite().SetMeshMode(MeshMode_Point);
-    openGlPanel_.AnotherSprite().SetMeshMode(MeshMode_Point);
+    World().GetBall().SetMeshMode(MeshMode_Point);
+    World().GetBall2().SetMeshMode(MeshMode_Point);
 }
 
 
 void CBasicFunctionsDlg::OnBnClickedMeshWireframeButton()
 {
-    openGlPanel_.Sprite().SetMeshMode(MeshMode_Wireframe);
-    openGlPanel_.AnotherSprite().SetMeshMode(MeshMode_Wireframe);
+    World().GetBall().SetMeshMode(MeshMode_Wireframe);
+    World().GetBall2().SetMeshMode(MeshMode_Wireframe);
 }
 
 
 void CBasicFunctionsDlg::OnBnClickedMeshQuadButton()
 {
-    openGlPanel_.Sprite().SetMeshMode(MeshMode_QuadMesh);
-    openGlPanel_.AnotherSprite().SetMeshMode(MeshMode_QuadMesh);
+    World().GetBall().SetMeshMode(MeshMode_QuadMesh);
+    World().GetBall2().SetMeshMode(MeshMode_QuadMesh);
 }
 
 
@@ -765,11 +771,11 @@ Virgin::Sprite& CBasicFunctionsDlg::GetSelectedSprite()
 {
     if(userViewSelectedCheck_.GetCheck())
     {
-        return openGlPanel_.Sprite();
+        return World().GetBall();
     }
     else
     {
-        return openGlPanel_.AnotherSprite();
+        return World().GetBall2();
     }
 }
 
@@ -789,7 +795,7 @@ void CBasicFunctionsDlg::OnBnClickedUserViewSelectedCheck()
 
 void CBasicFunctionsDlg::OnBnClickedResetCameraRotationButton()
 {
-    openGlPanel_.Camera().ResetRotation();
+    World().GetCamera().ResetRotation();
 }
 
 
@@ -797,12 +803,18 @@ void CBasicFunctionsDlg::OnBnClickedDrawTextureCheck()
 {
     if(drawTextureCheck_.GetCheck())
     {
-        openGlPanel_.Sprite().SetDrawTexture(true);
-        openGlPanel_.AnotherSprite().SetDrawTexture(true);
+        World().GetBall().SetDrawTexture(true);
+        World().GetBall2().SetDrawTexture(true);
     }
     else
     {
-        openGlPanel_.Sprite().SetDrawTexture(false);
-        openGlPanel_.AnotherSprite().SetDrawTexture(false);
+        World().GetBall().SetDrawTexture(false);
+        World().GetBall2().SetDrawTexture(false);
     }
+}
+
+// World Instance 좀 더 짧은 코드로 구할 수 있도록
+World& CBasicFunctionsDlg::World()
+{
+    return World::Instance();
 }

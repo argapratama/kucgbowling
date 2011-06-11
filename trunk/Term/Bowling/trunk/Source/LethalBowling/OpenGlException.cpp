@@ -1,6 +1,6 @@
 #include "OpenGlException.h"
 
-namespace OpenGl
+namespace Virgin
 {
 
 OpenGlException::OpenGlException(void)

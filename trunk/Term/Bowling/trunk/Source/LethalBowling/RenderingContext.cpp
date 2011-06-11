@@ -2,6 +2,8 @@
 #include "OpenGlException.h"
 #include <gl/GL.h>
 
+using Virgin::OpenGlException;
+
 namespace OpenGl
 {
 

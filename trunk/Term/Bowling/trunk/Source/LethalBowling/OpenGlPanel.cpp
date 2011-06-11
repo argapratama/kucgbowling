@@ -3,16 +3,17 @@
 #include "OpenGlPanel.h"
 #include "PixelFormatController.h"
 #include "PixelFormat.h"
-#include "Lighting.h"
+#include "World.h"
+#include <gl/GLU.h>
 #include <glut.h>
 
 using namespace OpenGl;
+using namespace Virgin;
 
 IMPLEMENT_DYNAMIC(OpenGlPanel, CWnd)
 
 OpenGlPanel::OpenGlPanel()
     : clientDc_(nullptr)
-    , rotation_(0.0)
     , renderingContext_(nullptr)
     , isLButtonDown_(false)
     , isRButtonDown_(false)
@@ -71,15 +72,8 @@ void OpenGlPanel::OnSize(UINT nType, int cx, int cy)
     height_ = cy;
 
     double aspect = static_cast<double>(cx / cy);
-    camera_.SetAspect(aspect);
-    camera_.Apply();
-
-   /* topCamera_.SetAspect(aspect);
-    topCamera_.Apply();
-    frontCamera_.SetAspect(aspect);
-    frontCamera_.Apply();
-    sideCamera_.SetAspect(aspect);
-    sideCamera_.Apply();*/
+    World::Instance().GetCamera().SetAspect(aspect);
+    World::Instance().GetCamera().Apply();
 }
 
 void OpenGlPanel::InitializeOpenGl()
@@ -100,81 +94,13 @@ void OpenGlPanel::InitializeOpenGl()
 
 void OpenGlPanel::DrawScene()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    renderingContext_->SetThisCurrent(clientDc_->m_hDC);
+    glViewport(0, 0, width_, height_);
 
-    // Top Left(TOP VIEW)
-    //glViewport(0, height_/2, width_/2, height_/2);
-    //topCamera_.Apply();
-    //anotherSprite_.Draw();
-    //
-    //// Top Right(FRONT VIEW)
-    //glViewport(width_/2, height_/2, width_/2, height_/2);
-    //frontCamera_.Apply();
-    //anotherSprite_.Draw();
+    World::Instance().GetCamera().Apply();
 
-    //// Bottom Left(SIDE VIEW)
-    //glViewport(0, 0, width_/2, height_/2);
-    //sideCamera_.Apply();
-    //anotherSprite_.Draw();
+    World::Instance().DrawScene();
 
-    //// Bottom Right(USER VIEW)
-    //glViewport(width_/2, 0, width_/2, height_/2);
-    //camera_.Apply();
-    //sprite_.Draw();
-	glViewport(0, 0, width_, height_);
-	glClearStencil(0);
-	camera_.Apply();
-	glEnable(GL_STENCIL_TEST);
-	glStencilFunc(GL_ALWAYS, 1,1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	/*glPushMatrix();
-	glColor4f(0.25,0.25,0.25, 1.0);
-	glColorMask(1,1,1,1);
-	glBegin(GL_POLYGON);
-	glVertex3f(-50.0f,0.0f, 0);
-	glVertex3f(50.0f,0.0f, 0);
-	glVertex3f(50.0f,-20.0f, 0);
-	glVertex3f(-50.0f,-20.0f, 0);
-	glEnd();
-	glPopMatrix();*/
-	glEnable(GL_BLEND);
-	glColor4f(0.49, 0.49, 0.49, 1);
-	glStencilFunc(GL_EQUAL, 1,1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-	glDisable(GL_DEPTH_TEST);
-	glPushMatrix();
-	glScalef(1,-1,1);
-	glTranslatef(0, 2, 0);
-	sprite_.Draw();
-	glPopMatrix();
-	glPushMatrix();
-	glScalef(1,-1,1);
-	glTranslatef(0, 3, 0);
-	spritePin_.Draw();	
-	spritePin2_.Draw();
-	spritePin3_.Draw();
-	spritePin4_.Draw();
-	spritePin5_.Draw();
-	spritePin6_.Draw();
-	spritePin7_.Draw();
-	spritePin8_.Draw();
-	spritePin9_.Draw();
-	spritePin10_.Draw();
-	glPopMatrix();
-	glDisable(GL_BLEND);
-	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_STENCIL_TEST);
-	sprite_.Draw();
-	spritePin_.Draw();
-	spritePin2_.Draw();
-	spritePin3_.Draw();
-	spritePin4_.Draw();
-	spritePin5_.Draw();
-	spritePin6_.Draw();
-	spritePin7_.Draw();
-	spritePin8_.Draw();
-	spritePin9_.Draw();
-	spritePin10_.Draw();
     SwapBuffers(clientDc_->m_hDC);
 }
 
@@ -184,12 +110,6 @@ void OpenGlPanel::OnPaint()
     // TODO: 여기에 메시지 처리기 코드를 추가합니다.
     // 그리기 메시지에 대해서는 CWnd::OnPaint()을(를) 호출하지 마십시오.
 
-    renderingContext_->SetThisCurrent(clientDc_->m_hDC);
-    rotation_ += 0.1;
-    if(rotation_ >= 360.0)
-    {
-        rotation_ -= 360.0;
-    }
     DrawScene();
 }
 
@@ -237,66 +157,6 @@ void OpenGlPanel::SetupPixelFormat(HDC hDC)
         0,
         PFD_MAIN_PLANE,
         0, 0, 0));
-}
-
-Virgin::Sprite& OpenGlPanel::Sprite()
-{
-    return sprite_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin()
-{
-    return spritePin_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin2()
-{
-    return spritePin2_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin3()
-{
-    return spritePin3_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin4()
-{
-    return spritePin4_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin5()
-{
-    return spritePin5_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin6()
-{
-    return spritePin6_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin7()
-{
-    return spritePin7_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin8()
-{
-    return spritePin8_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin9()
-{
-    return spritePin9_;
-}
-
-Virgin::Sprite& OpenGlPanel::SpritePin10()
-{
-    return spritePin10_;
-}
-
-Virgin::Camera& OpenGlPanel::Camera()
-{
-    return camera_;
 }
 
 
@@ -417,7 +277,8 @@ void OpenGlPanel::OnMouseHWheel(UINT nFlags, short zDelta, CPoint pt)
     CWnd::OnMouseHWheel(nFlags, zDelta, pt);
 }
 
-Virgin::Light& OpenGlPanel::Light()
-{
-    return light_;
+Virgin::Sprite& OpenGlPanel::GetManipulatingSprite()
+{ 
+    //if(isManipulatingSprite_)
+    return World::Instance().GetBall();
 }

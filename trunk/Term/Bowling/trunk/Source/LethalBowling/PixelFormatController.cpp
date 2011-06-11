@@ -3,6 +3,8 @@
 #include "PixelFormat.h"
 #include "OpenGlException.h"
 
+using Virgin::OpenGlException;
+
 namespace OpenGl
 {
 
