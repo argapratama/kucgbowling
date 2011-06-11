@@ -5,8 +5,6 @@
 namespace Virgin
 {
 
-using namespace OpenGl;
-
 enum CameraViewMode
 {
     CameraViewMode_Orthographic,

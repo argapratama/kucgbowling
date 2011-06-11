@@ -28,7 +28,7 @@ void RenderingContext::SetThisCurrent(HDC hdc)
 
 void RenderingContext::CreateContext(HDC hdc)
 {
-    if(!(handle_ = wglCreateContext(hdc)))
+    if((handle_ = wglCreateContext(hdc)) == nullptr)
     {
         throw OpenGlException(L"Can't create a GL rendering context");
     }

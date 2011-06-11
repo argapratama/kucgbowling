@@ -2,7 +2,7 @@
 
 #include <math.h>
 
-namespace OpenGl
+namespace Virgin
 {
 
 struct Vector3
@@ -40,9 +40,14 @@ public:
         return Vector3(X + rhs.X, Y + rhs.Y, Z + rhs.Z);
     }
 
-    Vector3 operator*(float magnitude) const
+    Vector3 operator*(float value) const
     {
-        return Vector3(X*magnitude, Y*magnitude, Z*magnitude);
+        return Vector3(X*value, Y*value, Z*value);
+    }
+
+    Vector3 operator/(float value) const
+    {
+        return Vector3(X/value, Y/value, Z/value);
     }
 
     Vector3& operator+=(const Vector3& rhs)
@@ -53,11 +58,27 @@ public:
         return *this;
     }
 
+    Vector3& operator-=(const Vector3& rhs)
+    {
+        X -= rhs.X;
+        Y -= rhs.Y;
+        Z -= rhs.Z;
+        return *this;
+    }
+
     Vector3& operator*=(float value)
     {
         X *= value;
         Y *= value;
         Z *= value;
+        return *this;
+    }
+
+    Vector3& operator/=(float value)
+    {
+        X /= value;
+        Y /= value;
+        Z /= value;
         return *this;
     }
 
@@ -72,9 +93,15 @@ public:
         }
     }
 
+    // X^2 + Y^2 + Z^2
+    float SquareSize() const
+    {
+        return X*X + Y*Y + Z*Z;
+    }
+
     float Size() const
     {
-        return sqrt(X*X + Y*Y + Z*Z);
+        return sqrt(SquareSize());
     }
 
 
@@ -82,6 +109,26 @@ public:
     float X;
     float Y;
     float Z;
+};
+
+// 정수형 3차 벡터
+struct Vector3D
+{
+public:
+    Vector3D()
+        : X(0), Y(0), Z(0)
+    {
+    }
+
+    Vector3D(int x, int y, int z)
+        : X(x), Y(y), Z(z)
+    {
+    }
+
+public:
+    int X;
+    int Y;
+    int Z;
 };
 
 }
