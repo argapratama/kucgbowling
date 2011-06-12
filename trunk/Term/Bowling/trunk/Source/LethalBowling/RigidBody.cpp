@@ -62,20 +62,28 @@ void RigidBody::CalcObjectForces()
             Fb += Thrust;
         }*/
 
-        // 항력 정의
-        vDragVector = -rigidBody.velocityBody;
-        vDragVector.Normalize();
-        Fb += vDragVector * (rigidBody.speed_ * rigidBody.speed_ * Physics::AirDensity * Physics::LinearDragCoefficient * rigidBody.radius_ * rigidBody.radius_);
+        //
+        // 사용자가 가한 순간 힘
+        //
+        Fb += rigidBody.immediateForce_;
+        rigidBody.immediateForce_.Reset();
 
-        vAngularDragVector = -rigidBody.angularVelocity_;
-        vAngularDragVector.Normalize();
-        Mb += vAngularDragVector * (rigidBody.angularVelocity_.Size() * rigidBody.angularVelocity_.Size() * Physics::AirDensity * Physics::AngularDragCoefficient * rigidBody.radius_ * rigidBody.radius_);
+        //// 항력 정의
+        //vDragVector = -rigidBody.velocityBody;
+        //vDragVector.Normalize();
+        //Fb += vDragVector * (rigidBody.speed_ * rigidBody.speed_ * Physics::AirDensity * Physics::LinearDragCoefficient * rigidBody.radius_ * rigidBody.radius_);
+
+        //vAngularDragVector = -rigidBody.angularVelocity_;
+        //vAngularDragVector.Normalize();
+        //Mb += vAngularDragVector * (rigidBody.angularVelocity_.Size() * rigidBody.angularVelocity_.Size() * Physics::AirDensity * Physics::AngularDragCoefficient * rigidBody.radius_ * rigidBody.radius_);
+
+        
 
         // 힘을 모델 공간에서 전체 공간으로 변환
         rigidBody.forces_ = rigidBody.orientation_.VRotate(Fb);
 
         // 중력 작용
-        rigidBody.forces_.Z += Physics::Gravity * rigidBody.mass_;
+        rigidBody.forces_.Y += Physics::Gravity * rigidBody.mass_;
 
         // 모멘트 저장
         rigidBody.moments_ += Mb;
@@ -209,14 +217,14 @@ CollisionType RigidBody::CheckGroundPlaneContacts(const RigidBody& rigidBody)
     // 문제의 각 꼭지점이 지평면에 닿는지 확인
     for(int i = 0; i < BoxVertexCount; ++i)
     {
-        // * Todo: 우리는 X, Y가 바닥이 아니고 X, Z 평면이 바닥이므로 수정을 해야 할 듯
+        // * Todo: 우리는 X, Y가 바닥이 아니고 Z, X 평면이 바닥이므로 수정을 해야 할 듯
         // u: X축 단위 벡터
-        u.X = 1.0f;
+        u.X = 0.0f;
         u.Y = 0.0f;
-        u.Z = 0.0f;
+        u.Z = 1.0f;
         // v: Y축 단위 벡터
-        v.X = 0.0f;
-        v.Y = 1.0f;
+        v.X = 1.0f;
+        v.Y = 0.0f;
         v.Z = 0.0f;
         tmp.Reset();
 
@@ -236,7 +244,7 @@ CollisionType RigidBody::CheckGroundPlaneContacts(const RigidBody& rigidBody)
             Vr = vel1;
             Vrn = Vr.Dot(n);
 
-            if(Math::Abs(Vrn) <=  Physics::VelocityTolerance /*sqrt(2*32.174*CONTACTTOLERANCE)*/ )    // 정지 // * Todo: 비교값 교체
+            if(Math::Abs(Vrn) <= /*Math::Sqrt(2*(-Physics::Gravity)*Collision::ContactTolerance)*/ Physics::VelocityTolerance /*sqrt(2*32.174*CONTACTTOLERANCE)*/ )    // 정지 // * Todo: 비교값 교체
             {
                 // 이제 상대 가속도 확인
                 Ar = rigidBody.acceleration_ + (rigidBody.angularVelocity_.Cross(rigidBody.angularVelocity_.Cross(pt1))) + (rigidBody.angularAcceleration_.Cross(pt1));
@@ -249,7 +257,7 @@ CollisionType RigidBody::CheckGroundPlaneContacts(const RigidBody& rigidBody)
                     vector<Sprite*>& sprites = World::Instance().Sprites();
                     
                     // 접촉한 상태이고, 데이터 구조체를 채우고, 돌아간다
-                    assert(collisions.size() < sprites.size() * BoxVertexCount);
+                    //assert(collisions.size() < sprites.size() * BoxVertexCount);
 
                     if(collisions.size() < sprites.size() * BoxVertexCount)
                     {
@@ -278,6 +286,7 @@ CollisionType RigidBody::CheckGroundPlaneContacts(const RigidBody& rigidBody)
 }
 
 // 오일러 방법 이용(적분)
+// * 주의: 질량(mass)가 0.0일 경우 가속도가 무한대가 됨
 void RigidBody::StepSimulation(TimeSpan timeDelta)
 {
     int turn = 0;  // 시간 1/2씩 돌 때 세는 회차인 듯 (1회차, 2회차, ...)
@@ -295,6 +304,11 @@ tryagain:
     for(uint i = 0; i < sprites.size(); ++i)
     {
         RigidBody& rigidBody = sprites[i]->GetRigidBody();
+
+        if(rigidBody.mass_ == 0.0f)
+        {
+            continue;
+        }
 
         // 전체 좌표에서 가속도 계산
         Ae = rigidBody.forces_ / rigidBody.mass_;
@@ -457,7 +471,7 @@ CollisionType RigidBody::CheckForCollisions(bool doCheckPenetration)
                 continue;
             }
 			
-            RigidBody& rigidBody2 = sprites[i]->GetRigidBody();
+            RigidBody& rigidBody2 = sprites[j]->GetRigidBody();
 
             // do a bounding sphere check first	
             d = rigidBody1.location_ - rigidBody2.location_;
@@ -1272,5 +1286,9 @@ void RigidBody::ResolveCollisions()
 	}
 }
 
+void RigidBody::ApplyForce(Vector3 force)
+{
+    immediateForce_ = force;
+}
 
 }

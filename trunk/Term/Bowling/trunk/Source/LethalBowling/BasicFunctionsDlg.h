@@ -3,6 +3,7 @@
 #include "OpenGlPanel.h"
 #include "afxcmn.h"
 #include "World.h"
+#include "Sprite.h"
 
 class CBasicFunctionsDlg : public CDialogEx
 {
@@ -27,6 +28,8 @@ private:
     static float ToFloat(const CWnd& wnd);
     Virgin::Sprite& GetSelectedSprite();
     void InitializeWorld();
+    void InitializeSpriteMassProperties();
+    void InitializePin(Virgin::Sprite& pin);
     void InitializeControls();
 
     static Virgin::World& World();
@@ -125,4 +128,6 @@ public:
     CButton showCollisionInfoCheck_;
     afx_msg void OnBnClickedTest2Button();
     afx_msg void OnBnClickedTest3Button();
+    afx_msg void OnBnClickedTest4Button();
+    CButton pauseCheck_;
 };

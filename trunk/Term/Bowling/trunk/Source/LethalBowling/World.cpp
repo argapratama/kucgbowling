@@ -243,12 +243,13 @@ void World::HideCollisionInfo()
 
 void World::Update(TimeSpan timeDelta)
 {
-    if(timeDelta.TotalSeconds() == 0.0)
-    {
-        timeDelta += TimeSpan(1);
-    }
+    //if(timeDelta.TotalSeconds() == 0.0)
+    //{
+    //    timeDelta += TimeSpan(1);
+    //}
 
-    ball_.Update(timeDelta);
+    //ball_.Update(timeDelta);
+    RigidBody::StepSimulation(timeDelta);
 }
 
 vector<Sprite*>& World::Sprites()
