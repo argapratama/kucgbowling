@@ -19,7 +19,7 @@ public:
     
     void Enable();
     void Disable();
-
+	Vector3 GetLocation() { return location_;};
 private:
     Vector3 location_;
     Color ambient_;

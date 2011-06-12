@@ -29,6 +29,9 @@
     <Filter Include="Source\Library Class\OpenGl">
       <UniqueIdentifier>{39f08536-d861-4f36-8919-b62592a73f5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source\External">
+      <UniqueIdentifier>{278add2d-8e39-41eb-a4a7-c73c2cda83b6}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Source\Application Class\Physics">
       <UniqueIdentifier>{8e7eb943-6619-4cf8-8007-9896623e3075}</UniqueIdentifier>
     </Filter>
@@ -139,6 +142,9 @@
     <ClInclude Include="World.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Source\External</Filter>
+    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
@@ -218,6 +224,9 @@
     </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>Source\External</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Source\Application Class</Filter>

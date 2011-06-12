@@ -237,14 +237,15 @@ void CBasicFunctionsDlg::InitializeWorld()
     {
         MessageBox(L"bowling_ball.obj doesn't exist. Please restart this application ^^;;");
     }
-	World().GetBall().TranslateMore(6.0, -0.8, 1.0);
+	//World().GetBall().TranslateMore(6.0, -0.8, 1.0);
+	World().GetBall().TranslateMore(6.0, -0.2, 1.0);
 	
 	if(!World().GetPin(0).Load(L"bowling_pin.obj", L""))
     {
         MessageBox(L"bowling_pin.obj doesn't exist. Please restart this application ^^;;");
     }
 
-	World().GetPin(0).TranslateMore(-2.0, -0.0, 0.0);
+	World().GetPin(0).TranslateMore(-2.0, 0.0, 0.0);
 	World().GetPin(0).ScaleRate(1.5, 1.5, 1.5);
 	World().GetPin(0).CopyTo(World().GetPin(1));
 	World().GetPin(1).TranslateMore(-2.6, 0.0, 0.5);
@@ -286,7 +287,7 @@ void CBasicFunctionsDlg::InitializeWorld()
 	World().GetPin(9).SetDrawTexture(false);
 
     // The Main Light
-    World().GetLight().MoveTo(1.0, 1.0, 1.0);
+    World().GetLight().MoveTo(20, 30, 0);
     World().GetLight().Enable();
 
     // 스프라이트 등록
@@ -544,9 +545,8 @@ void CBasicFunctionsDlg::UpdateAndDraw()
     values.Y = ToFloat(cameraUpYEdit_);
     values.Z = ToFloat(cameraUpZEdit_);
     World().GetCamera().SetUpVector(values.X, values.Y, values.Z);
-
     World().GetCamera().Apply();
-
+	
     // 
     // Light
     //
