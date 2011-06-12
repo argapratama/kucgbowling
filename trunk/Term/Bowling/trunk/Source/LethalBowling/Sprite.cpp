@@ -6,7 +6,7 @@
 #include <iostream>
 #include <sstream>
 #include <fstream>
-
+#include <glut.h>
 
 using namespace std;
 
@@ -254,7 +254,7 @@ bool Sprite::Load(const String& fileName, const String& textureName)
 		free(TextureImage[0]);						// Free The Image Structure
 	}
 
-    CalculateModelCenter();
+    CalculateModelCenterAndRadius();
 
     return true;
 }
@@ -269,12 +269,14 @@ void Sprite::Draw()
     float ambient[] = { 0.3f, 0.3f, 0.3f, 1.0f };
     float diffuse[] = { 0.9f, 0.9f, 0.9f, 1.0f };
     float specular[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+    float emission[] = { 0.0f, 0.0f, 0.0f, 0.0f };
     glMaterialfv(GL_FRONT, GL_AMBIENT, ambient);
     glMaterialfv(GL_FRONT, GL_DIFFUSE, diffuse);
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
+    glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 
     glScalef(scales_.X, scales_.Y, scales_.Z);
-    glTranslatef(location_.X, location_.Y, location_.Z);
+    glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
     
     glRotatef(anglesForEachAxis_.X, 1.0, 0.0, 0.0);
     glRotatef(anglesForEachAxis_.Y, 0.0, 1.0, 0.0);
@@ -511,9 +513,9 @@ void Sprite::RotateAxis(float angle, const Vector3& axisBegin, const Vector3& ax
 
 void Sprite::TranslateMore(float x, float y, float z)
 {
-    location_.X += x;
-    location_.Y += y;
-    location_.Z += z;
+    rigidBody_.location_.X += x;
+    rigidBody_.location_.Y += y;
+    rigidBody_.location_.Z += z;
 }
 
 void Sprite::Scale(float x, float y, float z)
@@ -540,7 +542,7 @@ void Sprite::ScaleFrom(const Vector3& from, float x, float y, float z)
 
 void Sprite::Reset()
 {
-    location_.Reset();
+    rigidBody_.location_.Reset();
     anglesForEachAxis_.Reset();
 
     rotateAngle_ = 0.0;
@@ -594,10 +596,10 @@ void Sprite::SetDrawTexture(bool drawTexture)
 
 Vector3 Sprite::Location() const
 {
-    return location_;
+    return rigidBody_.location_;
 }
 
-void Sprite::CalculateModelCenter()
+void Sprite::CalculateModelCenterAndRadius()
 {
     Vector3 maxVertex;
     Vector3 minVertex;
@@ -621,8 +623,36 @@ void Sprite::CalculateModelCenter()
 
     modelCenter_ = (maxVertex + minVertex) / 2;
 
-    float a = (maxVertex.X - minVertex.X);
-    float b = a / 2;
+    // 반지름은 간단하게 계산. 물체를 Cube로 보았을 때 X, Y, Z 중 가장 긴 쪽 / 2
+    radius_ = Math::Max(Math::Max(maxVertex.X - minVertex.X, maxVertex.Y - minVertex.Y), maxVertex.Z - minVertex.Z) / 2;
+}
+
+void Sprite::DrawCoveringSphere()
+{
+    static float SphereMaterial[] = { 1.0f, 0.0f, 0.0f, 0.0f };
+    glMaterialfv(GL_FRONT, GL_EMISSION, SphereMaterial);
+
+    glPushMatrix();
+    glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
+    glutWireSphere(radius_+0.03f, 20, 20);
+    glPopMatrix();    
+}
+
+// * 강체가 Force 기반으로 구현되면 제거될 수 있음
+void Sprite::SetVelocity(Vector3 direction, float speed)
+{
+    rigidBody_.velocity_ = direction;
+    rigidBody_.speed_ = speed;
+}
+
+void Sprite::Update(TimeSpan timeSpan)
+{
+    rigidBody_.Update(timeSpan);
+}
+
+RigidBody& Sprite::GetRigidBody()
+{
+    return rigidBody_;
 }
 
 }

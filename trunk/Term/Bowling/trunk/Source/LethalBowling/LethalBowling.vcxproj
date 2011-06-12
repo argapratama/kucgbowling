@@ -116,6 +116,7 @@
     <ClInclude Include="BasicFunctions.h" />
     <ClInclude Include="BasicFunctionsDlg.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="DateTime.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="BasicFunctions.cpp" />
     <ClCompile Include="BasicFunctionsDlg.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionDetector.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="DateTime.cpp" />
