@@ -28,18 +28,18 @@ void RigidBody::Update(TimeSpan timeSpan)
 // * 주의: RigidBody::mass_ 가 0.0인 경우 가속도 구할 때 Divide by Zero 예외 발생할 수 있음
 void RigidBody::CalcObjectForces()
 {
-    Vector3 Fb, Mb;
-    Vector3 vDragVector;
-    Vector3 vAngularDragVector;
-    Vector3 ContactForce;
-    Vector3 pt;
-    CollisionType collisionType = CollisionType_NoCollision;
-    //Collision* collisionData;    // 여기서 접촉힘에 사용(Predicated, 대신 World::Collsions() 사용)
-    Vector3 FrictionForce;
-    Vector3 fDir;
-
     for(uint i = 0; i < World::Instance().Sprites().size(); ++i)
     {
+        Vector3 Fb, Mb;
+        Vector3 vDragVector;
+        Vector3 vAngularDragVector;
+        Vector3 ContactForce;
+        Vector3 pt;
+        CollisionType collisionType = CollisionType_NoCollision;
+        //Collision* collisionData;    // 여기서 접촉힘에 사용(Predicated, 대신 World::Collsions() 사용)
+        Vector3 FrictionForce;
+        Vector3 fDir;
+
         RigidBody& rigidBody = World::Instance().Sprites()[i]->GetRigidBody();
 
         // 힘과 모멘트를 재설정
