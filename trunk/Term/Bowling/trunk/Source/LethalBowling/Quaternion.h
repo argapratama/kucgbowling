@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vector.h"
+#include "Matrix.h"
 
 namespace Virgin
 {
@@ -27,6 +28,7 @@ public:
 
     static Quaternion FromEulerAngles(float x, float y, float z);
     Vector3 ToEulerAngles() const;
+    Matrix3 ToMatrix() const;
 
 public:
     float n;

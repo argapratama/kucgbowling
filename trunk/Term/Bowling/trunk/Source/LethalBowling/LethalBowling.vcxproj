@@ -125,6 +125,7 @@
     <ClInclude Include="DrawingState.h" />
     <ClInclude Include="Environment.h" />
     <ClInclude Include="Exception.h" />
+    <ClInclude Include="Geometric.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Lighting.h" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="DrawingState.cpp" />
     <ClCompile Include="Exception.cpp" />
+    <ClCompile Include="Geometric.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Lighting.cpp" />
