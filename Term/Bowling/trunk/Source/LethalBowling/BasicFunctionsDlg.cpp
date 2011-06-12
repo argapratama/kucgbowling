@@ -7,6 +7,7 @@
 #include "BasicFunctionsDlg.h"
 #include "afxdialogex.h"
 #include "Lighting.h"
+#include "DateTime.h"
 #include <gl/GL.h>
 #include <glut.h>
 
@@ -181,6 +182,8 @@ BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
     ON_BN_CLICKED(IDC_RESET_CAMERA_ROTATION_BUTTON, &CBasicFunctionsDlg::OnBnClickedResetCameraRotationButton)
     ON_BN_CLICKED(IDC_DRAW_TEXTURE_CHECK, &CBasicFunctionsDlg::OnBnClickedDrawTextureCheck)
     ON_BN_CLICKED(IDC_SHOW_COLLISION_INFO_CHECK, &CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck)
+    ON_BN_CLICKED(IDC_TEST2_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest2Button)
+    ON_BN_CLICKED(IDC_TEST3_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest3Button)
 END_MESSAGE_MAP()
 
 
@@ -285,6 +288,14 @@ void CBasicFunctionsDlg::InitializeWorld()
     // The Main Light
     World().GetLight().MoveTo(1.0, 1.0, 1.0);
     World().GetLight().Enable();
+
+    // 스프라이트 등록
+    World().Sprites().push_back(&World().GetBall());
+    World().Sprites().push_back(&World().GetBall2());
+    for(int i = 0; i < 10; ++i)
+    {
+        World().Sprites().push_back(&World().GetPin(i));
+    }
 }
 
 void CBasicFunctionsDlg::InitializeControls()
@@ -394,17 +405,21 @@ void CBasicFunctionsDlg::OnSize(UINT nType, int cx, int cy)
 
 void CBasicFunctionsDlg::UpdateAndDraw()
 {
-    //static float lastTime = (float)timeGetTime();
-    //float currTime = (float)timeGetTime();
-    //float timeDelta = (currTime - lastTime)/0.001f;
-    //lastTime = currTime;
+    static DateTime lastTime = DateTime::SinceSystemStarted();
+    DateTime currTime = DateTime::SinceSystemStarted();
+    TimeSpan timeDelta = currTime - lastTime;
+    lastTime = currTime;
 
-    //CString fpsText;
-    //if(timeDelta != 0.0)
-    //{
-    //    fpsText.Format(L"%d", (int)(double)1000.0f/timeDelta);
-    //    fpsStatic_.SetWindowText(fpsText);
-    //}
+    if(timeDelta.TotalSeconds() != 0.0)
+    {
+        CString fpsText;
+        int fps = (double)1.0/timeDelta.TotalSeconds();
+        fpsText.Format(L"%d", fps);
+        fpsStatic_.SetWindowText(fpsText);
+    }
+
+    World().Update(timeDelta);
+
     const float Speed = static_cast<float>(speedSlider_.GetPos() / 100.0);
 
     const float MoveUnit = 0.01 * Speed;
@@ -832,4 +847,16 @@ void CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck()
     {
         World().HideCollisionInfo();
     }
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedTest2Button()
+{
+    World().GetBall().SetVelocity(Vector3(0.0f, 1.0f, 0.0f), 0.5f);
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedTest3Button()
+{
+    World().GetBall().SetVelocity(Vector3(0.0f, 0.0f, 0.0f), 0.0f);
 }

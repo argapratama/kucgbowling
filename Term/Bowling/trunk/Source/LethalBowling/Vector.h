@@ -82,6 +82,11 @@ public:
         return *this;
     }
 
+    Vector3 operator-() const
+    {
+        return Vector3(-X, -Y, -Z);
+    }
+
     void Normalize()
     {
         const float size = Size();

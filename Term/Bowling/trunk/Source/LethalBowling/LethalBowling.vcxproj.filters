@@ -139,6 +139,9 @@
     <ClInclude Include="World.h">
       <Filter>Source\Application Class</Filter>
     </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicFunctionsDlg.cpp">
@@ -214,6 +217,9 @@
       <Filter>Source\Library Class</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
+      <Filter>Source\Application Class</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
       <Filter>Source\Application Class</Filter>
     </ClCompile>
   </ItemGroup>

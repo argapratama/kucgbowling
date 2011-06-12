@@ -60,17 +60,14 @@ void World::DrawScene()
 
     if(doShowCollisionInfo_)
     {
-        glPushMatrix();
-        glTranslatef(ball_.Location().X, ball_.Location().Y, ball_.Location().Z);
-        glutWireSphere(/*2.29934*//*1.9909358*/ 1.1496694, 10, 10);
-        glPopMatrix();
+        ball_.DrawCoveringSphere();
     }
 
     //
     // 원점 그리기
     //
     static float CenterPointMaterial[] = { 1.0f, 0.0f, 0.0f, 0.0f };
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, CenterPointMaterial);
+    glMaterialfv(GL_FRONT, GL_EMISSION, CenterPointMaterial);
     glutSolidSphere(0.5f, 10, 10);
 }
 
@@ -117,6 +114,26 @@ void World::ShowCollisionInfo()
 void World::HideCollisionInfo()
 {
     doShowCollisionInfo_ = false;
+}
+
+void World::Update(TimeSpan timeDelta)
+{
+    if(timeDelta.TotalSeconds() == 0.0)
+    {
+        timeDelta += TimeSpan(1);
+    }
+
+    ball_.Update(timeDelta);
+}
+
+vector<Sprite*>& World::Sprites()
+{
+    return sprites_;
+}
+
+vector<Collision>& World::Collisions()
+{
+    return collisions_;
 }
 
 }

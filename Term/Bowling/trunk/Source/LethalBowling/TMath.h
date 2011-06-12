@@ -24,6 +24,12 @@ public:
         return sqrt(value);
     }
 
+    template<typename XType, typename YType>
+    static XType Pow(XType x, YType y)
+    {
+        return pow(x, y);
+    }
+
     template<typename T>
     static T Min(T value1, T value2)
     {

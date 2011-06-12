@@ -3,6 +3,8 @@
 #include "Vector.h"
 #include "TString.h"
 #include "PrimitiveType.h"
+#include "RigidBody.h"
+#include "TimeSpan.h"
 #include <vector>
 
 namespace Virgin
@@ -54,7 +56,13 @@ public:
 
     void CopyTo(Sprite& rhs) const;
 
-    void CalculateModelCenter();
+    void CalculateModelCenterAndRadius();
+
+    void DrawCoveringSphere();
+
+    void SetVelocity(Vector3 direction, float speed);
+    void Update(TimeSpan timeSpan);
+    RigidBody& GetRigidBody();
 
 private:
     std::vector<Vector3> vertice_;
@@ -72,7 +80,7 @@ private:
     std::vector<Vector3> faceNormals_;
     std::vector<Vector3> vertexNormals_;
 
-    Vector3 location_;
+    //Vector3 location_;
     Vector3 anglesForEachAxis_;
 
     float rotateAngle_;
@@ -94,30 +102,10 @@ private:
     // 물리 모델링
     //
 
-    Vector3 modelCenter_;   // 모델 좌표 기준으로, 모델의 중점(Cube로 보았을 때)
+    Vector3 modelCenter_;   // 모델 좌표 기준으로, 모델의 중점(Cube로 보았을 때). 그릴 때 먼저 -modelCenter_ 만큼 Translate 해줘야 함
+    float radius_;
 
-    // 질량 특성
-    float mass_;        // 질량
-    Vector3 massCenter_;  // 질량 중심    // * Todo: 좌표가 필요함
-    float moment_;      // 관성 모멘트(회전 저항력)(Inertia)   // * Todo: 축별로 다름   
-    
-    // 물체에 작용하는 힘
-    std::vector<float> forces_; // * Todo: 방향도 필요함
-    std::vector<float> momentForces_;
-
-    // 선가속도, 각가속도
-    float linearAcceleration_;  // * Todo: 방향도 필요함
-    float angleAcceleration_;
-
-    // 선속도, 각속도
-    float linearVelocity_;  // * Todo: 방향도 필요함
-    float angleVelocity_;
-
-    // 선 변위, 각 변위
-    float linearDisplacement_;  // * Todo: 방향도 필요함
-    float angleDisplacement_;
-
-    // + 현재 위치, 방향
+    RigidBody rigidBody_;
 };
 
 }

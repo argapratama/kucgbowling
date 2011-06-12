@@ -123,4 +123,6 @@ public:
     afx_msg void OnBnClickedDrawTextureCheck();
     afx_msg void OnBnClickedShowCollisionInfoCheck();
     CButton showCollisionInfoCheck_;
+    afx_msg void OnBnClickedTest2Button();
+    afx_msg void OnBnClickedTest3Button();
 };
