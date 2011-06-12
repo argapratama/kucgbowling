@@ -151,6 +151,9 @@
     <ClInclude Include="RigidBody.h">
       <Filter>Source\Application Class\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="Edge.h">
+      <Filter>Source\Application Class</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicFunctionsDlg.cpp">

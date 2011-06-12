@@ -123,6 +123,7 @@
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="DrawingState.h" />
+    <ClInclude Include="Edge.h" />
     <ClInclude Include="Environment.h" />
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Geometric.h" />

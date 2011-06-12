@@ -22,4 +22,6 @@ float Physics::CoefficientOfRestitutionGround = 0.025f;
 float Physics::VelocityTolerance = 0.05f;
 float Physics::FrictionCoefficient = 0.9f;
 float Physics::AirDensity = 0.0023769f;     // 해수면의 공기 밀도 0.0023769 slug/ft^3 = 1.225 kg/m^3 
+
+bool Physics::DoFriction = true;
 }

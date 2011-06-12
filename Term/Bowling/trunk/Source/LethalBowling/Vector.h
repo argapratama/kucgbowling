@@ -114,6 +114,13 @@ public:
         return sqrt(SquareSize());
     }
 
+    void Reverse()
+    {
+        X = -X;
+        Y = -Y;
+        Z = -Z;
+    }
+
 
 public:
     float X;
