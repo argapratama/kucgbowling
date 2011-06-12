@@ -4,7 +4,6 @@
 #include "Camera.h"
 #include "Light.h"
 #include "TimeSpan.h"
-#include "Collision.h"
 
 using namespace std;
 
@@ -32,28 +31,30 @@ public:
 
     void ShowCollisionInfo();
     void HideCollisionInfo();
+	void Init();
+	void DrawObject();
+	void DrawFloor();
 
-    void Update(TimeSpan timeDelta);
+	void Update(TimeSpan timeDelta);
 
     vector<Sprite*>& Sprites();  
     vector<Collision>& Collisions();
-
 private:
-    vector<Sprite*> sprites_;   // 여기에 모든 스프라이트들을 등록해두어야 함 (충돌 검사 등에 사용)
+	vector<Sprite*> sprites_;   // 여기에 모든 스프라이트들을 등록해두어야 함 (충돌 검사 등에 사용)
     vector<Collision> collisions_;
-
     Sprite ball_;
     Sprite ball2_;
     vector<Sprite> pins_;
-
+	float shadow_matrix[16];
     Light light_;
 
     Camera camera_;
     Camera topCamera_;
     Camera sideCamera_;
     Camera frontCamera_;
-
+	GLuint texture[4];
     bool doShowCollisionInfo_;
+	void LoadGLTextures();
 };
 
 }

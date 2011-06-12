@@ -89,14 +89,13 @@ void OpenGlPanel::InitializeOpenGl()
 	glDisable(GL_BLEND);
 	glEnable(GL_ALPHA_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	//glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	World::Instance().Init();
 }
 
 void OpenGlPanel::DrawScene()
 {
     renderingContext_->SetThisCurrent(clientDc_->m_hDC);
     glViewport(0, 0, width_, height_);
-
     World::Instance().GetCamera().Apply();
 
     World::Instance().DrawScene();
@@ -153,7 +152,7 @@ void OpenGlPanel::SetupPixelFormat(HDC hDC)
         0,
         0, 0, 0, 0,
         16,
-        0,
+        1,
         0,
         PFD_MAIN_PLANE,
         0, 0, 0));
