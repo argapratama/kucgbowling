@@ -30,6 +30,11 @@ public:
         return Vector3(Y*rhs.Z - Z*rhs.Y, Z*rhs.X - X*rhs.Z, X*rhs.Y - Y*rhs.X);
     }
 
+    float Dot(const Vector3& rhs) const
+    {
+        return (X * rhs.X + Y * rhs.Y + Z * rhs.Z);
+    }
+
     Vector3 operator-(const Vector3& rhs) const
     {
         return Vector3(X - rhs.X, Y - rhs.Y, Z - rhs.Z);
@@ -115,6 +120,12 @@ public:
     float Y;
     float Z;
 };
+
+inline Vector3 operator*(float s, const Vector3& u)
+{
+    return u * s;
+}
+
 
 // 정수형 3차 벡터
 struct Vector3D

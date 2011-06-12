@@ -153,4 +153,30 @@ Vector3 Quaternion::ToEulerAngles() const
     return u;
 }
 
+Matrix3 Quaternion::ToMatrix() const
+{
+	double	q00, q11, q22, q33;
+	
+	Matrix3 m;
+
+	q00 = n * n;
+	q11 = v.X * v.X;
+	q22 = v.Y * v.Y;
+	q33 = v.Z * v.Z;
+
+	m.M11 = q00 + q11 - q22 - q33;
+	m.M21 = 2 * (v.X*v.Y + n*v.Z);
+	m.M31 = 2 * (v.X*v.Z - n*v.Y);
+	
+	m.M12 = 2 * (v.X*v.Y - n*v.Z);
+	m.M22 = q00 - q11 + q22 - q33;
+	m.M32 = 2 * (v.Y*v.Z + n*v.X);
+	
+	m.M13 = 2 * (v.X*v.Z + n*v.Y);
+	m.M23 = 2 * (v.Y*v.Z - n*v.X);
+	m.M33 = q00 - q11 - q22 + q33;
+
+	return m;
+}
+
 }

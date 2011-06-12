@@ -36,11 +36,35 @@ public:
         Values[2][2] = r3c3;
     }
 
-    //Matrix3(const Matrix3& rhs);
+    float Determinant() const
+    {
+        return M11*M22*M33 -
+               M11*M32*M23 +
+               M21*M32*M13 -
+               M21*M12*M33 +
+               M31*M12*M23 -
+               M31*M22*M13;
+    }
 
-    float Determinant() const;
-    Matrix3 Transpose();
-    Matrix3 Inverse();
+    Matrix3 Transpose()
+    {
+        return Matrix3(M11, M21, M31,
+                       M12, M22, M32,
+                       M13, M23, M33);
+    }
+
+    Matrix3 Inverse()
+    {
+        float d = Determinant();
+        if(d == 0.0f)
+        {
+            d = 1.0f;
+        }
+
+        return Matrix3((M22*M33 - M23*M32) / d, -(M12*M33 - M13*M32) / d, (M12*M23 - M13*M22) / d,
+                       -(M21*M33 - M23*M31) / d, (M11*M33 - M13*M31) / d, -(M11*M23-M13*M21) / d,
+                       (M21*M32 - M22*M31) / d, -(M11*M32 - M12*M31) / d, (M11*M22 - M12*M21) / d);
+    }
 
     Matrix3 operator+=(const Matrix3& rhs);
     Matrix3 operator-=(const Matrix3& rhs);

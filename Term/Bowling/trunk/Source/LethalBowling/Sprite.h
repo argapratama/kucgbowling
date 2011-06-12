@@ -64,6 +64,9 @@ public:
     void Update(TimeSpan timeSpan);
     RigidBody& GetRigidBody();
 
+    static void InitializeRigidBodyForBall(RigidBody& rigidBody);
+    static void InitializeRigidBodyForPin(RigidBody& rigidBody);
+
 private:
     std::vector<Vector3> vertice_;
     std::vector<Vector3> texels_;

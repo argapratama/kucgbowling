@@ -9,7 +9,10 @@
 namespace Virgin
 {
 
-
+enum
+{
+    BoxVertexCount = 8
+};
 
 class RigidBody
 {
@@ -18,9 +21,12 @@ public:
 
     static void CalcObjectForces(); // 임의의 특정 순간에 개체에 작용하는 힘과 모멘트를 전부 계산한다
     static CollisionType CheckGroundPlaneContacts(const RigidBody& rigidBody);    // 접촉
+    static CollisionType CheckForCollisions(bool doCheckPenetration);
+    static CollisionType CheckGroundPlaneCollisions(RigidBody& rigidBody);
 
-    static float CalcDistanceFromPointToPlane(Vector3 pt, Vector3 u, Vector3 v, Vector3 ptOnPlane);
-    void StepSimulation(float dtime);   // 오일러 방법 이용(적분)
+    static CollisionType IsPenetrating(const RigidBody& rigidBody1, const RigidBody& rigidBody2);
+
+    static void StepSimulation(TimeSpan timeDelta);   // 오일러 방법 이용(적분)
 
     // 충돌 반응 처리
     void ResolveCollisions();
@@ -42,13 +48,19 @@ public:
     Vector3 angularVelocity_;       // 각속도, 물체 좌표
     Vector3 eulerAngles_;           // 오일러 각, 물체 좌표
     float speed_;                   // 속력
+
     Quaternion orientation_;        // 방향, 전체 좌표
 
     Vector3 forces_;                // 물체에 작용하는 전체 힘
     Vector3 moments_;               // 물체에 작용하는 전체 모멘트(토크)
+    
     Matrix3 ieInverse_;             // 관성 모멘트의 역, 전체 좌표
+    
+    Vector3 angularVelocityGlobal_; // angular velocity in terms of earth fixed coords.
+	Vector3 angularAccelerationGlobal_; // angular acceleration in terms of earth fixed coords.
+
     float radius_;
-    Vector3 vertexList_[8];
+    Vector3 vertexList_[BoxVertexCount];    // 충돌 검사를 Box로 함
 };
 
 }
