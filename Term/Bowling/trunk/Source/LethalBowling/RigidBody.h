@@ -19,7 +19,6 @@ class RigidBody
 public:
     RigidBody();
 
-    
     static void CalcObjectForces(); // 임의의 특정 순간에 개체에 작용하는 힘과 모멘트를 전부 계산한다
     static void StepSimulation(TimeSpan timeDelta);   // 오일러 방법 이용(적분)
     
@@ -37,8 +36,9 @@ public:
     // 충돌 반응 처리
     static void ResolveCollisions();
 
-
     void Update(TimeSpan timeSpan);
+    
+    void ApplyForce(Vector3 force);
 
 public:
     float mass_;                    // 전체 질량(일정)
@@ -66,6 +66,11 @@ public:
 
     float radius_;
     Vector3 vertexList_[BoxVertexCount];    // 충돌 검사를 Box로 함
+
+    //
+    //
+    //
+    Vector3 immediateForce_;
 };
 
 }

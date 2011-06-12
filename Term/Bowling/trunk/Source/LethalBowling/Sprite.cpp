@@ -275,22 +275,22 @@ void Sprite::Draw()
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
     glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 
-    glScalef(scales_.X, scales_.Y, scales_.Z);
+//    glScalef(scales_.X, scales_.Y, scales_.Z);
     glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
     
-    glRotatef(anglesForEachAxis_.X, 1.0, 0.0, 0.0);
-    glRotatef(anglesForEachAxis_.Y, 0.0, 1.0, 0.0);
-    glRotatef(anglesForEachAxis_.Z, 0.0, 0.0, 1.0);
+    glRotatef(rigidBody_.eulerAngles_.Z, 0.0, 0.0, 1.0);
+    glRotatef(rigidBody_.eulerAngles_.Y, 0.0, 1.0, 0.0);
+    glRotatef(rigidBody_.eulerAngles_.X, 1.0, 0.0, 0.0);
 
-    // Pivot-Point Scaling
-    glTranslatef(pivotPointForScaling_.X, pivotPointForScaling_.Y, pivotPointForScaling_.Z);
-    glScalef(pivotPointScales_.X, pivotPointScales_.Y, pivotPointScales_.Z);
-    glTranslatef(-pivotPointForScaling_.X, -pivotPointForScaling_.Y, -pivotPointForScaling_.Z);
+    //// Pivot-Point Scaling
+    //glTranslatef(pivotPointForScaling_.X, pivotPointForScaling_.Y, pivotPointForScaling_.Z);
+    //glScalef(pivotPointScales_.X, pivotPointScales_.Y, pivotPointScales_.Z);
+    //glTranslatef(-pivotPointForScaling_.X, -pivotPointForScaling_.Y, -pivotPointForScaling_.Z);
 
-    // Arbitrary Axis Rotation
-    glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
-    glRotatef(rotateAngle_, rotateAxisEnd_.X - rotateAxisBegin_.X, rotateAxisEnd_.Y - rotateAxisBegin_.Y, rotateAxisEnd_.Z - rotateAxisBegin_.Z);
-    glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
+    //// Arbitrary Axis Rotation
+    //glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
+    //glRotatef(rotateAngle_, rotateAxisEnd_.X - rotateAxisBegin_.X, rotateAxisEnd_.Y - rotateAxisBegin_.Y, rotateAxisEnd_.Z - rotateAxisBegin_.Z);
+    //glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
 
     // Model Center 만큼을 보정해서 원점으로 이동
     glTranslatef(-modelCenter_.X, -modelCenter_.Y, -modelCenter_.Z);

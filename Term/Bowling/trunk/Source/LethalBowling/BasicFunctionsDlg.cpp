@@ -8,6 +8,8 @@
 #include "afxdialogex.h"
 #include "Lighting.h"
 #include "DateTime.h"
+#include "Physics.h"
+#include "Quaternion.h"
 #include <gl/GL.h>
 #include <glut.h>
 
@@ -123,6 +125,7 @@ void CBasicFunctionsDlg::DoDataExchange(CDataExchange* pDX)
     DDX_Control(pDX, IDC_USER_VIEW_SELECTED_CHECK, userViewSelectedCheck_);
     DDX_Control(pDX, IDC_DRAW_TEXTURE_CHECK, drawTextureCheck_);
     DDX_Control(pDX, IDC_SHOW_COLLISION_INFO_CHECK, showCollisionInfoCheck_);
+    DDX_Control(pDX, IDC_PAUSE_CHECK, pauseCheck_);
 }
 
 BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
@@ -184,6 +187,7 @@ BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
     ON_BN_CLICKED(IDC_SHOW_COLLISION_INFO_CHECK, &CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck)
     ON_BN_CLICKED(IDC_TEST2_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest2Button)
     ON_BN_CLICKED(IDC_TEST3_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest3Button)
+    ON_BN_CLICKED(IDC_TEST4_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest4Button)
 END_MESSAGE_MAP()
 
 
@@ -224,7 +228,9 @@ BOOL CBasicFunctionsDlg::OnInitDialog()
     openGlPanel_.Create(rect, this);
     
     InitializeWorld();
+    InitializeSpriteMassProperties();
     InitializeControls();
+    
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -297,6 +303,108 @@ void CBasicFunctionsDlg::InitializeWorld()
     {
         World().Sprites().push_back(&World().GetPin(i));
     }
+}
+
+void CBasicFunctionsDlg::InitializeSpriteMassProperties()
+{
+    Sprite& ball = World().GetBall();
+
+    RigidBody& ballBody = ball.GetRigidBody();
+    //ballBody.velocity_.X = -20.0f;
+    ballBody.mass_ = 10.0f / (-Physics::Gravity);
+
+    float length = 1.1496694 * 2;  // X
+    float height = 1.1496694 * 2;  // Y
+    float width = 1.1496694 * 2;   // Z
+
+    ballBody.radius_ = length;
+
+    ballBody.vertexList_[0].X = length / 2.0f;
+    ballBody.vertexList_[0].Y = height / 2.0f;
+    ballBody.vertexList_[0].Z = -width / 2.0f;
+
+    ballBody.vertexList_[1].X = length / 2.0f;
+    ballBody.vertexList_[1].Y = height / 2.0f;
+    ballBody.vertexList_[1].Z = width / 2.0f;
+
+    ballBody.vertexList_[2].X = length / 2.0f;
+    ballBody.vertexList_[2].Y = -height / 2.0f;
+    ballBody.vertexList_[2].Z = width / 2.0f;
+
+    ballBody.vertexList_[3].X = length / 2.0f;
+    ballBody.vertexList_[3].Y = -height / 2.0f;
+    ballBody.vertexList_[3].Z = -width / 2.0f;
+
+    ballBody.vertexList_[4].X = -length / 2.0f;
+    ballBody.vertexList_[4].Y = height / 2.0f;
+    ballBody.vertexList_[4].Z = -width / 2.0f;
+
+    ballBody.vertexList_[5].X = -length / 2.0f;
+    ballBody.vertexList_[5].Y = height / 2.0f;
+    ballBody.vertexList_[5].Z = width / 2.0f;
+
+    ballBody.vertexList_[6].X = -length / 2.0f;
+    ballBody.vertexList_[6].Y = -height / 2.0f;
+    ballBody.vertexList_[6].Z = width / 2.0f;
+
+    ballBody.vertexList_[7].X = -length / 2.0f;
+    ballBody.vertexList_[7].Y = -height / 2.0f;
+    ballBody.vertexList_[7].Z = -width / 2.0f;
+
+    ballBody.orientation_ = Quaternion::FromEulerAngles(0.0f, 0.0f, 0.0f);
+
+
+    //
+    // Pin0
+    //
+    Sprite& pin = World().GetPin(0);
+    InitializePin(pin);
+}
+
+void CBasicFunctionsDlg::InitializePin(Sprite& pin)
+{
+    
+    RigidBody& pinBody = pin.GetRigidBody();
+    //pinBody.velocity_.X = -5.0f;
+    pinBody.mass_ = 10.0f / (-Physics::Gravity);
+
+    float length = 1.1496694 * 2;  // X
+    float height = 1.1496694 * 2;  // Y
+    float width = 1.1496694 * 2;   // Z
+
+    pinBody.vertexList_[0].X = length / 2.0f;
+    pinBody.vertexList_[0].Y = height / 2.0f;
+    pinBody.vertexList_[0].Z = -width / 2.0f;
+
+    pinBody.vertexList_[1].X = length / 2.0f;
+    pinBody.vertexList_[1].Y = height / 2.0f;
+    pinBody.vertexList_[1].Z = width / 2.0f;
+
+    pinBody.vertexList_[2].X = length / 2.0f;
+    pinBody.vertexList_[2].Y = -height / 2.0f;
+    pinBody.vertexList_[2].Z = width / 2.0f;
+
+    pinBody.vertexList_[3].X = length / 2.0f;
+    pinBody.vertexList_[3].Y = -height / 2.0f;
+    pinBody.vertexList_[3].Z = -width / 2.0f;
+
+    pinBody.vertexList_[4].X = -length / 2.0f;
+    pinBody.vertexList_[4].Y = height / 2.0f;
+    pinBody.vertexList_[4].Z = -width / 2.0f;
+
+    pinBody.vertexList_[5].X = -length / 2.0f;
+    pinBody.vertexList_[5].Y = height / 2.0f;
+    pinBody.vertexList_[5].Z = width / 2.0f;
+
+    pinBody.vertexList_[6].X = -length / 2.0f;
+    pinBody.vertexList_[6].Y = -height / 2.0f;
+    pinBody.vertexList_[6].Z = width / 2.0f;
+
+    pinBody.vertexList_[7].X = -length / 2.0f;
+    pinBody.vertexList_[7].Y = -height / 2.0f;
+    pinBody.vertexList_[7].Z = -width / 2.0f;
+
+    pinBody.orientation_ = Quaternion::FromEulerAngles(0.0f, 0.0f, 0.0f);
 }
 
 void CBasicFunctionsDlg::InitializeControls()
@@ -419,7 +527,10 @@ void CBasicFunctionsDlg::UpdateAndDraw()
         fpsStatic_.SetWindowText(fpsText);
     }
 
-    World().Update(timeDelta);
+    if(!pauseCheck_.GetCheck())
+    {
+        World().Update(timeDelta);
+    }
 
     const float Speed = static_cast<float>(speedSlider_.GetPos() / 100.0);
 
@@ -852,11 +963,18 @@ void CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck()
 
 void CBasicFunctionsDlg::OnBnClickedTest2Button()
 {
-    World().GetBall().SetVelocity(Vector3(0.0f, 1.0f, 0.0f), 0.5f);
+    //World().GetBall().SetVelocity(Vector3(0.0f, 1.0f, 0.0f), 0.5f);
+    World().GetBall().GetRigidBody().ApplyForce(Vector3(-100.0, 0.0, 0.0));
 }
 
 
 void CBasicFunctionsDlg::OnBnClickedTest3Button()
 {
     World().GetBall().SetVelocity(Vector3(0.0f, 0.0f, 0.0f), 0.0f);
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedTest4Button()
+{
+    World().Update(TimeSpan(100));
 }
