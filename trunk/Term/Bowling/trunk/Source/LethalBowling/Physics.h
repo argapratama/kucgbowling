@@ -15,6 +15,8 @@ public:
     static float VelocityTolerance;
     static float FrictionCoefficient;
     static float AirDensity;
+    
+    static bool DoFriction;
 };
 
 }
