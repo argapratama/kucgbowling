@@ -4,6 +4,7 @@
 #include "Camera.h"
 #include "Light.h"
 #include "TimeSpan.h"
+#include <glut.h>
 
 using namespace std;
 
