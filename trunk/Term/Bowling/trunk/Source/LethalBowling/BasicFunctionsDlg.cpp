@@ -80,52 +80,54 @@ CBasicFunctionsDlg::CBasicFunctionsDlg(CWnd* pParent /*=NULL*/)
 
 void CBasicFunctionsDlg::DoDataExchange(CDataExchange* pDX)
 {
-    CDialogEx::DoDataExchange(pDX);
-    DDX_Control(pDX, IDC_DISPLAY_PANEL, displayPanel_);
-    DDX_Control(pDX, IDC_ROTATE_LEFT_BUTTON, rotateLeftButton_);
-    DDX_Control(pDX, IDC_ROTATE_RIGHT_BUTTON, rotateRightButton_);
-    DDX_Control(pDX, IDC_ROTATE_UP_BUTTON, rotateUpButton_);
-    DDX_Control(pDX, IDC_ROLL_LEFT_BUTTON, rollLeftButton_);
-    DDX_Control(pDX, IDC_ROLL_RIGHT_BUTTON, rollRightButton_);
-    DDX_Control(pDX, IDC_ROTATE_DOWN_BUTTON, rotateDownButton_);
-    DDX_Control(pDX, IDC_MOVE_FAR_BUTTON, moveFarButton_);
-    DDX_Control(pDX, IDC_MOVE_NEAR_BUTTON, moveNearButton_);
-    DDX_Control(pDX, IDC_LEFT_BUTTON, moveLeftButton_);
-    DDX_Control(pDX, IDC_RIGHT_BUTTON, moveRightButton_);
-    DDX_Control(pDX, IDC_UP_BUTTON, moveUpButton_);
-    DDX_Control(pDX, IDC_DOWN_BUTTON, moveDownButton_);
-    DDX_Control(pDX, IDC_MOVE_FAR_BUTTON2, biggerButton_);
-    DDX_Control(pDX, IDC_MOVE_NEAR_BUTTON2, smallerButton_);
-    DDX_Control(pDX, IDC_SCALE_X_EDIT, scaleXEdit_);
-    DDX_Control(pDX, IDC_SCALE_Y_EDIT, scaleYEdit_);
-    DDX_Control(pDX, IDC_SCALE_Z_EDIT, scaleZEdit_);
-    DDX_Control(pDX, IDC_DRAW_NORMAL_CHECK, drawNormalCheck_);
-    DDX_Control(pDX, IDC_FPS_STATIC, fpsStatic_);
-    DDX_Control(pDX, IDC_SPEED_SLIDER, speedSlider_);
-    DDX_Control(pDX, IDC_CAMERA_LOCATION_X_EDIT, cameraLocationXEdit_);
-    DDX_Control(pDX, IDC_CAMERA_LOCATION_Y_EDIT, cameraLocationYEdit_);
-    DDX_Control(pDX, IDC_CAMERA_LOCATION_Z_EDIT, cameraLocationZEdit_);
-    DDX_Control(pDX, IDC_CAMERA_LOOKAT_X_EDIT, cameraLookAtXEdit_);
-    DDX_Control(pDX, IDC_CAMERA_LOOKAT_Y_EDIT, cameraLookAtYEdit_);
-    DDX_Control(pDX, IDC_CAMERA_LOOKAT_Z_EDIT, cameraLookAtZEdit_);
-    DDX_Control(pDX, IDC_CAMERA_UP_X_EDIT, cameraUpXEdit_);
-    DDX_Control(pDX, IDC_CAMERA_UP_Y_EDIT, cameraUpYEdit_);
-    DDX_Control(pDX, IDC_CAMERA_UP_Z_EDIT, cameraUpZEdit_);
-    DDX_Control(pDX, IDC_CAMERA_AUTO_ROTATION_CHECK, cameraAutoRotateCheck_);
-    DDX_Control(pDX, IDC_AMBIENT_R_EDIT, ambientREdit_);
-    DDX_Control(pDX, IDC_AMBIENT_G_EDIT, ambientGEdit_);
-    DDX_Control(pDX, IDC_AMBIENT_B_EDIT, ambientBEdit_);
-    DDX_Control(pDX, IDC_DIFFUSE_R_EDIT, diffuseREdit_);
-    DDX_Control(pDX, IDC_DIFFUSE_G_EDIT, diffuseGEdit_);
-    DDX_Control(pDX, IDC_DIFFUSE_B_EDIT, diffuseBEdit_);
-    DDX_Control(pDX, IDC_SPECULAR_R_EDIT, specularREdit_);
-    DDX_Control(pDX, IDC_SPECULAR_G_EDIT, specularGEdit_);
-    DDX_Control(pDX, IDC_SPECULAR_B_EDIT, specularBEdit_);
-    DDX_Control(pDX, IDC_LIGHT_CHECK, lightCheck_);
-    DDX_Control(pDX, IDC_USER_VIEW_SELECTED_CHECK, userViewSelectedCheck_);
-    DDX_Control(pDX, IDC_DRAW_TEXTURE_CHECK, drawTextureCheck_);
-    DDX_Control(pDX, IDC_SHOW_COLLISION_INFO_CHECK, showCollisionInfoCheck_);
-    DDX_Control(pDX, IDC_PAUSE_CHECK, pauseCheck_);
+	CDialogEx::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_DISPLAY_PANEL, displayPanel_);
+	DDX_Control(pDX, IDC_ROTATE_LEFT_BUTTON, rotateLeftButton_);
+	DDX_Control(pDX, IDC_ROTATE_RIGHT_BUTTON, rotateRightButton_);
+	DDX_Control(pDX, IDC_ROTATE_UP_BUTTON, rotateUpButton_);
+	DDX_Control(pDX, IDC_ROLL_LEFT_BUTTON, rollLeftButton_);
+	DDX_Control(pDX, IDC_ROLL_RIGHT_BUTTON, rollRightButton_);
+	DDX_Control(pDX, IDC_ROTATE_DOWN_BUTTON, rotateDownButton_);
+	DDX_Control(pDX, IDC_MOVE_FAR_BUTTON, moveFarButton_);
+	DDX_Control(pDX, IDC_MOVE_NEAR_BUTTON, moveNearButton_);
+	DDX_Control(pDX, IDC_LEFT_BUTTON, moveLeftButton_);
+	DDX_Control(pDX, IDC_RIGHT_BUTTON, moveRightButton_);
+	DDX_Control(pDX, IDC_UP_BUTTON, moveUpButton_);
+	DDX_Control(pDX, IDC_DOWN_BUTTON, moveDownButton_);
+	DDX_Control(pDX, IDC_MOVE_FAR_BUTTON2, biggerButton_);
+	DDX_Control(pDX, IDC_MOVE_NEAR_BUTTON2, smallerButton_);
+	DDX_Control(pDX, IDC_SCALE_X_EDIT, scaleXEdit_);
+	DDX_Control(pDX, IDC_SCALE_Y_EDIT, scaleYEdit_);
+	DDX_Control(pDX, IDC_SCALE_Z_EDIT, scaleZEdit_);
+	DDX_Control(pDX, IDC_DRAW_NORMAL_CHECK, drawNormalCheck_);
+	DDX_Control(pDX, IDC_FPS_STATIC, fpsStatic_);
+	DDX_Control(pDX, IDC_SPEED_SLIDER, speedSlider_);
+	DDX_Control(pDX, IDC_CAMERA_LOCATION_X_EDIT, cameraLocationXEdit_);
+	DDX_Control(pDX, IDC_CAMERA_LOCATION_Y_EDIT, cameraLocationYEdit_);
+	DDX_Control(pDX, IDC_CAMERA_LOCATION_Z_EDIT, cameraLocationZEdit_);
+	DDX_Control(pDX, IDC_CAMERA_LOOKAT_X_EDIT, cameraLookAtXEdit_);
+	DDX_Control(pDX, IDC_CAMERA_LOOKAT_Y_EDIT, cameraLookAtYEdit_);
+	DDX_Control(pDX, IDC_CAMERA_LOOKAT_Z_EDIT, cameraLookAtZEdit_);
+	DDX_Control(pDX, IDC_CAMERA_UP_X_EDIT, cameraUpXEdit_);
+	DDX_Control(pDX, IDC_CAMERA_UP_Y_EDIT, cameraUpYEdit_);
+	DDX_Control(pDX, IDC_CAMERA_UP_Z_EDIT, cameraUpZEdit_);
+	DDX_Control(pDX, IDC_CAMERA_AUTO_ROTATION_CHECK, cameraAutoRotateCheck_);
+	DDX_Control(pDX, IDC_AMBIENT_R_EDIT, ambientREdit_);
+	DDX_Control(pDX, IDC_AMBIENT_G_EDIT, ambientGEdit_);
+	DDX_Control(pDX, IDC_AMBIENT_B_EDIT, ambientBEdit_);
+	DDX_Control(pDX, IDC_DIFFUSE_R_EDIT, diffuseREdit_);
+	DDX_Control(pDX, IDC_DIFFUSE_G_EDIT, diffuseGEdit_);
+	DDX_Control(pDX, IDC_DIFFUSE_B_EDIT, diffuseBEdit_);
+	DDX_Control(pDX, IDC_SPECULAR_R_EDIT, specularREdit_);
+	DDX_Control(pDX, IDC_SPECULAR_G_EDIT, specularGEdit_);
+	DDX_Control(pDX, IDC_SPECULAR_B_EDIT, specularBEdit_);
+	DDX_Control(pDX, IDC_LIGHT_CHECK, lightCheck_);
+	DDX_Control(pDX, IDC_USER_VIEW_SELECTED_CHECK, userViewSelectedCheck_);
+	DDX_Control(pDX, IDC_DRAW_TEXTURE_CHECK, drawTextureCheck_);
+	DDX_Control(pDX, IDC_SHOW_COLLISION_INFO_CHECK, showCollisionInfoCheck_);
+	DDX_Control(pDX, IDC_PAUSE_CHECK, pauseCheck_);
+	DDX_Control(pDX, IDC_BUTTON1, cameraRotateRight_);
+	DDX_Control(pDX, IDC_BUTTON_CAMERA_LEFT, cameraRotateLeft_);
 }
 
 BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
@@ -188,6 +190,8 @@ BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
     ON_BN_CLICKED(IDC_TEST2_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest2Button)
     ON_BN_CLICKED(IDC_TEST3_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest3Button)
     ON_BN_CLICKED(IDC_TEST4_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest4Button)
+	ON_BN_CLICKED(IDC_BUTTON_CAMERA_LEFT, &CBasicFunctionsDlg::OnBnClickedButtonCameraLeft)
+	ON_BN_CLICKED(IDC_BUTTON_CAMERA_RIGHT, &CBasicFunctionsDlg::OnBnClickedButtonCameraRight)
 END_MESSAGE_MAP()
 
 
@@ -298,7 +302,7 @@ void CBasicFunctionsDlg::InitializeWorld()
 
     // 스프라이트 등록
     World().Sprites().push_back(&World().GetBall());
-    World().Sprites().push_back(&World().GetBall2());
+    //World().Sprites().push_back(&World().GetBall2());
     for(int i = 0; i < 10; ++i)
     {
         World().Sprites().push_back(&World().GetPin(i));
@@ -317,7 +321,7 @@ void CBasicFunctionsDlg::InitializeSpriteMassProperties()
     float height = 1.1496694 * 2;  // Y
     float width = 1.1496694 * 2;   // Z
 
-    ballBody.radius_ = length;
+    ballBody.radius_ = length/2;
 
     ballBody.vertexList_[0].X = length / 2.0f;
     ballBody.vertexList_[0].Y = height / 2.0f;
@@ -355,24 +359,44 @@ void CBasicFunctionsDlg::InitializeSpriteMassProperties()
 
 
     //
-    // Pin0
+    // Entire of pin
     //
     Sprite& pin = World().GetPin(0);
     InitializePin(pin);
+	Sprite& pin1 = World().GetPin(1);
+    InitializePin(pin1);
+	Sprite& pin2 = World().GetPin(2);
+    InitializePin(pin2);
+	Sprite& pin3 = World().GetPin(3);
+    InitializePin(pin3);
+	Sprite& pin4 = World().GetPin(4);
+    InitializePin(pin4);
+	Sprite& pin5 = World().GetPin(5);
+    InitializePin(pin5);
+	Sprite& pin6 = World().GetPin(6);
+    InitializePin(pin6);
+	Sprite& pin7 = World().GetPin(7);
+    InitializePin(pin7);
+	Sprite& pin8 = World().GetPin(8);
+    InitializePin(pin8);
+	Sprite& pin9 = World().GetPin(9);
+    InitializePin(pin9);
 }
 
 void CBasicFunctionsDlg::InitializePin(Sprite& pin)
 {
     
     RigidBody& pinBody = pin.GetRigidBody();
-    //pinBody.velocity_.X = -5.0f;
+    //pinBody.velocity_.X = 0.0f;
     pinBody.mass_ = 10.0f / (-Physics::Gravity);
 
-    float length = 1.1496694 * 2;  // X
-    float height = 1.1496694 * 2;  // Y
-    float width = 1.1496694 * 2;   // Z
+    float length = 0.31128 * 2;  // X
+    float height = 0.97743 * 2;  // Y
+    float width = 0.31128 * 2;   // Z
 
-    pinBody.vertexList_[0].X = length / 2.0f;
+	pinBody.radius_ = length/2;
+
+	pinBody.vertexList_[0].X = length / 2.0f;
     pinBody.vertexList_[0].Y = height / 2.0f;
     pinBody.vertexList_[0].Z = -width / 2.0f;
 
@@ -977,4 +1001,18 @@ void CBasicFunctionsDlg::OnBnClickedTest3Button()
 void CBasicFunctionsDlg::OnBnClickedTest4Button()
 {
     World().Update(TimeSpan(100));
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedButtonCameraLeft()
+{
+	World().GetCamera().RotateYMore(10.0);
+	UpdateAndDraw();
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedButtonCameraRight()
+{
+	World().GetCamera().RotateYMore(-10.0);
+	UpdateAndDraw();
 }
