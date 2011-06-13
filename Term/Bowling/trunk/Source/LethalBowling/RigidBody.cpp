@@ -752,7 +752,7 @@ CollisionType RigidBody::CheckVertexFaceCollisions(const RigidBody& rigidBody1, 
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 
-				if(Vrn < 0.0f)
+				//if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -806,7 +806,7 @@ CollisionType RigidBody::CheckVertexFaceCollisions(const RigidBody& rigidBody1, 
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 				
-				if(Vrn < 0.0f)
+				//if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -859,7 +859,7 @@ CollisionType RigidBody::CheckVertexFaceCollisions(const RigidBody& rigidBody1, 
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 				
-				if(Vrn < 0.0f)
+				//if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -912,7 +912,7 @@ CollisionType RigidBody::CheckVertexFaceCollisions(const RigidBody& rigidBody1, 
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 				
-				if(Vrn < 0.0f)
+				//if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -965,7 +965,7 @@ CollisionType RigidBody::CheckVertexFaceCollisions(const RigidBody& rigidBody1, 
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 				
-				if(Vrn < 0.0f)
+				//if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -1018,7 +1018,7 @@ CollisionType RigidBody::CheckVertexFaceCollisions(const RigidBody& rigidBody1, 
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 				
-				if(Vrn < 0.0f)
+				//if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -1140,7 +1140,8 @@ CollisionType RigidBody::CheckEdgeEdgeCollisions(const RigidBody& rigidBody1, co
 
 			// test for intersection
 			t = tx;
-            if( ((Math::Abs(t-ty) < Collision::PenetrationTolerance/2) && (Math::Abs(t-tz) < Collision::PenetrationTolerance/2)) && (t>=0) && (t <=1))
+            //if( ((Math::Abs(t-ty) < Collision::PenetrationTolerance/2) && (Math::Abs(t-tz) < Collision::PenetrationTolerance/2)) && (t>=0) && (t <=1))
+			if( ((Math::Abs(t)-Math::Abs(ty) < Collision::PenetrationTolerance) && (Math::Abs(t)-Math::Abs(tz) < Collision::PenetrationTolerance)) && (Math::Abs(t)>=0) && (Math::Abs(t) <=1))
 			{ // have intersection
 
 				tmp.X = v1[a1].X + (v1[b1].X - v1[a1].X) * t;
@@ -1167,7 +1168,7 @@ CollisionType RigidBody::CheckEdgeEdgeCollisions(const RigidBody& rigidBody1, co
 				Vr = (vel1 - vel2);
 				Vrn = Vr.Dot(n);
 				
-				if(Vrn < 0.0f)
+//				if(Vrn < 0.0f)
 				{
                     vector<Collision>& collisions = World::Instance().Collisions();
                     vector<Sprite*>& sprites = World::Instance().Sprites();
@@ -1188,6 +1189,7 @@ CollisionType RigidBody::CheckEdgeEdgeCollisions(const RigidBody& rigidBody1, co
                         collisions.push_back(collision);
 
                         status = CollisionType_Collision;
+						break;
 					}									
 				}
 			}

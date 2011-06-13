@@ -130,4 +130,8 @@ public:
     afx_msg void OnBnClickedTest3Button();
     afx_msg void OnBnClickedTest4Button();
     CButton pauseCheck_;
+	CButton cameraRotateRight_;
+	afx_msg void OnBnClickedButtonCameraLeft();
+	CButton cameraRotateLeft_;
+	afx_msg void OnBnClickedButtonCameraRight();
 };
