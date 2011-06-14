@@ -76,7 +76,8 @@ bool Sprite::Load(const String& fileName, const String& textureName)
             float z;
             swscanf(line.c_str(), L"v %f %f %f", &x, &y, &z);
 
-            vertice_.push_back(Vector3(x, y, z));
+            //vertice_.push_back(Vector3(x, y, z));
+            vertice_.push_back(Vector3(z, x, y));
         }
 
         // vt 1.0 1.0 1.0
@@ -87,6 +88,7 @@ bool Sprite::Load(const String& fileName, const String& textureName)
             float z = 0;
             swscanf(line.c_str(), L"vt %f %f %f", &x, &y, &z);
 
+            //texels_.push_back(Vector3(x, y, z));
             texels_.push_back(Vector3(x, y, z));
         }
 
@@ -98,7 +100,8 @@ bool Sprite::Load(const String& fileName, const String& textureName)
             float z;
             swscanf(line.c_str(), L"vn %f %f %f", &x, &y, &z);
 
-            normals_.push_back(Vector3(x, y, z));
+            //normals_.push_back(Vector3(x, y, z));
+            normals_.push_back(Vector3(z, x, y));
         }
 
 		// f 0/0 1/2 3/3 2/1
@@ -228,7 +231,7 @@ bool Sprite::Load(const String& fileName, const String& textureName)
 		glBindTexture(GL_TEXTURE_2D, texture_[0]);
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST); // ( NEW )
 		glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST); // ( NEW )
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
+        glTexImage2D(GL_TEXTURE_2D, 0, 3, TextureImage[0]->sizeX, TextureImage[0]->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, TextureImage[0]->data);
 
         // Create Linear Filtered Texture
 		glBindTexture(GL_TEXTURE_2D, texture_[1]);
@@ -276,7 +279,8 @@ void Sprite::Draw()
     glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 
 //    glScalef(scales_.X, scales_.Y, scales_.Z);
-    glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
+    //glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
+    glTranslatef(rigidBody_.location_.Z, rigidBody_.location_.X, rigidBody_.location_.Y);
     
     glRotatef(rigidBody_.eulerAngles_.Z, 0.0, 0.0, 1.0);
     glRotatef(rigidBody_.eulerAngles_.Y, 0.0, 1.0, 0.0);
@@ -449,7 +453,25 @@ void Sprite::Draw()
             if(doDrawTexture_) 
                 glTexCoord2f(texel4.X, texel4.Y); 
             glVertex3f(vertex4.X, vertex4.Y, vertex4.Z);
+            
+            /*glNormal3f(normal1.X, normal1.Y, normal1.Z);
+            if(doDrawTexture_)
+                glTexCoord2f(texel1.Y, texel1.Z); 
+            glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
+			glNormal3f(normal2.X, normal2.Y, normal2.Z);
+            if(doDrawTexture_)
+                glTexCoord2f(texel1.Y, texel1.Z); 
+            glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
 
+			glNormal3f(normal3.X, normal3.Y, normal3.Z);
+            if(doDrawTexture_) 
+                glTexCoord2f(texel1.Y, texel1.Z); 
+            glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
+
+			glNormal3f(normal4.X, normal4.Y, normal4.Z);
+            if(doDrawTexture_) 
+                glTexCoord2f(texel1.Y, texel1.Z); 
+            glVertex3f(vertex4.X, vertex4.Y, vertex4.Z);*/
             glEnd();
 		}
 
@@ -469,17 +491,17 @@ void Sprite::Draw()
 
            // glNormal3f(normal1.X, normal1.Y, normal1.Z);
             if(doDrawTexture_)
-                glTexCoord2f(texel1.X, texel1.Y); 
+                glTexCoord2f(texel1.Z, texel1.Y); 
             glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
             
            // glNormal3f(normal2.X, normal2.Y, normal2.Z);
             if(doDrawTexture_)
-                glTexCoord2f(texel2.X, texel2.Y); 
+                glTexCoord2f(texel1.Z, texel1.Y); 
             glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
 
            // glNormal3f(normal3.X, normal3.Y, normal3.Z);
             if(doDrawTexture_) 
-                glTexCoord2f(texel3.X, texel3.Y); 
+                glTexCoord2f(texel1.Z, texel1.Y); 
             glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
 
             glEnd();

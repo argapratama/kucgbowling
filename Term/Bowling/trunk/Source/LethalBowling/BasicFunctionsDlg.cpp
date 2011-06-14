@@ -247,8 +247,8 @@ void CBasicFunctionsDlg::InitializeWorld()
     {
         MessageBox(L"bowling_ball.obj doesn't exist. Please restart this application ^^;;");
     }
-	//World().GetBall().TranslateMore(6.0, -0.8, 1.0);
 	World().GetBall().TranslateMore(6.0, -0.2, 1.0);
+    //World().GetBall().TranslateMore(1.0, 6.0, -0.2);
 	
 	if(!World().GetPin(0).Load(L"bowling_pin.obj", L""))
     {
@@ -256,7 +256,7 @@ void CBasicFunctionsDlg::InitializeWorld()
     }
 
 	World().GetPin(0).TranslateMore(-2.0, 0.0, 0.0);
-	World().GetPin(0).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(0).ScaleRate(1.5, 1.5, 1.5);
 	World().GetPin(0).CopyTo(World().GetPin(1));
 	World().GetPin(1).TranslateMore(-2.6, 0.0, 0.5);
 	World().GetPin(1).ScaleRate(1.5, 1.5, 1.5);
@@ -297,7 +297,8 @@ void CBasicFunctionsDlg::InitializeWorld()
 	World().GetPin(9).SetDrawTexture(false);
 
     // The Main Light
-    World().GetLight().MoveTo(20, 30, 0);
+    //World().GetLight().MoveTo(20, 30, 0);
+    World().GetLight().MoveTo(0, 20, 30);
     World().GetLight().Enable();
 
     // 스프라이트 등록
@@ -388,7 +389,7 @@ void CBasicFunctionsDlg::InitializePin(Sprite& pin)
     
     RigidBody& pinBody = pin.GetRigidBody();
     //pinBody.velocity_.X = 0.0f;
-    pinBody.mass_ = 10.0f / (-Physics::Gravity);
+    pinBody.mass_ = 5.0f / (-Physics::Gravity);
 
     float length = 0.31128 * 2;  // X
     float height = 0.97743 * 2;  // Y
@@ -437,17 +438,17 @@ void CBasicFunctionsDlg::InitializeControls()
     scaleYEdit_.SetWindowText(L"1.0");
     scaleZEdit_.SetWindowText(L"1.0");
 
-    cameraLocationXEdit_.SetWindowText(L"0.0");
+    cameraLocationXEdit_.SetWindowText(L"1.0");
     cameraLocationYEdit_.SetWindowText(L"0.0");
-    cameraLocationZEdit_.SetWindowText(L"10.0");
+    cameraLocationZEdit_.SetWindowText(L"0.0");
     
     cameraLookAtXEdit_.SetWindowText(L"0.0");
     cameraLookAtYEdit_.SetWindowText(L"0.0");
     cameraLookAtZEdit_.SetWindowText(L"0.0");
 
     cameraUpXEdit_.SetWindowText(L"0.0");
-    cameraUpYEdit_.SetWindowText(L"1.0");
-    cameraUpZEdit_.SetWindowText(L"0.0");
+    cameraUpYEdit_.SetWindowText(L"0.0");
+    cameraUpZEdit_.SetWindowText(L"1.0");
 
     // Speed Slider
     speedSlider_.SetRange(1, 2000);
@@ -637,7 +638,13 @@ void CBasicFunctionsDlg::UpdateAndDraw()
         magnitudeRate -= ScaleRate;
     }
 
-	World().GetBall().TranslateMore(moveX, moveY, moveZ);
+	/*World().GetBall().TranslateMore(moveX, moveY, moveZ);
+    World().GetBall().RotateXMore(rotateXAngle);
+    World().GetBall().RotateYMore(rotateYAngle);
+    World().GetBall().RotateZMore(rotateZAngle);
+    World().GetBall().ScaleRate(magnitudeRate, magnitudeRate, magnitudeRate);*/
+
+    World().GetBall().TranslateMore(moveZ, moveX, moveY);
     World().GetBall().RotateXMore(rotateXAngle);
     World().GetBall().RotateYMore(rotateYAngle);
     World().GetBall().RotateZMore(rotateZAngle);
@@ -663,24 +670,25 @@ void CBasicFunctionsDlg::UpdateAndDraw()
     //
     if(cameraAutoRotateCheck_.GetCheck())
     {
-        World().GetCamera().RotateYMore(RotateUnit);
+        //World().GetCamera().RotateYMore(RotateUnit);
+        World().GetCamera().RotateZMore(RotateUnit);
     }
 
-    values.X = ToFloat(cameraLocationXEdit_);
+    /*values.X = ToFloat(cameraLocationXEdit_);
     values.Y = ToFloat(cameraLocationYEdit_);
     values.Z = ToFloat(cameraLocationZEdit_);
-    World().GetCamera().MoveTo(values.X, values.Y, values.Z);
+    World().GetCamera().MoveTo(values.Z, values.X, values.Y);
 
     values.X = ToFloat(cameraLookAtXEdit_);
     values.Y = ToFloat(cameraLookAtYEdit_);
     values.Z = ToFloat(cameraLookAtZEdit_);
-    World().GetCamera().LookAt(values.X, values.Y, values.Z);
+    World().GetCamera().LookAt(values.Z, values.X, values.Y);
 
     values.X = ToFloat(cameraUpXEdit_);
     values.Y = ToFloat(cameraUpYEdit_);
     values.Z = ToFloat(cameraUpZEdit_);
-    World().GetCamera().SetUpVector(values.X, values.Y, values.Z);
-    World().GetCamera().Apply();
+    World().GetCamera().SetUpVector(values.Z, values.X, values.Y);*/
+    //World().GetCamera().Apply();
 	
     // 
     // Light
@@ -751,12 +759,12 @@ BOOL CBasicFunctionsDlg::PreTranslateMessage(MSG* pMsg)
         { &biggerButton_, &biggerButtonDown_ },
         { &smallerButton_, &smallerButtonDown_ }
     };
-
+    bool isButtonDown;
     switch(pMsg->message)
     {
     case WM_LBUTTONDOWN:
     case WM_LBUTTONUP:
-        bool isButtonDown = pMsg->message == WM_LBUTTONDOWN;
+        isButtonDown = pMsg->message == WM_LBUTTONDOWN;
 
         for(int i = 0; i < sizeof(buttonDownStatus)/sizeof(ButtonDownStatus); ++i)
         {
@@ -766,36 +774,30 @@ BOOL CBasicFunctionsDlg::PreTranslateMessage(MSG* pMsg)
                 break;
             }
         }
-/*
-        if(pMsg->hwnd == rotateLeftButton_.m_hWnd)
-        {
-            rotateLeftButtonDown_ = isButtonDown;
-        }
-        else if(pMsg->hwnd == rotateRightButton_.m_hWnd)
-        {
-            rotateRightButtonDown_ = isButtonDown;
-        }
-        else if(pMsg->hwnd == rotateUpButton_.m_hWnd)
-        {
-            rotateUpButtonDown_ = isButtonDown;
-        }
-        else if(pMsg->hwnd == rotateDownButton_.m_hWnd)
-        {
-            rotateDownButtonDown_ = isButtonDown;
-        }
-        else if(pMsg->hwnd == rollLeftButton_.m_hWnd)
-        {
-            rollLeftButtonDown_ = isButtonDown;
-        }
-        else if(pMsg->hwnd == rollLeftButton_.m_hWnd)
-        {
-            rollRightButtonDown_ = isButtonDown;
-        }
-        */
         break;
-
+    case WM_KEYDOWN:
+        switch(pMsg->wParam)
+        {
+            case VK_LEFT:
+                //World().GetCamera().RotateZMore(10.0);
+                World().GetCamera().MoveMore(0.0, -2.0, 0.0);
+                return true;
+            case VK_RIGHT:
+                //World().GetCamera().RotateZMore(-10.0);
+                World().GetCamera().MoveMore(0.0, 2.0, 0.0);
+                return true;
+            case VK_UP:
+                //World().GetCamera().RotateYMore(10.0);
+                World().GetCamera().MoveMore(0.0, 0.0, 2.0);
+                return true;
+            case VK_DOWN:
+                //World().GetCamera().RotateYMore(-10.0);
+                World().GetCamera().MoveMore(0.0, 0.0, -2.0);
+                return true;
+        }
+        break;
     }
-
+    
     return CDialogEx::PreTranslateMessage(pMsg);
 }
 
@@ -881,8 +883,9 @@ void CBasicFunctionsDlg::OnNMReleasedcaptureSpeedSlider(NMHDR *pNMHDR, LRESULT *
 
 BOOL CBasicFunctionsDlg::OnMouseWheel(UINT nFlags, short zDelta, CPoint pt)
 {
-    GetSelectedSprite().TranslateMore(0.0, 0.0, zDelta/240.0);
-
+    //GetSelectedSprite().TranslateMore(0.0, 0.0, zDelta/240.0);
+    //GetSelectedSprite().TranslateMore(zDelta/240.0, 0.0, 0.0);
+    World().GetCamera().MoveMore(zDelta/60, 0, 0);
     return CDialogEx::OnMouseWheel(nFlags, zDelta, pt);
 }
 
@@ -1006,13 +1009,13 @@ void CBasicFunctionsDlg::OnBnClickedTest4Button()
 
 void CBasicFunctionsDlg::OnBnClickedButtonCameraLeft()
 {
-	World().GetCamera().RotateYMore(10.0);
+	World().GetCamera().RotateZMore(10.0);
 	UpdateAndDraw();
 }
 
 
 void CBasicFunctionsDlg::OnBnClickedButtonCameraRight()
 {
-	World().GetCamera().RotateYMore(-10.0);
+	World().GetCamera().RotateZMore(-10.0);
 	UpdateAndDraw();
 }
