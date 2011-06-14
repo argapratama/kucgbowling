@@ -1,0 +1,1713 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>Magic Software: Books</title>
+<link rel=stylesheet type="text/css" href="../mgcbodystyle.css" title="mgcbodystyle">
+<style>
+<!--
+A:link {text-decoration: none}
+A:visited {text-decoration: none; color: rgb(183,177,207)}
+A:active {text-decoration: none; color: rgb(183,177,207)}
+-->
+</style>
+</head>
+<body>
+
+<table>
+<tr><td>
+  <font size="3"><b>3D Game Engine Design: Book Corrections</b>
+  <br><br>
+</td></tr>
+</table>
+
+<a href="#ByPageNumber">Book Corrections Organized by Page Number</a>
+
+<table width=760><tr><td><hr></td></tr></table>
+<h2> Book Corrections Organized by Date of Change</h2>
+<table width=760><tr><td><hr></td></tr></table>
+
+<table width=760>
+
+<tr><td><b>14 Oct 2003, page 398.</b>
+Immediately before the last displayed equation for vector P, there is the
+fragment "Using c0 = 1 - c0 - c2".  This should be "c0 = 1 - c1 - c2".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 May 2003, page 183.</b>
+Fourth paragraph, "In addition to the triangle edges already defined, set
+E2 = V1-V0."  That should be "E2 = E1-E0" or "E2 = V2-V1".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>19 May 2003, page 497.</b>
+A minor correction.  In Euler's method, a displayed equation has
+x_{i+1} (lower case x) and should be X_{i+1} (upper case x).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>05 May 2003, page 192.</b>
+The first paragraph of section 6.2.7 has "If N*D, then the line...".  This
+should be "If N*D is not zero, then the line...".  The last paragraph has
+"For the case of N*D, if there...".  This should be "For the case of N*D
+is zero, if there...".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>10 Mar 2003, page 245.</b>
+The paragraph starting with "Section 6.9 illustrates" should start with
+"Section 6.8 illustrates".  The paragraph starting with "Section 6.10
+presents" should start with "Section 6.9 presents".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>10 Mar 2003, page 9.</b>
+The next-to-last displayed equation containing H is missing a vector.  The
+equation should be
+<pre>
+    +   +   +         + +   +
+  H | V | = |  M  | T | | V | = ...
+    |---|   |-----+---| |---|
+    | w |   | S^T | 1 | | w |
+    +   +   +         + +   +
+</pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>28 Jan 2003, page 354.</b>
+In the section "Slide to Point", second paragraph.  The equation is missing
+the U and should be:  F = E + clamp{T,tmin,tmax}U
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>08 Jan 2003, page 301.</b>
+The definition of a cylinder surface involves a curve Y(u) and a desired
+offset D for the curve.  The definition of the surface should be X(u,v) =
+Y(u) + v*D for 0 <= v <= 1.  (The book has X(u,v) = (1-v)*Y(u)+v*D.)  The
+partial derivatives are then dX/du = dY/du and dX/dv = D.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>31 Dec 2002, page 271.</b>
+The pseudocode
+<pre>  intermediate[k] += data[i]*M[j][k];</pre>
+should be
+<pre>  intermediate[k] += f[i]*M[j][k];</pre>
+since the data array was named f earlier in the pseudocode.  The pseudocode
+<pre>  float dt = t - b;</pre>
+should be
+<pre>  float dt = t - floor(t);</pre>
+The actual implementation at the interpolation pages of the Magic Software
+web site has the correct calculation.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Oct 2002, page 44.</b>
+In Figure 2.2, the arrow for the level curve Q=V0 is pointing to the wrong
+curve.  The figure with the correct arrow shown in blue is:
+<p>
+<img src="segseglevel.png" width=300 height=300 alt="segseglevel" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Oct 2002, page 51.</b>
+In Figure 2.4, the arrow for the level curve Q=V0 is pointing to the wrong
+curve.  The level curve tagged as Q=V2 is really the curve Q=V0.  A level
+curve for Q=V2 is shown in blue.  The first point of contact was (1,t0) but
+should be (s0,t0).
+<p>
+<img src="pttrilevel.png" width=301 height=251 alt="pttrilevel" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Oct 2002, page 174.</b>
+The right image in Figure 5.3 has "p0 <= -e0" and should be "p0 >= -e0".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>07 Oct 2002, page 390.</b>
+The pseudocode at the bottom of the page has
+<pre>
+  if ( vertex.IsEnabled() )
+</pre>
+but should be
+<pre>
+  if ( not vertex.IsEnabled() )
+</pre>
+The terrain source code containing this is correct (file MgcTerrainBlock.cpp,
+function SimplifyVertices).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>30 Sep 2002, page 155.</b>
+The pseudocode at the top of the page is missing the <i>time</i> parameter.
+The pseudocode should be
+<pre>
+  for each child do
+      child.UpdateGS(time,false);
+</pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>03 Jul 2002, page 163.</b>
+The section on culling of cylinders (intersection of cylinder and plane) has
+an incorrect formula for the extreme values.  The displayed equation at the
+bottom of the page (with d-Dot(N,C)...) is missing the cylinder radius in
+front of the square root term.  Worse is that the source code is wrong since
+it is missing the radius term and does not do the division by Dot(N,W).
+<br><br>
+The algorithm is simpler if you just look at projecting the cylinder onto a
+line normal to the plane.  The plane is Dot(N,X)-d = 0.  The projection of
+cylinder points X is Dot(N,X)-d where X = C+y0*U+y1*V+y2*W for y0^2+y1^2=r^2
+and |y2| <= h/2 (using the book notation).  The projection values are
+<pre>
+  Dot(N,X)-d = (Dot(N,C)-d) +
+     Dot(N,U)*(r*cos(A))+Dot(N,V)*(r*sin(A)) +
+     Dot(N,W)*y2
+</pre>
+The extreme values are
+<pre>
+  min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
+  max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
+</pre>
+as I mention in my web document for intersection of two cylinders.  An
+intersection occurs if and only if:  min <= 0 <= max.  The source code
+(MgcIntr3DPlnCyln.cpp) has been modified to use the new algorithm.  I wrote a
+Wild Magic application to test the new code (rotate/translate cylinder and
+change colors when state goes from intersect to no-intersect or from cull to
+no-cull).  The code appears to work fine now.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>05 Jun 2002, page 17.</b>
+The first paragraph of the subsection "Rotation Matrix to Quaternion" has a
+construction that was based on the originally typeset S matrix at the bottom
+of page 8.  An earlier book correction changed S to its transpose, so the
+construction mentioned above must be modified.  The formulas in that paragraph
+should be "(r21-r12,r02-r20,r10-r01) = 2 sin(theta) S", "x = (r21-r12)/(4w)",
+"y = (r02-r20)/(4w)", and "z = (r10-r01)/(4w)".  However, the source code
+in MgcQuaternion.cpp is correct.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 May 2002, page 486.</b>
+The last sentence has "f(t) = at^2 + b^t + c" (b is raised to the power t).
+It should be "f(t) = at^2 + bt + c" (b times t).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>29 Apr 2002, page 86.</b>
+The paragraph "It is also convenient..." is a bit compact.  Here is some
+extra verbage that gives some intuition about why you choose z' = bar(s).
+<p>
+Section 3.2.1 describes the perspective projection of line segments.  The
+parameter s is for the "world" line segment.  As s varies uniformly in [0,1],
+the world point on the line segment varies uniformly between end points.  The
+parameter bar(s) is for the projected line segment.  Equation (3.2) tells you
+how bar(s) varies in [0,1]--it is not uniform.  Let us say that it varies
+"perspectively".  For a line segment with an end point at z0 = n and an end
+point at z1 = f, you can select the uniformly varying world line parameter to
+be s = (z-z0)/(z1-z0) = (z-n)/(f-n).  For those end points, w0 = z0/n = 1 and
+w1 = z1/n = f/n.  The right-hand side of equation (3.2) for this case reduces
+to bar(s) = (f/(f-n))*(1-n/z).  As z varies uniformly over the world segment,
+z' = bar(s) varies "perspectively" according to the formula shown.  When you
+draw a line in the frame buffer, you take (approximately) uniform steps in
+screen space to draw the pixels.  The z' values are your depth values that
+you put into the depth buffer.  This argument applies to any attribute that
+you want to interpolate in a perspective correct way.   You just replace z by
+A where A could be color, alpha, or any scalar value of visual interest.
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>22 Apr 2002, page 90.</b>
+The first paragraph of Section 3.3.5 mentions V0 = ... = (x0,y0,z0) and
+V1 = ... = (x1,y1,z1).  Instead the explicit naming of the coordinates should
+be for T0 = (x0,y0,z0) and T1 = (x1,y1,z1), the normalized projections in
+screen space of V0 and V1.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>07 Apr 2002, page 423.</b>
+The first paragraph is badly written and incorrect.  The first problem is that
+the dot product test is <b>not</b> to see if N is inside the frustum cone, but
+to see if N is in the "complementary cone" for the view frustum.  
+<p>
+<img src="cones.png" width=128 height=128 alt="cones" border=0>
+</p>
+For the case of the eye point E being on the negative side of the plane, if
+N is in the complementary cone, then the view frustum cannot intersect the
+positive side of the plane.  The image below shows the case when the eye
+point is on the negative side of the plane.
+<p>
+<img src="frustums.png" width=258 height=128 alt="frustums" border=0>
+</p>
+The left of the image shows a case when N is outside the complementary cone
+(in 2D, angle between N and the cone edge is smaller than pi/2).  The right of
+the image shows a case when N is inside the complementary cone (in 2D, angle
+between N and the cone edge is larger than pi/2).  The test for N being in
+the complementary cone is incorrectly written in the pseudocode.  The correct
+test is "Dot(N,-D) >= cos(pi/2-A)" where N is the plane normal, D is the
+camera direction vector, and A is the angle of the frustum cone.  The test is
+equivalent to:  -Dot(N,D) >= sin(A).
+<br><br>
+
+The second problem with the paragraph is that "negative side" should read
+"positive side".
+<br><br>
+
+The essence of the pseudocode is that before drawing the portion of a scene in
+a half-space, you can test if the view frustum intersects that half-space.  In
+the "sd < 0" case, this would be
+<pre><font color=blue size="1">
+else if ( sd < 0 )
+{
+    if ( frustum intersects positive half-space )
+    {
+        draw positive tree;
+        draw coincident polygons;
+    }
+    draw negative tree;
+}
+</font></pre>
+A more aggressive test would be
+<pre><font color=blue size="1">
+else if ( sd < 0 )
+{
+    if ( frustum intersects positive half-space )
+        draw positive tree;
+    if ( frustum intersects separating plane )
+        draw coincident polygons;
+    draw negative tree;
+}
+</font></pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>06 Apr 2002, page 57.</b>
+Top of page.  The partitioning of R^3 for the ray has 14 components (not 16),
+7 for r > 0 and 7 for r < 0.  For the segment, the partitioning has 21
+components (not 24), 7 for r < 0, 7 for r in [0,1], and 7 for r > 1.
+The last paragraph has "P0 = = P+s*E0+t*E1".  The "P" should be "B".  Also,
+E0 and E1 are not necessarily unit length, so the text should have
+"s = Dot(D,E0)/Dot(E0,E0)" and "t = Dot(D,E1)/Dot(E1,E1)".  (The pseudocode
+does compute s and t properly.)
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>26 Mar 2002, page 50.</b>
+The first sentence of the second paragraph is "An alternate way of visualizing
+... with the plane s = 1."  The plane should be "s + t = 1".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>25 Mar 2002, page 199.</b>
+The pseudocode TestCylinderPlane has "capsule.D" and "capsule.P" in the
+first two lines of code.  These should be "cylinder.D" and "cylinder.P".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>25 Mar 2002, page 201.</b>
+The pseudocode TestEllipsoidPlane has "sphere.C" in the first line of code.
+This should be "ellipsoid.C".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>25 Mar 2002, page 90.</b>
+A typographical error in section 3.3.5.  The formula for T0 has "Theta
+transpose", but should be "R transpose".
+<p>
+The end of the paragraph containing this says "... for some sigma_x > 0 and
+sigma_y > 0.  The...".  The descriptions of sigma_x and sigma_y are incorrect.
+<i>Twice</i> those values are <i>approximately</i> the number of pixels per
+unit of distance.  Replace that part of the paragraph "for some sigma_x ... on
+the view plane." by "where sigma_x = (Sx-1)/2 and sigma_y = (Sy-1)/2 for a
+screen with Sx pixels in width and Sy pixels in height."
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>25 Mar 2002, page 91.</b>
+The middle of the page has "Psi = (Uz*Dx-Ux*Dz,Uz*Dy-Uy*Dz,0) = (Lx,-Ly,0)".
+The last term should be "(Ly,-Lx,0)".  Later in that paragraph there is a
+term starting with "(Ly^2+Ly^2)*DeltaX^2-...".  The term should start with
+"(Ly^2+Uy^2)".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>07 Mar 2002, page 8.</b>
+The matrix for S at the bottom of the page should be transposed to correspond
+to a counterclockwise rotation about the U axis when angle Theta > 0.  Page
+15 has the correct matrix for S.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>28 Feb 2002, page 292.</b>
+The last sentence fragment should say "corresponding to those eigenvectors
+in {vector(N)}^perp where N = Gradient(F)/Length(Gradient(F))".  I believe
+the minus sign in front of the displayed equation does not belong there.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>22 Feb 2002, page 85-86.</b>
+Equation (3.8) is only part of the promised transformation to an orthogonal
+frustum.  The conditions x' in [-1,1] and y' in [-1,1] only apply for the
+viewport on the near plane (when z = n).  The sentence should say |x'| <= z/n
+and |y'| <= z/n.  Setting w = z/n, x" = x'/w, and y" = y'/w, then it is the
+case that |x"| <= 1 and |y"| <= 1.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>05 Feb 2002, page 134-136.</b>
+The clipped triangles should retain the same vertex ordering as the parent
+triangle.  Figure 3.10 shows the parent triangle as having clockwise ordering.
+The clipped triangles in the three cases are mentioned in the text in
+counterclockwise order.  The clipper implementation does not care about the
+parent ordering, only that the ordering be preserved in the clipping.  Thus,
+theoretically it does not matter if the images of the triangles in Figure 3.10
+are reflected (and the book text remain unchanged) or that the book text
+change (and the images remain unchanged).  In my copy I have left the images
+as is--parent triangles are clockwise ordered.  The text changes are as
+follows.
+<ul>
+  <li> Page 134, last paragraph.  The new triangle is T1 = {V3,V1,V4;E3,E4,E5}. </li>
+  <li> Page 135, first paragraph.  The new triangle is T1 = {V3,V1,V2;E3,E1,E4}. </li>
+  <li> Page 136, top of page.  The new triangles are T1 = {V3,V1,V2;E3,E1,E5}
+    and T2 = {V3,V2,V4;E5,E4,E6}. </li>
+</ul>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>01 Feb 2002, page 457.</b>
+The two lines of pseudocode "MgcNodePtr spChild = new MgcNode;" should be
+"MgcNodePtr spChild = pkNode;".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>15 Jan 2002, page 49.</b>
+The equation e = -Dot(E1,B-P) should be e = +Dot(E1,B-P).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>14 Jan 2002, page 8.</b>
+In section 2.1, I stated that a matrix is a linear transformation.  To
+be more precise, the definition of a linear transformation should be
+provided.  A matrix happens to be something that represents the
+transformation with respect to specified bases for the domain and
+range of the transformation.  I took the liberty not to cloud the issue
+with facts from linear algebra, but some mathematicians might cringe at
+my taking this liberty.  So be it.
+<p>
+An error of omission:  In the first sentence of section 2.1.2, the
+definition for rotation matrix not only requires R^{-1} = R^T, it also
+requires that the determinant is 1 to rule out "reflections".  A matrix
+for which R^{-1} = R^T is said to be "orthogonal" (includes rotations
+and reflections).
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>14 Jan 2002, page 103.</b>
+As mentioned, the intent of the paragraph on attenuation for a spot
+light is that, for unit length direction D and unit length cone axis
+U, the attenuation is 1 if the angle between D and U is 0 and decreases
+to 0 as the angle between D and U approaches the spot angle T.  Some
+computer graphics books suggest just using A = pow(Dot(D,U),E) for the
+attenuation (E &gt= 0 is the spot exponent).  Simple to compute, but it
+does not have the property that A = 0 when Dot(D,U) = cos(T).  However,
+just set A = 0 for Dot(D,U) <= cos(T) (D is outside the cone).  My
+displayed formula for d_{spot} was an attempt to attain A = 0 at the
+cone boundary.  Unfortunately, it does not satisfy A = 1 when
+Dot(D,U) = 1.  In the case of E = 1, if you want a linear drop-off
+based on angles, then use A = 1-acos(Dot(D,U)/T works.  Another
+possibility that is nonlinear based on angles is
+A = (Dot(D,U)-cos(T))/(1-cos(T)).  However, both functions are more
+expensive than just using Dot(D,U), so stick with the cheaper one to
+compute,  even though A is not zero when Dot(D,U) = cos(T).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>11 Jan 2002, page 17.</b>
+The first sentence in subsection <i>Quaternion to Rotation Matrix</i>
+should say "The problem is to compute R given...".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>11 Jan 2002, page 19.</b>
+Section 2.4.1, first paragraph.  A sentence should be added:  "Also,
+Tan^{-1}(y,x) corresponds to the function call atan2(y,x)."  I used
+Tan^{-1}(y,x) through the sections, but never defined it.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>11 Jan 2002, page 20.</b>
+The sentences at the top of the page have two occurrences of
+"Tan^{-1}2(r10,r11)".  These should be "Tan^{-1}(r10,r11)".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>11 Jan 2002, page 103.</b>
+The first sentence of the paragraph starting with "For spot lights..."
+should say end with "...the light direction is D = (V-P)/|V-P| where
+P is the light position and V is an illuminated point".  I had
+introduced P and V on page 101.
+<p>
+The equation for d_{spot} has three occurrences of |D|.  Since D was
+defined to be a unit-length vector, |D| = 1 and this term can be
+removed from the equations.  However, if you happen to implement light
+directions that are not unit length, the equations are correct as
+stated.
+</p>
+<p>
+The first paragraph of the section <i>Diffuse Light</i>.  I intended
+the surface normal N to be an outer pointing normal.  In the sentence
+"Moreover, the intensity ... is pi/2 radians or larger", the last word
+should be "smaller".  The equation for the color C_{diff} should have
+"max{-Dot(N,D),0}".  (The minus sign must be included.)
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>11 Jan 2002, page 104.</b>
+I had made an earlier change to the C_{spec} formula.  The term
+Dot(R,D) was changed to Dot(R,U).  Two other occurrences on that page
+must change.  In the paragraph before the formula, there is
+Dot(R,D)^{M_{shine}}.  This D should be U.  In the C_{final} formula
+at the bottom of the page, Dot(R,D^{i}), this D should be U.  Finally,
+the following figure illustrates the various quantities.
+<p>
+<img src="specular.png" width=132 height=132 alt="diagram" border=0>
+</p>
+The reflection vector R in the book is the negative of what it should
+be.  The correct formula is R = D - 2*Dot(N,D)*N.  With the correct
+formula, when R = U, you get the maximum specularity.  Note that in
+this case Dot(R,U) = 1.
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>22 Dec 2001, page 449.</b>
+The loop body of IsDerivedFromClass in the multiple inheritance scheme
+is incorrect.  The inheritance tree must be traversed and the query
+RTTI compared to each of the RTTI objects in that tree.  For single
+inheritance, only a list is traversed and the book pseudocode shows
+that MgcObject takes the responsibility to do this.  A better system is
+to make MgcRTTI be responsible for the list/tree traversal.
+<br><br>
+
+Single inheritance:
+<pre><font color=blue size="1">
+bool MgcRTTI::IsDerivedFromClass (const MgcRTTI* pkQueryRTTI) const
+{
+    if ( pkQueryRTTI == this ) return true;
+    if ( m_pkBaseRTTI )
+        return m_pkBaseRTTI->IsDerivedFromClass(pkQueryRTTI);
+    return false;
+}
+</font></pre>
+
+Multiple inheritance:
+<pre><font color=blue size="1">
+bool MgcRTTI::IsDerivedFromClass (const MgcRTTI* pkQueryRTTI) const
+{
+    if ( pkQueryRTTI == this ) return true;
+    for (unsigned int i = 0; i < m_uiNumBaseClasses; i++)
+    {
+        const MgcRTTI* pkBaseRTTI = m_apkBaseRTTI[i];
+        if ( pkBaseRTTI->IsDerivedFromClass(pkQueryRTTI) )
+            return true;
+    }
+    return false;
+}
+</font></pre>
+
+A base class in either inheritance system has:
+<pre><font color=blue size="1">
+bool MgcObject::IsDerivedFromClass (const MgcRTTI* pkQueryRTTI) const
+{
+    return GetRTTI()->IsDerivedFromClass(pkQueryRTTI);
+}
+</font></pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 Sep 2001, page 273.</b>
+The TCB spline multipliers to adjust for nonuniform spacing in time
+are swapped from what they should be.  The multiplier for equation
+(7.21) should be 2*D(i-1)/(D(i-1)+D(i)) and the multiplier for equation
+(7.22) should be 2*D(i)/(D(i-1)+D(i)).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 Sep 2001, page 62-63.</b>
+The pseudocode for the squared distances of point-to-solid-box and
+point-to-hollow-box are incorrect.  (The C++ source code is correct.)
+They should be
+<a href="DistPointSolidBox.txt">point-to-solid-box</a>
+and
+<a href="DistPointHollowBox.txt">point-to-hollow-box</a>.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 Sep 2001, pages 350, 356, 523.</b>
+I misspelled Jeff Lander's name as "Landers" when it should be "Lander".
+Sorry Jeff :)  Thought I had done a search on this (probably replaced
+the wrong way, Lander by Landers).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 Sep 2001, pages 176, 178.</b>
+The boxes in Figures 5.4 and 5.5 were incorrectly redrawn.  The
+original art for Figure 5.4 is
+<p>
+<img src="segboxsep.png" width=216 height=128 alt="diagram" border=0>
+</p>
+The original art for Figure 5.5 is
+<p>
+<img src="rayboxsep.png" width=216 height=128 alt="diagram" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>24 Sep 2001, page 177.</b>
+I had corrected on Apr 05, 2001 the Table 5.1 by replacing the three
+occurrences of W by V.  The same replacement must occur in the last
+sentence of section 5.2.1.  That is, replace the |W| by |V|.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>02 Aug 2001, page 232.</b>
+At the bottom of the page, the additional axes are listed as
+Wx(NxE_i) and Wx(MxF_i).  These should be WxE_i and WxF_i.  The idea
+is to project the triangles onto a plane whose normal is W, compute the
+edge directions for the projection (the directions are in that plane),
+and take the cross product with W to get normal vectors to the edges.
+That said, the idea of considering additional axes for linear motion is
+not the best way to look at the problem.  Instead you should download the
+document <a href="http://www.magic-software.com/Documentation/MethodOfSeparatingAxes.pdf">
+Method of Separating Axes</a>.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>10 Jul 2001, page 419.</b>
+In the middle of the pseudocode there are references to <i>positiveList</i>
+and <i>negativeList</i>.  These should be <i>posList</i> and <i>negList</i>
+(the original names used at the beginning of ConstructTree).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>07 Jul 2001, page 175.</b>
+The "else if" block of the Clip pseudocode has first line
+"ti = numer/denom;".  This is a cut-and-paste error from the previous
+page.  The line should be removed.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>05 Apr 2001, page 176.</b>
+The last displayed equation should have a vector V, not a vector M.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>05 Apr 2001, page 177.</b>
+In Table 5.1, the first three rows of the column for Rs should have
+vectors V instead of vectors W.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>04 Apr 2001, page 272.</b>
+To be consistent with index i-indices used on tangents on that page,
+the displayed equation for tangents with bias terms should have their
+indices changed from n to i.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>19 Mar 2001, page 278.</b>
+The return type of <i>Bisect</i> should be <i>void</i>, not <i>bool</i>.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>12 Mar 2001, page 174-175.</b>
+The pseudocode blocks for Clip should have "return numer <= 0" instead
+of "return numer > 0".  The actual code in MgcIntr3DLinBox.cpp has
+the correct expressions.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>12 Mar 2001, page 104.</b>
+The formula for C_{spec} should have the dot product R*U instead
+of R*D.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>07 Mar 2001, page 491.</b>
+Equation (B.2) should have (C_1)/4, not (C_1)/2.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 12.</b>
+The second line after equation (2.9) has the statement "hat(u) hat(u)
+= -1".  This is a true statement.  To verify it, use equation (2.2)
+and the fact that u0*u0+u1*u1+u2*u2 = 1.
+<p>
+Equation (2.12) has the terms "hat(u) theta".  These are correct.
+"hat(u)" is a quaternion with no w-term and "theta" is a scalar.  The
+product of quaternion*scalar is the same as scalar*quaternion.
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 14.</b>
+The first displayed equation starts with "hat(w) = inverse(M)(hat(v))".
+The "v" is a typographical error.  It should be "hat(w) =
+inverse(M)(hat(w))".  The equation is obtained by "diagram chasing"
+(yes, a real mathematical term).  The following diagram illustrates
+the various transformations and their relationship to each other.
+<p>
+<img src="QuatDiagram.png" width=320 height=216 alt="diagram" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 17.</b>
+The matrix in Equation (2.13) is incorrect.  The <i>transpose</i> of
+the matrix is what should be displayed.  The source code on the CD-ROM
+does have the correct conversions between quaternions and rotation
+matrices.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 21-24.</b>
+For Rx*Rz*Ry, case thetaZ = -PI/2 should have thetaX = atan2(-r20,r22)
+and case thetaZ = PI/2 should have thetaX = atan2(r20,r22).  For
+Ry*Rx*Rz, case thetaX = -PI/2 should have thetaY = atan2(-r01,r00) and
+case thetaX = PI/2 should have thetaY = atan2(r01,r00).  For Rz*Ry*Rx,
+case thetaY = -PI/2 should have thetaZ = atan2(-r01,-r02) and case
+thetaY = PI/2 should have thetaZ = -atan2(r01,r02).  The corresponding
+code in MgcMatrix3.cpp has been corrected.  It has also been set up
+to compare the relevant matrix terms to +1 and -1 rather than PI/2 and
+-PI/2 (to avoid one asin call in the non-unique factorization cases).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 25.</b>
+The first sentence after the matrix equation at the top of the page
+should have:  ThetaY = Sin^{-1}(c_a s_b).  In the middle of the page,
+the block of equations for ThetaX, ThetaY, and ThetaZ, the denominators
+of the arguments of the four Sin^{-1} terms should have c_a*s_b instead
+of c_b*s_a.  At the end of the page, the block of equations for ThetaX,
+ThetaY, and ThetaZ, the four Sin^{-1} terms should have Cos^{-1}
+instead.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 34.</b>
+"We need to compute the largest b0 so that all points lie above the
+hemicircle w^2+(v-b0)^2 = r^2 with v <= a0."  The last inequality should
+be "v <= b0".  "Similarly, there is a smallest value b1 so that all
+points lie below the hemicircle w^2+(v-b0)^2 = r^2 with v >= b1."  The
+circle equation should be w^2+(v-b1)^2 = r^2.  The references to "above"
+and "below" assume that the V-axis is horizontal and the W-axis is
+vertical, even though the point pairs are (v_i,w_i).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 35.</b>
+"The corner must be adjusted to K1 = A + a1 U + b1 V so that...".  The
+a1 and b1 terms were defined earlier.  The intent for K1 is that
+the a1 and b1 values are increased to meet the constraint mentioned
+in the paragraph.  This may lead to confusion, so replace a1 and b1
+in the K1 equation and in later occurrences in the paragraph to new
+symbols, something like a1' and b1' (or some such).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 50.</b>
+The last sentence should read: "Because the global minimum occurs in
+region 2, the negative of the gradient at the corner (0,1) cannot
+point inside D."
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 114.</b>
+The equation in the sixth line from the top should be
+s_i = (y_0 - y_i) + (dy/dx)(x_i + 1 - x_0).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 150.</b>
+The projections in the last two loops of the OBB merge pseudocode
+should be onto the interpolated box axes.  The expression
+Dot(box0.axis[j],delta) should be Dot(box.axis[j],delta) and the
+expression Dot(box1.axis[j],delta) should be Dot(box.axis[j],delta).
+The source code has the same error (correction has been uploaded).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 188.</b>
+The formula for Q(t) is missing a couple of vector D terms.  The
+formula should be
+<pre>
+  Q(t) = |(W-(Dot(D,W)/Dot(D,D))<b>D</b>)t +
+           ((C-P)-(Dot(D,C-P)/Dot(D,D))<b>D</b>)|^2
+</pre>
+The boldface <b>D</b> terms are the ones missing in the text.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 227.</b>
+The formula for D at the bottom of the page should read:
+D = (U0 + T*V1) - (C + T*V0).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 233.</b>
+Tables 6.10, 6.11, and 6.12 have three equations each for one of the
+x_i as a fraction with denominator of the form Dot(N,Cross(A_i,E_j)).
+The formula is valid as long as the denominator is not zero, but the
+denominator can be zero (in which case the OBB has a face parallel to
+the triangle).  Each of the nine equations of this type was constructed
+by a cross of Equation (6.6) with an E_j vector followed by a dot by
+N.  Instead of the dot by N, a dot with the separating axis direction
+should be used.  That is, if L = Cross(A_i,E_j), the corresponding
+formula for x_i should have the N replaced by Cross(A_i,E_j) and the
+|N|^2 term in the numerator replaced by Dot(N,Cross(A_i,E_j)).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 279.</b>
+The term \vec{x}_{t_i} is used in equation (7.23) before it is defined
+a few lines later.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 281.</b>
+The first displayed equation for sigma_i has two cases for i.  The
+second case is n+1 <= i <= 2*n.  The summation in that case should
+be sum_{ell=i-n}^{n} S_{ell,i-ell} (the book has upper limit of 2*n
+which is incorrect).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 308.</b>
+The displayed equation before equation (8.3) is incorrect.  A bicubic
+rectangle patch can have nonzero fourth, fifth, or sixth derivative
+terms.  There are four identities, two for s and two for t, just like
+the ones for cubic curves:<br>
+<font color=green>
+<pre>
+    x(s,t) = (x(s+d,t)+x(s-d,t)-d^2*x_{ss}(s,t))/2,
+    x_{ss}(s,t) = (x_{ss}(s+d,t)+x_{ss}(s-d,t))/2,
+    x(s,t) = (x(s,t+d)+x(s,t+d)-d^2*x_{tt}(s,t))/2,
+    x_{tt}(s,t) = (x_{tt}(s,t+d)+x_{tt}(s,t-d))/2.
+</pre>
+</font>
+The other identities metioned on page 309 are obtained by taking
+partial derivatives of these identities.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 345.</b>
+The derivation of 'squad' in equation (9.6) is the right idea, but
+notationally has problems.  The paragraph after the equation uses the
+same c0 and c1 for u(t), v(t), and S(t).  The quantities should be
+u(t) = c0(t)p+c1(t)q, v(t) = d0(t)a+d1(t)b, S(t) = e0(2t(1-t))u(t) +
+e1(2t(1-t))v(t).  The derivative calculations proceed as in the proof
+and the evaluations of the c0, c1, d0, d1, e0, and e1 coefficients at
+t=0 and t=1 will lead to the same equations for S'(0) and S'(1).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 415.</b>
+The pseudocode for 'void Render (Region region)' should be<br>
+<font color=blue>
+<pre>
+    planeSet.Add(portal.planes);
+    Render(portal.adjacentRegion);
+    planeSet.Remove(portal.planes);
+</pre>
+</font>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 445.</b>
+The single line of code in the constructor for MgcRTTI should be
+<font color=blue>
+<pre>
+    m_pkBaseRTTI = pkBaseRTTI;
+</pre>
+</font>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 477.</b>
+In the equations for dE/da and dE/db, the -2 coefficient should be
+a 2 and the 2 coefficient should be a -2.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 479.</b>
+In the equations for dE/da, dE/db, and dE/dc, the -2 coefficient
+should be a 2 and the 2 coefficient should be a -2.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 480.</b>
+The equation at the bottom of the page should be E(C) =
+sum_{i=0}^{n} (C*V_i)^2 = C^T M C.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>27 Feb 2001, page 489.</b>
+Table B.1 header should have t^3+3t^2-1.
+</td></tr>
+</table>
+
+<table width=760><tr><td><hr></td></tr></table>
+<a name="ByPageNumber"></a>
+<h2> Book Corrections Organized by Page Number</h2>
+<table width=760><tr><td><hr></td></tr></table>
+
+<table width=760>
+<tr><td><b>page 8.</b>
+The matrix for S at the bottom of the page should be transposed to correspond
+to a counterclockwise rotation about the U axis when angle Theta > 0.  Page
+15 has the correct matrix for S.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 8.</b>
+In section 2.1, I stated that a matrix is a linear transformation.  To
+be more precise, the definition of a linear transformation should be
+provided.  A matrix happens to be something that represents the
+transformation with respect to specified bases for the domain and
+range of the transformation.  I took the liberty not to cloud the issue
+with facts from linear algebra, but some mathematicians might cringe at
+my taking this liberty.  So be it.
+<p>
+An error of omission:  In the first sentence of section 2.1.2, the
+definition for rotation matrix not only requires R^{-1} = R^T, it also
+requires that the determinant is 1 to rule out "reflections".  A matrix
+for which R^{-1} = R^T is said to be "orthogonal" (includes rotations
+and reflections).
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 9.</b>
+The next-to-last displayed equation containing H is missing a vector.  The
+equation should be
+<pre>
+    +   +   +         + +   +
+  H | V | = |  M  | T | | V | = ...
+    |---|   |-----+---| |---|
+    | w |   | S^T | 1 | | w |
+    +   +   +         + +   +
+</pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 12.</b>
+The second line after equation (2.9) has the statement "hat(u) hat(u)
+= -1".  This is a true statement.  To verify it, use equation (2.2)
+and the fact that u0*u0+u1*u1+u2*u2 = 1.
+<p>
+Equation (2.12) has the terms "hat(u) theta".  These are correct.
+"hat(u)" is a quaternion with no w-term and "theta" is a scalar.  The
+product of quaternion*scalar is the same as scalar*quaternion.
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 14.</b>
+The first displayed equation starts with "hat(w) = inverse(M)(hat(v))".
+The "v" is a typographical error.  It should be "hat(w) =
+inverse(M)(hat(w))".  The equation is obtained by "diagram chasing"
+(yes, a real mathematical term).  The following diagram illustrates
+the various transformations and their relationship to each other.
+<p>
+<img src="QuatDiagram.png" width=320 height=216 alt="diagram" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 17.</b>
+The first paragraph of the subsection "Rotation Matrix to Quaternion" has a
+construction that was based on the originally typeset S matrix at the bottom
+of page 8.  An earlier book correction changed S to its transpose, so the
+construction mentioned above must be modified.  The formulas in that paragraph
+should be "(r21-r12,r02-r20,r10-r01) = 2 sin(theta) S", "x = (r21-r12)/(4w)",
+"y = (r02-r20)/(4w)", and "z = (r10-r01)/(4w)".  However, the source code
+in MgcQuaternion.cpp is correct.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 17.</b>
+The first sentence in subsection <i>Quaternion to Rotation Matrix</i>
+should say "The problem is to compute R given...".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 17.</b>
+The matrix in Equation (2.13) is incorrect.  The <i>transpose</i> of
+the matrix is what should be displayed.  The source code on the CD-ROM
+does have the correct conversions between quaternions and rotation
+matrices.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 19.</b>
+Section 2.4.1, first paragraph.  A sentence should be added:  "Also,
+Tan^{-1}(y,x) corresponds to the function call atan2(y,x)."  I used
+Tan^{-1}(y,x) through the sections, but never defined it.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 20.</b>
+The sentences at the top of the page have two occurrences of
+"Tan^{-1}2(r10,r11)".  These should be "Tan^{-1}(r10,r11)".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 21-24.</b>
+For Rx*Rz*Ry, case thetaZ = -PI/2 should have thetaX = atan2(-r20,r22)
+and case thetaZ = PI/2 should have thetaX = atan2(r20,r22).  For
+Ry*Rx*Rz, case thetaX = -PI/2 should have thetaY = atan2(-r01,r00) and
+case thetaX = PI/2 should have thetaY = atan2(r01,r00).  For Rz*Ry*Rx,
+case thetaY = -PI/2 should have thetaZ = atan2(-r01,-r02) and case
+thetaY = PI/2 should have thetaZ = -atan2(r01,r02).  The corresponding
+code in MgcMatrix3.cpp has been corrected.  It has also been set up
+to compare the relevant matrix terms to +1 and -1 rather than PI/2 and
+-PI/2 (to avoid one asin call in the non-unique factorization cases).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 25.</b>
+The first sentence after the matrix equation at the top of the page
+should have:  ThetaY = Sin^{-1}(c_a s_b).  In the middle of the page,
+the block of equations for ThetaX, ThetaY, and ThetaZ, the denominators
+of the arguments of the four Sin^{-1} terms should have c_a*s_b instead
+of c_b*s_a.  At the end of the page, the block of equations for ThetaX,
+ThetaY, and ThetaZ, the four Sin^{-1} terms should have Cos^{-1}
+instead.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 34.</b>
+"We need to compute the largest b0 so that all points lie above the
+hemicircle w^2+(v-b0)^2 = r^2 with v <= a0."  The last inequality should
+be "v <= b0".  "Similarly, there is a smallest value b1 so that all
+points lie below the hemicircle w^2+(v-b0)^2 = r^2 with v >= b1."  The
+circle equation should be w^2+(v-b1)^2 = r^2.  The references to "above"
+and "below" assume that the V-axis is horizontal and the W-axis is
+vertical, even though the point pairs are (v_i,w_i).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 35.</b>
+"The corner must be adjusted to K1 = A + a1 U + b1 V so that...".  The
+a1 and b1 terms were defined earlier.  The intent for K1 is that
+the a1 and b1 values are increased to meet the constraint mentioned
+in the paragraph.  This may lead to confusion, so replace a1 and b1
+in the K1 equation and in later occurrences in the paragraph to new
+symbols, something like a1' and b1' (or some such).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 44.</b>
+In Figure 2.2, the arrow for the level curve Q=V0 is pointing to the wrong
+curve.  The figure with the correct arrow shown in blue is:
+<p>
+<img src="segseglevel.png" width=300 height=300 alt="segseglevel" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 51.</b>
+In Figure 2.4, the arrow for the level curve Q=V0 is pointing to the wrong
+curve.  The level curve tagged as Q=V2 is really the curve Q=V0.  A level
+curve for Q=V2 is shown in blue.  The first point of contact was (1,t0) but
+should be (s0,t0).
+<p>
+<img src="pttrilevel.png" width=301 height=251 alt="pttrilevel" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 49.</b>
+The equation e = -Dot(E1,B-P) should be e = +Dot(E1,B-P).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 50.</b>
+The first sentence of the second paragraph is "An alternate way of visualizing
+... with the plane s = 1."  The plane should be "s + t = 1".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 50.</b>
+The last sentence should read: "Because the global minimum occurs in
+region 2, the negative of the gradient at the corner (0,1) cannot
+point inside D."
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 57.</b>
+Top of page.  The partitioning of R^3 for the ray has 14 components (not 16),
+7 for r > 0 and 7 for r < 0.  For the segment, the partitioning has 21
+components (not 24), 7 for r < 0, 7 for r in [0,1], and 7 for r > 1.
+The last paragraph has "P0 = = P+s*E0+t*E1".  The "P" should be "B".  Also,
+E0 and E1 are not necessarily unit length, so the text should have
+"s = Dot(D,E0)/Dot(E0,E0)" and "t = Dot(D,E1)/Dot(E1,E1)".  (The pseudocode
+does compute s and t properly.)
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 62-63.</b>
+The pseudocode for the squared distances of point-to-solid-box and
+point-to-hollow-box are incorrect.  (The C++ source code is correct.)
+They should be
+<a href="DistPointSolidBox.txt">point-to-solid-box</a>
+and
+<a href="DistPointHollowBox.txt">point-to-hollow-box</a>.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 85-86.</b>
+Equation (3.8) is only part of the promised transformation to an orthogonal
+frustum.  The conditions x' in [-1,1] and y' in [-1,1] only apply for the
+viewport on the near plane (when z = n).  The sentence should say |x'| <= z/n
+and |y'| <= z/n.  Setting w = z/n, x" = x'/w, and y" = y'/w, then it is the
+case that |x"| <= 1 and |y"| <= 1.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 86.</b>
+The paragraph "It is also convenient..." is a bit compact.  Here is some
+extra verbage that gives some intuition about why you choose z' = bar(s).
+<p>
+Section 3.2.1 describes the perspective projection of line segments.  The
+parameter s is for the "world" line segment.  As s varies uniformly in [0,1],
+the world point on the line segment varies uniformly between end points.  The
+parameter bar(s) is for the projected line segment.  Equation (3.2) tells you
+how bar(s) varies in [0,1]--it is not uniform.  Let us say that it varies
+"perspectively".  For a line segment with an end point at z0 = n and an end
+point at z1 = f, you can select the uniformly varying world line parameter to
+be s = (z-z0)/(z1-z0) = (z-n)/(f-n).  For those end points, w0 = z0/n = 1 and
+w1 = z1/n = f/n.  The right-hand side of equation (3.2) for this case reduces
+to bar(s) = (f/(f-n))*(1-n/z).  As z varies uniformly over the world segment,
+z' = bar(s) varies "perspectively" according to the formula shown.  When you
+draw a line in the frame buffer, you take (approximately) uniform steps in
+screen space to draw the pixels.  The z' values are your depth values that
+you put into the depth buffer.  This argument applies to any attribute that
+you want to interpolate in a perspective correct way.   You just replace z by
+A where A could be color, alpha, or any scalar value of visual interest.
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 90.</b>
+The first paragraph of Section 3.3.5 mentions V0 = ... = (x0,y0,z0) and
+V1 = ... = (x1,y1,z1).  Instead the explicit naming of the coordinates should
+be for T0 = (x0,y0,z0) and T1 = (x1,y1,z1), the normalized projections in
+screen space of V0 and V1.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 90.</b>
+A typographical error in section 3.3.5.  The formula for T0 has "Theta
+transpose", but should be "R transpose".
+<p>
+The end of the paragraph containing this says "... for some sigma_x > 0 and
+sigma_y > 0.  The...".  The descriptions of sigma_x and sigma_y are incorrect.
+<i>Twice</i> those values are <i>approximately</i> the number of pixels per
+unit of distance.  Replace that part of the paragraph "for some sigma_x ... on
+the view plane." by "where sigma_x = (Sx-1)/2 and sigma_y = (Sy-1)/2 for a
+screen with Sx pixels in width and Sy pixels in height."
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 91.</b>
+The middle of the page has "Psi = (Uz*Dx-Ux*Dz,Uz*Dy-Uy*Dz,0) = (Lx,-Ly,0)".
+The last term should be "(Ly,-Lx,0)".  Later in that paragraph there is a
+term starting with "(Ly^2+Ly^2)*DeltaX^2-...".  The term should start with
+"(Ly^2+Uy^2)".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 103.</b>
+As mentioned, the intent of the paragraph on attenuation for a spot
+light is that, for unit length direction D and unit length cone axis
+U, the attenuation is 1 if the angle between D and U is 0 and decreases
+to 0 as the angle between D and U approaches the spot angle T.  Some
+computer graphics books suggest just using A = pow(Dot(D,U),E) for the
+attenuation (E &gt= 0 is the spot exponent).  Simple to compute, but it
+does not have the property that A = 0 when Dot(D,U) = cos(T).  However,
+just set A = 0 for Dot(D,U) <= cos(T) (D is outside the cone).  My
+displayed formula for d_{spot} was an attempt to attain A = 0 at the
+cone boundary.  Unfortunately, it does not satisfy A = 1 when
+Dot(D,U) = 1.  In the case of E = 1, if you want a linear drop-off
+based on angles, then use A = 1-acos(Dot(D,U)/T works.  Another
+possibility that is nonlinear based on angles is
+A = (Dot(D,U)-cos(T))/(1-cos(T)).  However, both functions are more
+expensive than just using Dot(D,U), so stick with the cheaper one to
+compute,  even though A is not zero when Dot(D,U) = cos(T).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 103.</b>
+The first sentence of the paragraph starting with "For spot lights..."
+should say end with "...the light direction is D = (V-P)/|V-P| where
+P is the light position and V is an illuminated point".  I had
+introduced P and V on page 101.
+<p>
+The equation for d_{spot} has three occurrences of |D|.  Since D was
+defined to be a unit-length vector, |D| = 1 and this term can be
+removed from the equations.  However, if you happen to implement light
+directions that are not unit length, the equations are correct as
+stated.
+</p>
+<p>
+The first paragraph of the section <i>Diffuse Light</i>.  I intended
+the surface normal N to be an outer pointing normal.  In the sentence
+"Moreover, the intensity ... is pi/2 radians or larger", the last word
+should be "smaller".  The equation for the color C_{diff} should have
+"max{-Dot(N,D),0}".  (The minus sign must be included.)
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 104.</b>
+I had made an earlier change to the C_{spec} formula.  The term
+Dot(R,D) was changed to Dot(R,U).  Two other occurrences on that page
+must change.  In the paragraph before the formula, there is
+Dot(R,D)^{M_{shine}}.  This D should be U.  In the C_{final} formula
+at the bottom of the page, Dot(R,D^{i}), this D should be U.  Finally,
+the following figure illustrates the various quantities.
+<p>
+<img src="specular.png" width=132 height=132 alt="diagram" border=0>
+</p>
+The reflection vector R in the book is the negative of what it should
+be.  The correct formula is R = D - 2*Dot(N,D)*N.  With the correct
+formula, when R = U, you get the maximum specularity.  Note that in
+this case Dot(R,U) = 1.
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 104.</b>
+The formula for C_{spec} should have the dot product R*U instead
+of R*D.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 114.</b>
+The equation in the sixth line from the top should be
+s_i = (y_0 - y_i) + (dy/dx)(x_i + 1 - x_0).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 134-136.</b>
+The clipped triangles should retain the same vertex ordering as the parent
+triangle.  Figure 3.10 shows the parent triangle as having clockwise ordering.
+The clipped triangles in the three cases are mentioned in the text in
+counterclockwise order.  The clipper implementation does not care about the
+parent ordering, only that the ordering be preserved in the clipping.  Thus,
+theoretically it does not matter if the images of the triangles in Figure 3.10
+are reflected (and the book text remain unchanged) or that the book text
+change (and the images remain unchanged).  In my copy I have left the images
+as is--parent triangles are clockwise ordered.  The text changes are as
+follows.
+<ul>
+  <li> Page 134, last paragraph.  The new triangle is T1 = {V3,V1,V4;E3,E4,E5}. </li>
+  <li> Page 135, first paragraph.  The new triangle is T1 = {V3,V1,V2;E3,E1,E4}. </li>
+  <li> Page 136, top of page.  The new triangles are T1 = {V3,V1,V2;E3,E1,E5}
+    and T2 = {V3,V2,V4;E5,E4,E6}. </li>
+</ul>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 150.</b>
+The projections in the last two loops of the OBB merge pseudocode
+should be onto the interpolated box axes.  The expression
+Dot(box0.axis[j],delta) should be Dot(box.axis[j],delta) and the
+expression Dot(box1.axis[j],delta) should be Dot(box.axis[j],delta).
+The source code has the same error (correction has been uploaded).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 155.</b>
+The pseudocode at the top of the page is missing the <i>time</i> parameter.
+The pseudocode should be
+<pre>
+  for each child do
+      child.UpdateGS(time,false);
+</pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 163.</b>
+The section on culling of cylinders (intersection of cylinder and plane) has
+an incorrect formula for the extreme values.  The displayed equation at the
+bottom of the page (with d-Dot(N,C)...) is missing the cylinder radius in
+front of the square root term.  Worse is that the source code is wrong since
+it is missing the radius term and does not do the division by Dot(N,W).
+<br><br>
+The algorithm is simpler if you just look at projecting the cylinder onto a
+line normal to the plane.  The plane is Dot(N,X)-d = 0.  The projection of
+cylinder points X is Dot(N,X)-d where X = C+y0*U+y1*V+y2*W for y0^2+y1^2=r^2
+and |y2| <= h/2 (using the book notation).  The projection values are
+<pre>
+  Dot(N,X)-d = (Dot(N,C)-d) +
+     Dot(N,U)*(r*cos(A))+Dot(N,V)*(r*sin(A)) +
+     Dot(N,W)*y2
+</pre>
+The extreme values are
+<pre>
+  min = (Dot(N,C)-d) - r*sqrt(1-Dot(N,W)^2) - (h/2)*|Dot(N,W)|
+  max = (Dot(N,C)-d) + r*sqrt(1-Dot(N,W)^2) + (h/2)*|Dot(N,W)|
+</pre>
+as I mention in my web document for intersection of two cylinders.  An
+intersection occurs if and only if:  min <= 0 <= max.  The source code
+(MgcIntr3DPlnCyln.cpp) has been modified to use the new algorithm.  I wrote a
+Wild Magic application to test the new code (rotate/translate cylinder and
+change colors when state goes from intersect to no-intersect or from cull to
+no-cull).  The code appears to work fine now.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 174.</b>
+The right image in Figure 5.3 has "p0 <= -e0" and should be "p0 >= -e0".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 174-175.</b>
+The pseudocode blocks for Clip should have "return numer <= 0" instead
+of "return numer > 0".  The actual code in MgcIntr3DLinBox.cpp has
+the correct expressions.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 175.</b>
+The "else if" block of the Clip pseudocode has first line
+"ti = numer/denom;".  This is a cut-and-paste error from the previous
+page.  The line should be removed.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 176.</b>
+The last displayed equation should have a vector V, not a vector M.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>pages 176, 178.</b>
+The boxes in Figures 5.4 and 5.5 were incorrectly redrawn.  The
+original art for Figure 5.4 is
+<p>
+<img src="segboxsep.png" width=216 height=128 alt="diagram" border=0>
+</p>
+The original art for Figure 5.5 is
+<p>
+<img src="rayboxsep.png" width=216 height=128 alt="diagram" border=0>
+</p>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 177.</b>
+I had corrected on Apr 05, 2001 the Table 5.1 by replacing the three
+occurrences of W by V.  The same replacement must occur in the last
+sentence of section 5.2.1.  That is, replace the |W| by |V|.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 177.</b>
+In Table 5.1, the first three rows of the column for Rs should have
+vectors V instead of vectors W.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 183.</b>
+Fourth paragraph, "In addition to the triangle edges already defined, set
+E2 = V1-V0."  That should be "E2 = E1-E0" or "E2 = V2-V1".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 188.</b>
+The formula for Q(t) is missing a couple of vector D terms.  The
+formula should be
+<pre>
+  Q(t) = |(W-(Dot(D,W)/Dot(D,D))<b>D</b>)t +
+           ((C-P)-(Dot(D,C-P)/Dot(D,D))<b>D</b>)|^2
+</pre>
+The boldface <b>D</b> terms are the ones missing in the text.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 192.</b>
+The first paragraph of section 6.2.7 has "If N*D, then the line...".  This
+should be "If N*D is not zero, then the line...".  The last paragraph has
+"For the case of N*D, if there...".  This should be "For the case of N*D
+is zero, if there...".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 199.</b>
+The pseudocode TestCylinderPlane has "capsule.D" and "capsule.P" in the
+first two lines of code.  These should be "cylinder.D" and "cylinder.P".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 201.</b>
+The pseudocode TestEllipsoidPlane has "sphere.C" in the first line of code.
+This should be "ellipsoid.C".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 227.</b>
+The formula for D at the bottom of the page should read:
+D = (U0 + T*V1) - (C + T*V0).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 232.</b>
+At the bottom of the page, the additional axes are listed as
+Wx(NxE_i) and Wx(MxF_i).  These should be WxE_i and WxF_i.  The idea
+is to project the triangles onto a plane whose normal is W, compute the
+edge directions for the projection (the directions are in that plane),
+and take the cross product with W to get normal vectors to the edges.
+That said, the idea of considering additional axes for linear motion is
+not the best way to look at the problem.  Instead you should download the
+document <a href="http://www.magic-software.com/Documentation/MethodOfSeparatingAxes.pdf">
+Method of Separating Axes</a>.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 233.</b>
+Tables 6.10, 6.11, and 6.12 have three equations each for one of the
+x_i as a fraction with denominator of the form Dot(N,Cross(A_i,E_j)).
+The formula is valid as long as the denominator is not zero, but the
+denominator can be zero (in which case the OBB has a face parallel to
+the triangle).  Each of the nine equations of this type was constructed
+by a cross of Equation (6.6) with an E_j vector followed by a dot by
+N.  Instead of the dot by N, a dot with the separating axis direction
+should be used.  That is, if L = Cross(A_i,E_j), the corresponding
+formula for x_i should have the N replaced by Cross(A_i,E_j) and the
+|N|^2 term in the numerator replaced by Dot(N,Cross(A_i,E_j)).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 245.</b>
+The paragraph starting with "Section 6.9 illustrates" should start with
+"Section 6.8 illustrates".  The paragraph starting with "Section 6.10
+presents" should start with "Section 6.9 presents".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 271.</b>
+The pseudocode
+<pre>  intermediate[k] += data[i]*M[j][k];</pre>
+should be
+<pre>  intermediate[k] += f[i]*M[j][k];</pre>
+since the data array was named f earlier in the pseudocode.  The pseudocode
+<pre>  float dt = t - b;</pre>
+should be
+<pre>  float dt = t - floor(t);</pre>
+The actual implementation at the interpolation pages of the Magic Software
+web site has the correct calculation.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 272.</b>
+To be consistent with index i-indices used on tangents on that page,
+the displayed equation for tangents with bias terms should have their
+indices changed from n to i.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 273.</b>
+The TCB spline multipliers to adjust for nonuniform spacing in time
+are swapped from what they should be.  The multiplier for equation
+(7.21) should be 2*D(i-1)/(D(i-1)+D(i)) and the multiplier for equation
+(7.22) should be 2*D(i)/(D(i-1)+D(i)).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 278.</b>
+The return type of <i>Bisect</i> should be <i>void</i>, not <i>bool</i>.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 279.</b>
+The term \vec{x}_{t_i} is used in equation (7.23) before it is defined
+a few lines later.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 281.</b>
+The first displayed equation for sigma_i has two cases for i.  The
+second case is n+1 <= i <= 2*n.  The summation in that case should
+be sum_{ell=i-n}^{n} S_{ell,i-ell} (the book has upper limit of 2*n
+which is incorrect).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 292.</b>
+The last sentence fragment should say "corresponding to those eigenvectors
+in {vector(N)}^perp where N = Gradient(F)/Length(Gradient(F))".  I believe
+the minus sign in front of the displayed equation does not belong there.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 301.</b>
+The definition of a cylinder surface involves a curve Y(u) and a desired
+offset D for the curve.  The definition of the surface should be X(u,v) =
+Y(u) + v*D for 0 <= v <= 1.  (The book has X(u,v) = (1-v)*Y(u)+v*D.)  The
+partial derivatives are then dX/du = dY/du and dX/dv = D.
+</td></tr>
+<tr><td><hr></td></tr>
+
+
+<tr><td><b>page 308.</b>
+The displayed equation before equation (8.3) is incorrect.  A bicubic
+rectangle patch can have nonzero fourth, fifth, or sixth derivative
+terms.  There are four identities, two for s and two for t, just like
+the ones for cubic curves:<br>
+<font color=green>
+<pre>
+    x(s,t) = (x(s+d,t)+x(s-d,t)-d^2*x_{ss}(s,t))/2,
+    x_{ss}(s,t) = (x_{ss}(s+d,t)+x_{ss}(s-d,t))/2,
+    x(s,t) = (x(s,t+d)+x(s,t+d)-d^2*x_{tt}(s,t))/2,
+    x_{tt}(s,t) = (x_{tt}(s,t+d)+x_{tt}(s,t-d))/2.
+</pre>
+</font>
+The other identities metioned on page 309 are obtained by taking
+partial derivatives of these identities.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 345.</b>
+The derivation of 'squad' in equation (9.6) is the right idea, but
+notationally has problems.  The paragraph after the equation uses the
+same c0 and c1 for u(t), v(t), and S(t).  The quantities should be
+u(t) = c0(t)p+c1(t)q, v(t) = d0(t)a+d1(t)b, S(t) = e0(2t(1-t))u(t) +
+e1(2t(1-t))v(t).  The derivative calculations proceed as in the proof
+and the evaluations of the c0, c1, d0, d1, e0, and e1 coefficients at
+t=0 and t=1 will lead to the same equations for S'(0) and S'(1).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 354.</b>
+In the section "Slide to Point", second paragraph.  The equation is missing
+the U and should be:  F = E + clamp{T,tmin,tmax}U
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>pages 350, 356, 523.</b>
+I misspelled Jeff Lander's name as "Landers" when it should be "Lander".
+Sorry Jeff :)  Thought I had done a search on this (probably replaced
+the wrong way, Lander by Landers).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 390.</b>
+The pseudocode at the bottom of the page has
+<pre>
+  if ( vertex.IsEnabled() )
+</pre>
+but should be
+<pre>
+  if ( not vertex.IsEnabled() )
+</pre>
+The terrain source code containing this is correct (file MgcTerrainBlock.cpp,
+function SimplifyVertices).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 398.</b>
+Immediately before the last displayed equation for vector P, there is the
+fragment "Using c0 = 1 - c0 - c2".  This should be "c0 = 1 - c1 - c2".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 415.</b>
+The pseudocode for 'void Render (Region region)' should be<br>
+<font color=blue>
+<pre>
+    planeSet.Add(portal.planes);
+    Render(portal.adjacentRegion);
+    planeSet.Remove(portal.planes);
+</pre>
+</font>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 419.</b>
+In the middle of the pseudocode there are references to <i>positiveList</i>
+and <i>negativeList</i>.  These should be <i>posList</i> and <i>negList</i>
+(the original names used at the beginning of ConstructTree).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 423.</b>
+The first paragraph is badly written and incorrect.  The first problem is that
+the dot product test is <b>not</b> to see if N is inside the frustum cone, but
+to see if N is in the "complementary cone" for the view frustum.  
+<p>
+<img src="cones.png" width=128 height=128 alt="cones" border=0>
+</p>
+For the case of the eye point E being on the negative side of the plane, if
+N is in the complementary cone, then the view frustum cannot intersect the
+positive side of the plane.  The image below shows the case when the eye
+point is on the negative side of the plane.
+<p>
+<img src="frustums.png" width=258 height=128 alt="frustums" border=0>
+</p>
+The left of the image shows a case when N is outside the complementary cone
+(in 2D, angle between N and the cone edge is smaller than pi/2).  The right of
+the image shows a case when N is inside the complementary cone (in 2D, angle
+between N and the cone edge is larger than pi/2).  The test for N being in
+the complementary cone is incorrectly written in the pseudocode.  The correct
+test is "Dot(N,-D) >= cos(pi/2-A)" where N is the plane normal, D is the
+camera direction vector, and A is the angle of the frustum cone.  The test is
+equivalent to:  -Dot(N,D) >= sin(A).
+<br><br>
+
+The second problem with the paragraph is that "negative side" should read
+"positive side".
+<br><br>
+
+The essence of the pseudocode is that before drawing the portion of a scene in
+a half-space, you can test if the view frustum intersects that half-space.  In
+the "sd < 0" case, this would be
+<pre><font color=blue size="1">
+else if ( sd < 0 )
+{
+    if ( frustum intersects positive half-space )
+    {
+        draw positive tree;
+        draw coincident polygons;
+    }
+    draw negative tree;
+}
+</font></pre>
+A more aggressive test would be
+<pre><font color=blue size="1">
+else if ( sd < 0 )
+{
+    if ( frustum intersects positive half-space )
+        draw positive tree;
+    if ( frustum intersects separating plane )
+        draw coincident polygons;
+    draw negative tree;
+}
+</font></pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 445.</b>
+The single line of code in the constructor for MgcRTTI should be
+<font color=blue>
+<pre>
+    m_pkBaseRTTI = pkBaseRTTI;
+</pre>
+</font>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 449.</b>
+The loop body of IsDerivedFromClass in the multiple inheritance scheme
+is incorrect.  The inheritance tree must be traversed and the query
+RTTI compared to each of the RTTI objects in that tree.  For single
+inheritance, only a list is traversed and the book pseudocode shows
+that MgcObject takes the responsibility to do this.  A better system is
+to make MgcRTTI be responsible for the list/tree traversal.
+<br><br>
+
+Single inheritance:
+<pre><font color=blue size="1">
+bool MgcRTTI::IsDerivedFromClass (const MgcRTTI* pkQueryRTTI) const
+{
+    if ( pkQueryRTTI == this ) return true;
+    if ( m_pkBaseRTTI )
+        return m_pkBaseRTTI->IsDerivedFromClass(pkQueryRTTI);
+    return false;
+}
+</font></pre>
+
+Multiple inheritance:
+<pre><font color=blue size="1">
+bool MgcRTTI::IsDerivedFromClass (const MgcRTTI* pkQueryRTTI) const
+{
+    if ( pkQueryRTTI == this ) return true;
+    for (unsigned int i = 0; i < m_uiNumBaseClasses; i++)
+    {
+        const MgcRTTI* pkBaseRTTI = m_apkBaseRTTI[i];
+        if ( pkBaseRTTI->IsDerivedFromClass(pkQueryRTTI) )
+            return true;
+    }
+    return false;
+}
+</font></pre>
+
+A base class in either inheritance system has:
+<pre><font color=blue size="1">
+bool MgcObject::IsDerivedFromClass (const MgcRTTI* pkQueryRTTI) const
+{
+    return GetRTTI()->IsDerivedFromClass(pkQueryRTTI);
+}
+</font></pre>
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 457.</b>
+The two lines of pseudocode "MgcNodePtr spChild = new MgcNode;" should be
+"MgcNodePtr spChild = pkNode;".
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 477.</b>
+In the equations for dE/da and dE/db, the -2 coefficient should be
+a 2 and the 2 coefficient should be a -2.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 479.</b>
+In the equations for dE/da, dE/db, and dE/dc, the -2 coefficient
+should be a 2 and the 2 coefficient should be a -2.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 480.</b>
+The equation at the bottom of the page should be E(C) =
+sum_{i=0}^{n} (C*V_i)^2 = C^T M C.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 486.</b>
+The last sentence has "f(t) = at^2 + b^t + c" (b is raised to the power t).
+It should be "f(t) = at^2 + bt + c" (b times t).
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 489.</b>
+Table B.1 header should have t^3+3t^2-1.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 491.</b>
+Equation (B.2) should have (C_1)/4, not (C_1)/2.
+</td></tr>
+<tr><td><hr></td></tr>
+
+<tr><td><b>page 497.</b>
+A minor correction.  In Euler's method, a displayed equation has
+x_{i+1} (lower case x) and should be X_{i+1} (upper case x).
+</td></tr>
+<tr><td><hr></td></tr>
+
+</table>
+
+</body>
+</html>
