@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding = "Windows-1252"?>
+<VisualStudioProject
+	ProjectType="Visual C++"
+	Version="7.00"
+	Name="Application3"
+	ProjectGUID="{6C3199D8-DF86-4321-A77A-F359F91AACA8}"
+	Keyword="Win32Proj">
+	<Platforms>
+		<Platform
+			Name="Win32"/>
+	</Platforms>
+	<Configurations>
+		<Configuration
+			Name="Debug GLUT|Win32"
+			OutputDirectory="..\..\Library\Debug\GLUT"
+			IntermediateDirectory="Debug\GLUT"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WML_USE_GLUT"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release GLUT|Win32"
+			OutputDirectory="..\..\Library\Release\GLUT"
+			IntermediateDirectory="Release\GLUT"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WML_USE_GLUT"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="DebugDLL GLUT|Win32"
+			OutputDirectory="..\..\Library\DebugDLL\GLUT"
+			IntermediateDirectory="DebugDLL\GLUT"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WML_USE_GLUT;WML_DLL_IMPORT;WML_RENDERER_DLL_IMPORT"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="ReleaseDLL GLUT|Win32"
+			OutputDirectory="..\..\Library\ReleaseDLL\GLUT"
+			IntermediateDirectory="ReleaseDLL\GLUT"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WML_USE_GLUT;WML_DLL_IMPORT;WML_RENDERER_DLL_IMPORT"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Debug WGL|Win32"
+			OutputDirectory="..\..\Library\Debug\WGL"
+			IntermediateDirectory="Debug\WGL"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WML_USE_WGL"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="DebugDLL WGL|Win32"
+			OutputDirectory="..\..\Library\DebugDLL\WGL"
+			IntermediateDirectory="DebugDLL\WGL"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WML_USE_WGL;WML_DLL_IMPORT;WML_RENDERER_DLL_IMPORT"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release WGL|Win32"
+			OutputDirectory="..\..\Library\Release\WGL"
+			IntermediateDirectory="Release\WGL"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WML_USE_WGL"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="ReleaseDLL WGL|Win32"
+			OutputDirectory="..\..\Library\ReleaseDLL\WGL"
+			IntermediateDirectory="ReleaseDLL\WGL"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WML_USE_WGL;WML_DLL_IMPORT;WML_RENDERER_DLL_IMPORT"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Debug DX|Win32"
+			OutputDirectory="..\..\Library\Debug\DX"
+			IntermediateDirectory="Debug\DX"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WML_USE_DX"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="4"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="DebugDLL DX|Win32"
+			OutputDirectory="..\..\Library\DebugDLL\DX"
+			IntermediateDirectory="DebugDLL\DX"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="0"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;WML_USE_DX;WML_DLL_IMPORT;WML_RENDERER_DLL_IMPORT"
+				MinimalRebuild="TRUE"
+				BasicRuntimeChecks="3"
+				RuntimeLibrary="3"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="Release DX|Win32"
+			OutputDirectory="..\..\Library\Release\DX"
+			IntermediateDirectory="Release\DX"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WML_USE_DX"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+		<Configuration
+			Name="ReleaseDLL DX|Win32"
+			OutputDirectory="..\..\Library\ReleaseDLL\DX"
+			IntermediateDirectory="ReleaseDLL\DX"
+			ConfigurationType="4"
+			CharacterSet="2">
+			<Tool
+				Name="VCCLCompilerTool"
+				Optimization="2"
+				InlineFunctionExpansion="1"
+				OmitFramePointers="TRUE"
+				AdditionalIncludeDirectories="..\..\Include"
+				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;WML_USE_DX;WML_DLL_IMPORT;WML_RENDERER_DLL_IMPORT"
+				StringPooling="TRUE"
+				RuntimeLibrary="2"
+				EnableFunctionLevelLinking="TRUE"
+				UsePrecompiledHeader="2"
+				PrecompiledHeaderThrough=""
+				WarningLevel="3"
+				Detect64BitPortabilityProblems="TRUE"
+				DebugInformationFormat="3"/>
+			<Tool
+				Name="VCCustomBuildTool"/>
+			<Tool
+				Name="VCLibrarianTool"
+				OutputFile="$(OutDir)\WmlApplication3.lib"/>
+			<Tool
+				Name="VCMIDLTool"/>
+			<Tool
+				Name="VCPostBuildEventTool"
+				CommandLine="copy *.h ..\..\Include
+copy *.inl ..\..\Include
+"/>
+			<Tool
+				Name="VCPreBuildEventTool"/>
+			<Tool
+				Name="VCPreLinkEventTool"/>
+			<Tool
+				Name="VCResourceCompilerTool"/>
+			<Tool
+				Name="VCWebServiceProxyGeneratorTool"/>
+		</Configuration>
+	</Configurations>
+	<Files>
+		<Filter
+			Name="Source Files"
+			Filter="cpp">
+			<File
+				RelativePath="WmlApplication.cpp">
+			</File>
+			<File
+				RelativePath="WmlDxApplication.cpp">
+			</File>
+			<File
+				RelativePath="WmlGlutApplication.cpp">
+			</File>
+			<File
+				RelativePath="WmlWglApplication.cpp">
+			</File>
+		</Filter>
+		<Filter
+			Name="Header Files"
+			Filter="h">
+			<File
+				RelativePath="WmlApplication.h">
+			</File>
+		</Filter>
+		<Filter
+			Name="Inline Files"
+			Filter="inl">
+			<File
+				RelativePath="WmlApplication.inl">
+			</File>
+		</Filter>
+	</Files>
+	<Globals>
+	</Globals>
+</VisualStudioProject>
+
