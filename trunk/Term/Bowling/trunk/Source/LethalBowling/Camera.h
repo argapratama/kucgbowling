@@ -30,7 +30,9 @@ public:
     void SetUpVector(float x, float y, float z);
 
     void Rotate(float angle, float x, float y, float z);
+    void RotateXMore(float angle);
     void RotateYMore(float angle);
+    void RotateZMore(float angle);
     void ResetRotation();
 
     void Apply();

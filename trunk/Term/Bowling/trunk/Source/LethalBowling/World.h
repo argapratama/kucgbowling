@@ -40,6 +40,8 @@ public:
 
     vector<Sprite*>& Sprites();  
     vector<Collision>& Collisions();
+
+    void DrawString3(void *font, const char *str, float x_position, float y_position, float z_position);
 private:
 	vector<Sprite*> sprites_;   // 여기에 모든 스프라이트들을 등록해두어야 함 (충돌 검사 등에 사용)
     vector<Collision> collisions_;

@@ -99,7 +99,7 @@ void World::DrawFloor()
 {
 	glBindTexture(GL_TEXTURE_2D, texture[0]);
 	glBegin(GL_QUADS);
-	glNormal3f(0.0, 1.0, 0.0);
+	/*glNormal3f(0.0, 1.0, 0.0);
 	glTexCoord2f(0.0f, 1.0f);
 	glVertex3f(-50.0, 0.0, 3.0);
 			
@@ -110,19 +110,66 @@ void World::DrawFloor()
 	glVertex3f( 50.0, 0.0,-3.0);
 			
 	glTexCoord2f(1.0f, 1.0f);
-	glVertex3f( 50.0, 0.0, 3.0);
+	glVertex3f( 50.0, 0.0, 3.0);*/
+    glNormal3f(0.0, 0.0, 1.0);
+	glTexCoord2f(0.0f, 1.0f);
+	glVertex3f(3.0, -50.0, 0.0);
+			
+	glTexCoord2f(0.0f, 0.0f);
+	glVertex3f(-3.0, -50.0, 0.0);
+			
+	glTexCoord2f(1.0f, 0.0f);
+	glVertex3f(-3.0, 50.0, 0.0);
+			
+	glTexCoord2f(1.0f, 1.0f);
+	glVertex3f(3.0, 50.0, 0.0);
 	glEnd();
 }
 
+void World::DrawString3(void *font, const char *str, float x_position, float y_position, float z_position)
+{
+     glColor3f(1, 1, 1);
+     /*if( z_position == 0.0f )
+     {
+          glDisable(GL_DEPTH_TEST);
+          glPushAttrib( GL_LIGHTING_BIT );
+          glDisable(GL_LIGHTING);
+          glMatrixMode(GL_PROJECTION);
+          glPushMatrix();
+           glLoadIdentity();
+
+           glMatrixMode(GL_MODELVIEW);
+
+           glPushMatrix();
+     }*/
+     glRasterPos3f(x_position, y_position, z_position);
+     for(unsigned int i = 0; i < strlen(str); i++)
+      glutBitmapCharacter(font, str[i]);
+
+     /*if( z_position == 0.0f )
+     {
+           glPopMatrix();
+           glMatrixMode(GL_PROJECTION);
+          glPopMatrix();
+          glMatrixMode(GL_MODELVIEW);
+
+          glPopAttrib();
+          glEnable(GL_DEPTH_TEST);
+     }*/
+}
+
+
 void World::DrawScene()
 {
-	float shadow_plane[] = {0.0f, 100.0f, 0.0f, 1.0f};
+	float shadow_plane[] = {0.0f, 0.0f, 100.0f, 1.0f};
+    //float shadow_plane[] = {0.0f, 100.0f, 0.0f, 1.0f};
 	Vector3 vec = light_.GetLocation();
-	float position[] = {vec.X, vec.Y, vec.Z, 1.0f};
+	float position[] = {vec.Z, vec.X, vec.Y, 1.0f};
 	BuildShadowMatrix(shadow_matrix, position, shadow_plane);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 	glLoadIdentity();
-	glTranslatef(0.0f, -3.6f, 1.0f);
+	//glTranslatef(0.0f, -3.6f, 1.0f);
+    glTranslatef(1.0f, 0.0f, -3.6f);
 	glColorMask(0,0,0,0);
 	glEnable(GL_STENCIL_TEST);
 	glStencilFunc(GL_ALWAYS, 1, 1);
@@ -134,8 +181,10 @@ void World::DrawScene()
 	glStencilFunc(GL_EQUAL, 1, 1);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 	glPushMatrix();
-	glScalef(1.0f, -1.0f, 1.0f);
-	glTranslatef(0.0f, 1.5f, 0.0f);
+    /*glTranslatef(0.0f, -1.5f, 0.0f);
+	glScalef(1.0f, -1.0f, 1.0f);*/
+    glTranslatef(0.0f, 0.0f, -1.5f);
+	glScalef(1.0f, 1.0f, -1.0f);
 	ball_.Draw();
 	for(uint i = 0; i < pins_.size(); ++i)
 	{
@@ -151,6 +200,8 @@ void World::DrawScene()
    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
    glColor4f(0.1f, 0.1f, 0.1f, 0.8f);
    glPushMatrix();
+   //glTranslatef(-0.8f, 0.5f, 0.0f);
+   glTranslatef(0.0f,-0.8f, 0.5f);
    glMultMatrixf(shadow_matrix);
    ball_.Draw();
    for(uint i = 0; i < pins_.size(); ++i)
@@ -170,9 +221,8 @@ void World::DrawScene()
 	glEnable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 
-	
-
-	glTranslatef(0.0f, 1.5, 0.0f);
+	//glTranslatef(0.0f, 1.5f, 0.0f);
+    glTranslatef(0.0f, 0.0f, 1.5f);
 	for(uint i = 0; i < pins_.size(); ++i)
     {
         pins_[i].Draw();
@@ -181,7 +231,8 @@ void World::DrawScene()
     if(doShowCollisionInfo_)
     {
         glPushMatrix();
-        glTranslatef(ball_.Location().X, ball_.Location().Y, ball_.Location().Z);
+        //glTranslatef(ball_.Location().X, ball_.Location().Y, ball_.Location().Z);
+        glTranslatef(ball_.Location().Z, ball_.Location().X, ball_.Location().Y);
         glutWireSphere(/*2.29934*//*1.9909358*/ 1.1496694, 10, 10);
         glPopMatrix();
     }
@@ -190,10 +241,29 @@ void World::DrawScene()
     //
     // 원점 그리기
     //
-    static float CenterPointMaterial[] = { 1.0f, 0.0f, 0.0f, 0.0f };
+   /* static float CenterPointMaterial[] = { 1.0f, 0.0f, 0.0f, 0.0f };
     glMaterialfv(GL_FRONT, GL_DIFFUSE, CenterPointMaterial);
-    glutSolidSphere(0.5f, 10, 10);
+    glutSolidSphere(0.5f, 10, 10);*/
 
+
+    glPushMatrix();
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glBegin(GL_LINES);
+		glVertex3f(0, 1, 0);
+		glVertex3f(0, 0, 0);
+		glEnd();
+        glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(1, 0, 0);
+		glEnd();
+        glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, 1);
+		glEnd();
+	glPopMatrix();
+    DrawString3(GLUT_BITMAP_8_BY_13, "X Axis", 1, 0, 0);
+    DrawString3(GLUT_BITMAP_8_BY_13, "Y Axis", 0, 1, 0);
+    DrawString3(GLUT_BITMAP_8_BY_13, "Z Axis", 0, 0, 1);
 }
 
 Sprite& World::GetBall()

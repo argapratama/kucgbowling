@@ -20,8 +20,10 @@ Camera::Camera(void)
     , rotateX_(0.0)
     , rotateY_(0.0)
     , rotateZ_(0.0)
-    , up_(0.0, 1.0, 0.0)
-    , location_(0.0, 0.0, 1.0)
+    /*, up_(0.0, 1.0, 0.0)
+    , location_(0.0, 0.0, 1.0)*/
+    , up_(0.0, 0.0, 1.0)
+    , location_(10.0, 1.0, 2.0)
 {
 }
 
@@ -99,9 +101,19 @@ void Camera::SetUpVector(float x, float y, float z)
     up_.Z = z;
 }
 
+void Camera::RotateXMore(float angle)
+{
+    anglesForEachAxis_.X += angle;
+}
+
 void Camera::RotateYMore(float angle)
 {
     anglesForEachAxis_.Y += angle;
+}
+
+void Camera::RotateZMore(float angle)
+{
+    anglesForEachAxis_.Z += angle;
 }
 
 void Camera::SetToOrthographicView(double left, double right, double bottom, double top, double zNear, double zFar)
