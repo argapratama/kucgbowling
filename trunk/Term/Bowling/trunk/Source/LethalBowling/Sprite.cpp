@@ -668,5 +668,10 @@ RigidBody& Sprite::GetRigidBody()
     return rigidBody_;
 }
 
+const Vector3& Sprite::ModelCenter() const
+{
+    return modelCenter_;
+}
+
 }
 

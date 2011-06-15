@@ -63,6 +63,7 @@ public:
     void SetVelocity(Vector3 direction, float speed);
     virtual void Update(TimeSpan time, TimeSpan timeDelta);
     RigidBody& GetRigidBody();
+    const Vector3& ModelCenter() const;
 
     //static void InitializeRigidBodyForBall(RigidBody& rigidBody);
     //static void InitializeRigidBodyForPin(RigidBody& rigidBody);

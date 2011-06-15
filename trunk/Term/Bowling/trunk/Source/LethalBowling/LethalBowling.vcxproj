@@ -118,7 +118,6 @@
     <ClInclude Include="BasicFunctions.h" />
     <ClInclude Include="BasicFunctionsDlg.h" />
     <ClInclude Include="Box.h" />
-    <ClInclude Include="Box3.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionDetector.h" />
@@ -168,7 +167,6 @@
     <ClCompile Include="BasicFunctions.cpp" />
     <ClCompile Include="BasicFunctionsDlg.cpp" />
     <ClCompile Include="Box.cpp" />
-    <ClCompile Include="Box3.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="CollisionDetector.cpp">
@@ -185,7 +183,10 @@
     <ClCompile Include="Geometric.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="IntersectingBoxes.cpp" />
-    <ClCompile Include="IntrBoxBox.cpp" />
+    <ClCompile Include="IntrBoxBox.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="IntrBoxSph.cpp" />
     <ClCompile Include="IntrPlnBox.cpp" />
     <ClCompile Include="IntrPlnSph.cpp" />
