@@ -114,12 +114,16 @@
     <None Include="Todo.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ball.h" />
     <ClInclude Include="BasicFunctions.h" />
     <ClInclude Include="BasicFunctionsDlg.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="CollisionDetector.h" />
     <ClInclude Include="Color.h" />
+    <ClInclude Include="Contact.h" />
+    <ClInclude Include="Cylinder.h" />
     <ClInclude Include="DateTime.h" />
     <ClInclude Include="Drawer.h" />
     <ClInclude Include="DrawingState.h" />
@@ -128,9 +132,17 @@
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Geometric.h" />
     <ClInclude Include="Image.h" />
+    <ClInclude Include="IntersectingBoxes.h" />
+    <ClInclude Include="IntrBoxBox.h" />
+    <ClInclude Include="IntrBoxSph.h" />
+    <ClInclude Include="IntrPlnBox.h" />
+    <ClInclude Include="IntrPlnSph.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Lighting.h" />
     <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Pin.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="TMath.h" />
     <ClInclude Include="OpenGlException.h" />
     <ClInclude Include="OpenGlPanel.h" />
@@ -151,20 +163,37 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BasicFunctions.cpp" />
     <ClCompile Include="BasicFunctionsDlg.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="CollisionDetector.cpp" />
+    <ClCompile Include="CollisionDetector.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Color.cpp" />
+    <ClCompile Include="Contact.cpp" />
+    <ClCompile Include="Cylinder.cpp" />
     <ClCompile Include="DateTime.cpp" />
     <ClCompile Include="Drawer.cpp" />
     <ClCompile Include="DrawingState.cpp" />
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Geometric.cpp" />
     <ClCompile Include="Image.cpp" />
+    <ClCompile Include="IntersectingBoxes.cpp" />
+    <ClCompile Include="IntrBoxBox.cpp" />
+    <ClCompile Include="IntrBoxSph.cpp" />
+    <ClCompile Include="IntrPlnBox.cpp" />
+    <ClCompile Include="IntrPlnSph.cpp" />
     <ClCompile Include="Light.cpp" />
     <ClCompile Include="Lighting.cpp" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Pin.cpp" />
+    <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Point.h" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TMath.cpp" />
     <ClCompile Include="OpenGlException.cpp" />
     <ClCompile Include="OpenGlPanel.cpp" />
@@ -181,6 +210,7 @@
     </ClCompile>
     <ClCompile Include="TimeSpan.cpp" />
     <ClCompile Include="TString.cpp" />
+    <ClCompile Include="Vector.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>

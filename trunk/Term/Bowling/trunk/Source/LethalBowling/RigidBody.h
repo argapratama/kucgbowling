@@ -9,68 +9,102 @@
 namespace Virgin
 {
 
-enum
-{
-    BoxVertexCount = 8
-};
-
 class RigidBody
 {
 public:
-    RigidBody();
+    // construction and destruction
+    RigidBody ();  // uninitialized, use SetState before using
+    virtual ~RigidBody ();
 
-    static void CalcObjectForces(); // 임의의 특정 순간에 개체에 작용하는 힘과 모멘트를 전부 계산한다
-    static void StepSimulation(TimeSpan timeDelta);   // 오일러 방법 이용(적분)
-    
-    static CollisionType CheckGroundPlaneContacts(const RigidBody& rigidBody);    // 접촉
-    static CollisionType CheckForCollisions(bool doCheckPenetration);
-    static CollisionType CheckGroundPlaneCollisions(RigidBody& rigidBody);
-    static CollisionType CheckBoxCollision(const RigidBody& rigidBody1, const RigidBody& rigidBody2);
-    static CollisionType CheckVertexFaceCollisions(const RigidBody& rigidBody1, const RigidBody& rigidBody2);
-    static CollisionType CheckEdgeEdgeCollisions(const RigidBody& rigidBody1, const RigidBody& rigidBody2);
-    static CollisionType CheckVertexEdgeCollisions(const RigidBody& rigidBody1, const RigidBody& rigidBody2);
+    // set/get position
+    Vector3& Position ();
 
-    static CollisionType IsPenetrating(const RigidBody& rigidBody1, const RigidBody& rigidBody2);
-    static CollisionType IsPenetratingGround(const RigidBody& rigidBody);
+    // set rigid body state
+    void SetMass (float fMass);
+    void SetBodyInertia (const Matrix3& rkInertia);
+    void SetPosition (const Vector3& rkPos);
+    void SetQOrientation (const Quaternion& rkQOrient);
+    void SetLinearMomentum (const Vector3& rkLinMom);
+    void SetAngularMomentum (const Vector3& rkAngMom);
+    void SetROrientation (const Matrix3& rkROrient);
+    void SetLinearVelocity (const Vector3& rkLinVel);
+    void SetAngularVelocity (const Vector3& rkAngVel);
 
-    // 충돌 반응 처리
-    static void ResolveCollisions();
+    // get rigid body state
+    float GetMass () const;
+    float GetInverseMass () const;
+    const Matrix3& GetBodyInertia () const;
+    const Matrix3& GetBodyInverseInertia () const;
+    Matrix3 GetWorldInertia () const;
+    Matrix3 GetWorldInverseInertia () const;
+    const Vector3& GetPosition () const;
+    const Quaternion& GetQOrientation () const;
+    const Vector3& GetLinearMomentum () const;
+    const Vector3& GetAngularMomentum () const;
+    const Matrix3& GetROrientation () const;
+    const Vector3& GetLinearVelocity () const;
+    const Vector3& GetAngularVelocity () const;
 
-    void Update(TimeSpan timeSpan);
-    
-    void ApplyForce(Vector3 force);
+    // force/torque function format
+    typedef Vector3 (*Function)
+    (
+        float,                    // time of application
+        float,                    // mass
+        const Vector3&,    // position
+        const Quaternion&, // orientation
+        const Vector3&,    // linear momentum
+        const Vector3&,    // angular momentum
+        const Matrix3&,    // orientation
+        const Vector3&,    // linear velocity
+        const Vector3&     // angular velocity
+    );
+
+    // for computing external forces and torques
+    void SetInternalForce (const Vector3& rkForce);
+    void SetInternalTorque (const Vector3& rkTorque);
+    void SetExternalForce (const Vector3& rkForce);
+    void SetExternalTorque (const Vector3& rkTorque);
+
+    // for computing internal forces and torques
+    void AppendInternalForce (const Vector3& rkForce);
+    void AppendInternalTorque (const Vector3& rkTorque);
+
+    // Runge-Kutta fourth-order differential equation solver
+    void Update (float fT, float fDT);
+    bool& Moved ();
+
+    // force and torque functions
+    Function Force;
+    Function Torque;
+
+protected:
+    // constant quantities (matrices in body coordinates)
+    float m_fMass, m_fInvMass;
+    Matrix3 m_kInertia, m_kInvInertia;
+
+    // state variables
+    Vector3 m_kPos;         // position
+    Quaternion m_kQOrient;  // orientation
+    Vector3 m_kLinMom;      // linear momentum
+    Vector3 m_kAngMom;      // angular momentum
+
+    // derived state variables
+    Matrix3 m_kROrient;    // orientation matrix
+    Vector3 m_kLinVel;     // linear velocity
+    Vector3 m_kAngVel;     // angular velocity
+
+    bool m_bMoved;
+
+    // external force/torque at current time of simulation
+    Vector3 m_kExternalForce, m_kExternalTorque;
+
+    // Resting contact force/torque. Initially zero, changed by simulator
+    // before call to ODE solver, ODE solver uses for motion of bodies,
+    // then reset to zero for next pass.
+    Vector3 m_kInternalForce, m_kInternalTorque;
 
 public:
-    float mass_;                    // 전체 질량(일정)
-    Matrix3 inertia_;               // 질량 관성모멘트, 물체 좌표
-    Matrix3 inertiaInverse_;        // 질량 관성모멘트 행렬의 역
-
-    Vector3 location_;              // 물체 위치, 전체 좌표
-    Vector3 velocity_;              // 속도, 전체 좌표
-    Vector3 velocityBody;           // 속도, 물체 좌표
-    Vector3 acceleration_;          // 무게중심 가속도, 전체 공간
-    Vector3 angularAcceleration_;   // 각가속도, 물체 좌표
-    Vector3 angularVelocity_;       // 각속도, 물체 좌표
-    Vector3 eulerAngles_;           // 오일러 각, 물체 좌표
-    float speed_;                   // 속력
-
-    Quaternion orientation_;        // 방향, 전체 좌표
-
-    Vector3 forces_;                // 물체에 작용하는 전체 힘
-    Vector3 moments_;               // 물체에 작용하는 전체 모멘트(토크)
-    
-    Matrix3 ieInverse_;             // 관성 모멘트의 역, 전체 좌표
-    
-    Vector3 angularVelocityGlobal_; // angular velocity in terms of earth fixed coords.
-	Vector3 angularAccelerationGlobal_; // angular acceleration in terms of earth fixed coords.
-
     float radius_;
-    Vector3 vertexList_[BoxVertexCount];    // 충돌 검사를 Box로 함
-
-    //
-    //
-    //
-    Vector3 immediateForce_;
 };
 
 }

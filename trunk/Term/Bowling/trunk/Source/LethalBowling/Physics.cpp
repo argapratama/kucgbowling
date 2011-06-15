@@ -13,7 +13,7 @@ namespace Virgin
 //#define VELOCITYTOLERANCE 0.05f
 //#define FRICTIONCOEFFICIENT 0.9f
 
-float Physics::Gravity = -32.174f;  // * Todo: -9.8로 수정해볼 것 (ft/s^2 -> m/s^2)
+float Physics::Gravity = 9.81f;  // * Todo: -9.8로 수정해볼 것 (ft/s^2 -> m/s^2)
 float Physics::LinearDragCoefficient = 5.0f;
 float Physics::AngularDragCoefficient = 1200.0f;
 float Physics::CollisionTolerance = 0.9f;

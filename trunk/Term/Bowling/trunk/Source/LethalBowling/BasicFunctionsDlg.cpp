@@ -74,6 +74,8 @@ CBasicFunctionsDlg::CBasicFunctionsDlg(CWnd* pParent /*=NULL*/)
     , moveNearButtonDown_(false)
     , biggerButtonDown_(false)
     , smallerButtonDown_(false)
+    , firstTime_(DateTime::SinceSystemStarted())
+    , lastTime_(DateTime::SinceSystemStarted())
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -192,6 +194,7 @@ BEGIN_MESSAGE_MAP(CBasicFunctionsDlg, CDialogEx)
     ON_BN_CLICKED(IDC_TEST4_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest4Button)
 	ON_BN_CLICKED(IDC_BUTTON_CAMERA_LEFT, &CBasicFunctionsDlg::OnBnClickedButtonCameraLeft)
 	ON_BN_CLICKED(IDC_BUTTON_CAMERA_RIGHT, &CBasicFunctionsDlg::OnBnClickedButtonCameraRight)
+    ON_BN_CLICKED(IDC_TEST5_BUTTON, &CBasicFunctionsDlg::OnBnClickedTest5Button)
 END_MESSAGE_MAP()
 
 
@@ -235,7 +238,6 @@ BOOL CBasicFunctionsDlg::OnInitDialog()
     InitializeSpriteMassProperties();
     InitializeControls();
     
-
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -255,46 +257,46 @@ void CBasicFunctionsDlg::InitializeWorld()
         MessageBox(L"bowling_pin.obj doesn't exist. Please restart this application ^^;;");
     }
 
-	World().GetPin(0).TranslateMore(-2.0, 0.0, 0.0);
-	//World().GetPin(0).ScaleRate(1.5, 1.5, 1.5);
+ //   World().GetPin(0).TranslateMore(-2.0, 0.0, 0.0);
+	////World().GetPin(0).ScaleRate(1.5, 1.5, 1.5);
 	World().GetPin(0).CopyTo(World().GetPin(1));
-	World().GetPin(1).TranslateMore(-2.6, 0.0, 0.5);
-	World().GetPin(1).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(1).SetDrawTexture(false);
+	//World().GetPin(1).TranslateMore(-2.6, 0.0, 0.5);
+	//World().GetPin(1).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(1).SetDrawTexture(false);
 	World().GetPin(0).CopyTo(World().GetPin(2));
-	World().GetPin(2).TranslateMore(-2.6, 0.0, -0.5);
-	World().GetPin(2).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(2).SetDrawTexture(false);
+	//World().GetPin(2).TranslateMore(-2.6, 0.0, -0.5);
+	//World().GetPin(2).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(2).SetDrawTexture(false);
 
 	World().GetPin(0).CopyTo(World().GetPin(3));
-	World().GetPin(3).TranslateMore(-3.2, 0.0, 1.0);
-	World().GetPin(3).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(3).SetDrawTexture(false);
+	//World().GetPin(3).TranslateMore(-3.2, 0.0, 1.0);
+	//World().GetPin(3).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(3).SetDrawTexture(false);
 	World().GetPin(0).CopyTo(World().GetPin(4));
-	World().GetPin(4).TranslateMore(-3.2, 0, 0.0);
-	World().GetPin(4).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(4).SetDrawTexture(false);
+	//World().GetPin(4).TranslateMore(-3.2, 0, 0.0);
+	//World().GetPin(4).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(4).SetDrawTexture(false);
 	World().GetPin(0).CopyTo(World().GetPin(5));
-	World().GetPin(5).TranslateMore(-3.2, 0.0, -1.0);
-	World().GetPin(5).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(5).SetDrawTexture(false);
+	//World().GetPin(5).TranslateMore(-3.2, 0.0, -1.0);
+	//World().GetPin(5).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(5).SetDrawTexture(false);
 
 	World().GetPin(0).CopyTo(World().GetPin(6));
-	World().GetPin(6).TranslateMore(-3.8, 0.0, 1.5);
-	World().GetPin(6).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(6).SetDrawTexture(false);
+	//World().GetPin(6).TranslateMore(-3.8, 0.0, 1.5);
+	//World().GetPin(6).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(6).SetDrawTexture(false);
 	World().GetPin(0).CopyTo(World().GetPin(7));
-	World().GetPin(7).TranslateMore(-3.8, 0.0, 0.5);
-	World().GetPin(7).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(7).SetDrawTexture(false);
+	//World().GetPin(7).TranslateMore(-3.8, 0.0, 0.5);
+	//World().GetPin(7).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(7).SetDrawTexture(false);
 	World().GetPin(0).CopyTo(World().GetPin(8));
-	World().GetPin(8).TranslateMore(-3.8, 0.0, -0.5);
-	World().GetPin(8).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(8).SetDrawTexture(true);
+	//World().GetPin(8).TranslateMore(-3.8, 0.0, -0.5);
+	//World().GetPin(8).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(8).SetDrawTexture(true);
 	World().GetPin(0).CopyTo(World().GetPin(9));
-	World().GetPin(9).TranslateMore(-3.8, 0.0, -1.5);
-	World().GetPin(9).ScaleRate(1.5, 1.5, 1.5);
-	World().GetPin(9).SetDrawTexture(false);
+	//World().GetPin(9).TranslateMore(-3.8, 0.0, -1.5);
+	//World().GetPin(9).ScaleRate(1.5, 1.5, 1.5);
+	//World().GetPin(9).SetDrawTexture(false);
 
     // The Main Light
     //World().GetLight().MoveTo(20, 30, 0);
@@ -302,7 +304,7 @@ void CBasicFunctionsDlg::InitializeWorld()
     World().GetLight().Enable();
 
     // 스프라이트 등록
-    World().Sprites().push_back(&World().GetBall());
+    //World().Sprites().push_back(&World().GetBall());
     //World().Sprites().push_back(&World().GetBall2());
     for(int i = 0; i < 10; ++i)
     {
@@ -312,124 +314,118 @@ void CBasicFunctionsDlg::InitializeWorld()
 
 void CBasicFunctionsDlg::InitializeSpriteMassProperties()
 {
-    Sprite& ball = World().GetBall();
+    Ball& ball = World().GetBall();
 
+    InitializeBall(ball);
+
+    //
+    // Entire of pin
+    //
+    Pin& pin = World().GetPin(0);
+    InitializePin(pin);
+	Pin& pin1 = World().GetPin(1);
+    InitializePin(pin1);
+	Pin& pin2 = World().GetPin(2);
+    InitializePin(pin2);
+	Pin& pin3 = World().GetPin(3);
+    InitializePin(pin3);
+	Pin& pin4 = World().GetPin(4);
+    InitializePin(pin4);
+	Pin& pin5 = World().GetPin(5);
+    InitializePin(pin5);
+	Pin& pin6 = World().GetPin(6);
+    InitializePin(pin6);
+	Pin& pin7 = World().GetPin(7);
+    InitializePin(pin7);
+	Pin& pin8 = World().GetPin(8);
+    InitializePin(pin8);
+	Pin& pin9 = World().GetPin(9);
+    InitializePin(pin9);
+
+    UpdateAndDraw();
+
+    pin.GetRigidBody().SetPosition(Vector3(0.0, -2.0, 0.0));
+    pin1.GetRigidBody().SetPosition(Vector3(0.5, -2.6, 0.0));
+    pin2.GetRigidBody().SetPosition(Vector3(-0.5, -2.6, 0.0));
+    pin3.GetRigidBody().SetPosition(Vector3(1.0, -3.2, 0.0));
+    pin4.GetRigidBody().SetPosition(Vector3(0.0, -3.2, 0.0));
+    pin5.GetRigidBody().SetPosition(Vector3(-1.0, -3.2, 0.0));
+    pin6.GetRigidBody().SetPosition(Vector3(1.5, -3.8, 0.0));
+    pin7.GetRigidBody().SetPosition(Vector3(0.5, -3.8, 0.0));
+    pin8.GetRigidBody().SetPosition(Vector3(-0.5, -3.8, 0.0));
+    pin9.GetRigidBody().SetPosition(Vector3(-1.5, -3.8, 0.0));
+    /*pin.GetRigidBody().SetPosition(Vector3(-2.0, 0.0, 0.0));
+    pin1.GetRigidBody().SetPosition(Vector3(0.0, 2.0, 0.0));*/
+
+	
+}
+
+void CBasicFunctionsDlg::InitializeBall(Virgin::Ball& ball)
+{
     RigidBody& ballBody = ball.GetRigidBody();
-    //ballBody.velocity_.X = -20.0f;
-    ballBody.mass_ = 10.0f / (-Physics::Gravity);
+
+    Vector3 vec(0.0, 0.0, 0.0);
+    ballBody.SetPosition(vec);
+    ballBody.SetMass(10.0f);
 
     float length = 1.1496694 * 2;  // X
     float height = 1.1496694 * 2;  // Y
     float width = 1.1496694 * 2;   // Z
 
     ballBody.radius_ = length/2;
-
-    ballBody.vertexList_[0].X = length / 2.0f;
-    ballBody.vertexList_[0].Y = height / 2.0f;
-    ballBody.vertexList_[0].Z = -width / 2.0f;
-
-    ballBody.vertexList_[1].X = length / 2.0f;
-    ballBody.vertexList_[1].Y = height / 2.0f;
-    ballBody.vertexList_[1].Z = width / 2.0f;
-
-    ballBody.vertexList_[2].X = length / 2.0f;
-    ballBody.vertexList_[2].Y = -height / 2.0f;
-    ballBody.vertexList_[2].Z = width / 2.0f;
-
-    ballBody.vertexList_[3].X = length / 2.0f;
-    ballBody.vertexList_[3].Y = -height / 2.0f;
-    ballBody.vertexList_[3].Z = -width / 2.0f;
-
-    ballBody.vertexList_[4].X = -length / 2.0f;
-    ballBody.vertexList_[4].Y = height / 2.0f;
-    ballBody.vertexList_[4].Z = -width / 2.0f;
-
-    ballBody.vertexList_[5].X = -length / 2.0f;
-    ballBody.vertexList_[5].Y = height / 2.0f;
-    ballBody.vertexList_[5].Z = width / 2.0f;
-
-    ballBody.vertexList_[6].X = -length / 2.0f;
-    ballBody.vertexList_[6].Y = -height / 2.0f;
-    ballBody.vertexList_[6].Z = width / 2.0f;
-
-    ballBody.vertexList_[7].X = -length / 2.0f;
-    ballBody.vertexList_[7].Y = -height / 2.0f;
-    ballBody.vertexList_[7].Z = -width / 2.0f;
-
-    ballBody.orientation_ = Quaternion::FromEulerAngles(0.0f, 0.0f, 0.0f);
-
-
-    //
-    // Entire of pin
-    //
-    Sprite& pin = World().GetPin(0);
-    InitializePin(pin);
-	Sprite& pin1 = World().GetPin(1);
-    InitializePin(pin1);
-	Sprite& pin2 = World().GetPin(2);
-    InitializePin(pin2);
-	Sprite& pin3 = World().GetPin(3);
-    InitializePin(pin3);
-	Sprite& pin4 = World().GetPin(4);
-    InitializePin(pin4);
-	Sprite& pin5 = World().GetPin(5);
-    InitializePin(pin5);
-	Sprite& pin6 = World().GetPin(6);
-    InitializePin(pin6);
-	Sprite& pin7 = World().GetPin(7);
-    InitializePin(pin7);
-	Sprite& pin8 = World().GetPin(8);
-    InitializePin(pin8);
-	Sprite& pin9 = World().GetPin(9);
-    InitializePin(pin9);
+    
+    ballBody.SetQOrientation(Quaternion::IDENTITY);
+    ballBody.Force = World::Force;
+    ballBody.Torque = World::Torque;
 }
 
-void CBasicFunctionsDlg::InitializePin(Sprite& pin)
+void CBasicFunctionsDlg::InitializePin(Pin& pin)
 {
-    
     RigidBody& pinBody = pin.GetRigidBody();
-    //pinBody.velocity_.X = 0.0f;
-    pinBody.mass_ = 5.0f / (-Physics::Gravity);
+    pinBody.SetMass(10.0f);
 
     float length = 0.31128 * 2;  // X
     float height = 0.97743 * 2;  // Y
     float width = 0.31128 * 2;   // Z
 
 	pinBody.radius_ = length/2;
+/*
+	pinBody.vertexList_[0].X() = length / 2.0f;
+    pinBody.vertexList_[0].Y() = -height / 2.0f;
+    pinBody.vertexList_[0].Z() = width / 2.0f;
 
-	pinBody.vertexList_[0].X = length / 2.0f;
-    pinBody.vertexList_[0].Y = height / 2.0f;
-    pinBody.vertexList_[0].Z = -width / 2.0f;
+    pinBody.vertexList_[1].X() = length / 2.0f;
+    pinBody.vertexList_[1].Y() = height / 2.0f;
+    pinBody.vertexList_[1].Z() = width / 2.0f;
 
-    pinBody.vertexList_[1].X = length / 2.0f;
-    pinBody.vertexList_[1].Y = height / 2.0f;
-    pinBody.vertexList_[1].Z = width / 2.0f;
+    pinBody.vertexList_[2].X() = -length / 2.0f;
+    pinBody.vertexList_[2].Y() = height / 2.0f;
+    pinBody.vertexList_[2].Z() = width / 2.0f;
 
-    pinBody.vertexList_[2].X = length / 2.0f;
-    pinBody.vertexList_[2].Y = -height / 2.0f;
-    pinBody.vertexList_[2].Z = width / 2.0f;
+    pinBody.vertexList_[3].X() = -length / 2.0f;
+    pinBody.vertexList_[3].Y() = -height / 2.0f;
+    pinBody.vertexList_[3].Z() = width / 2.0f;
 
-    pinBody.vertexList_[3].X = length / 2.0f;
-    pinBody.vertexList_[3].Y = -height / 2.0f;
-    pinBody.vertexList_[3].Z = -width / 2.0f;
+    pinBody.vertexList_[4].X() = length / 2.0f;
+    pinBody.vertexList_[4].Y() = -height / 2.0f;
+    pinBody.vertexList_[4].Z() = -width / 2.0f;
 
-    pinBody.vertexList_[4].X = -length / 2.0f;
-    pinBody.vertexList_[4].Y = height / 2.0f;
-    pinBody.vertexList_[4].Z = -width / 2.0f;
+    pinBody.vertexList_[5].X() = length / 2.0f;
+    pinBody.vertexList_[5].Y() = height / 2.0f;
+    pinBody.vertexList_[5].Z() = -width / 2.0f;
 
-    pinBody.vertexList_[5].X = -length / 2.0f;
-    pinBody.vertexList_[5].Y = height / 2.0f;
-    pinBody.vertexList_[5].Z = width / 2.0f;
+    pinBody.vertexList_[6].X() = -length / 2.0f;
+    pinBody.vertexList_[6].Y() = height / 2.0f;
+    pinBody.vertexList_[6].Z() = -width / 2.0f;
 
-    pinBody.vertexList_[6].X = -length / 2.0f;
-    pinBody.vertexList_[6].Y = -height / 2.0f;
-    pinBody.vertexList_[6].Z = width / 2.0f;
+    pinBody.vertexList_[7].X() = -length / 2.0f;
+    pinBody.vertexList_[7].Y() = -height / 2.0f;
+    pinBody.vertexList_[7].Z() = -width / 2.0f;*/
 
-    pinBody.vertexList_[7].X = -length / 2.0f;
-    pinBody.vertexList_[7].Y = -height / 2.0f;
-    pinBody.vertexList_[7].Z = -width / 2.0f;
+    pinBody.SetQOrientation(Quaternion::IDENTITY);
 
-    pinBody.orientation_ = Quaternion::FromEulerAngles(0.0f, 0.0f, 0.0f);
+    pinBody.Force = World::Force;
+    pinBody.Torque = World::Torque;
 }
 
 void CBasicFunctionsDlg::InitializeControls()
@@ -539,10 +535,9 @@ void CBasicFunctionsDlg::OnSize(UINT nType, int cx, int cy)
 
 void CBasicFunctionsDlg::UpdateAndDraw()
 {
-    static DateTime lastTime = DateTime::SinceSystemStarted();
     DateTime currTime = DateTime::SinceSystemStarted();
-    TimeSpan timeDelta = currTime - lastTime;
-    lastTime = currTime;
+    TimeSpan timeDelta = currTime - lastTime_;
+    lastTime_ = currTime;
 
     if(timeDelta.TotalSeconds() != 0.0)
     {
@@ -554,7 +549,7 @@ void CBasicFunctionsDlg::UpdateAndDraw()
 
     if(!pauseCheck_.GetCheck())
     {
-        World().Update(timeDelta);
+        World().Update(lastTime_ - firstTime_, timeDelta);
     }
 
     const float Speed = static_cast<float>(speedSlider_.GetPos() / 100.0);
@@ -660,10 +655,10 @@ void CBasicFunctionsDlg::UpdateAndDraw()
     Vector3 values2;
 
     // Scaling
-    values.X = ToFloat(scaleXEdit_);
-    values.Y = ToFloat(scaleYEdit_);
-    values.Z = ToFloat(scaleZEdit_);
-    GetSelectedSprite().Scale(values.X, values.Y, values.Z);
+    values.X() = ToFloat(scaleXEdit_);
+    values.Y() = ToFloat(scaleYEdit_);
+    values.Z() = ToFloat(scaleZEdit_);
+    GetSelectedSprite().Scale(values.X(), values.Y(), values.Z());
 
     //
     // Camera
@@ -674,20 +669,20 @@ void CBasicFunctionsDlg::UpdateAndDraw()
         World().GetCamera().RotateZMore(RotateUnit);
     }
 
-    /*values.X = ToFloat(cameraLocationXEdit_);
-    values.Y = ToFloat(cameraLocationYEdit_);
-    values.Z = ToFloat(cameraLocationZEdit_);
-    World().GetCamera().MoveTo(values.Z, values.X, values.Y);
+    //values.X() = ToFloat(cameraLocationXEdit_);
+    //values.Y() = ToFloat(cameraLocationYEdit_);
+    //values.Z() = ToFloat(cameraLocationZEdit_);
+    //World().GetCamera().MoveTo(values.X(), values.Y(), values.Z());
 
-    values.X = ToFloat(cameraLookAtXEdit_);
-    values.Y = ToFloat(cameraLookAtYEdit_);
-    values.Z = ToFloat(cameraLookAtZEdit_);
-    World().GetCamera().LookAt(values.Z, values.X, values.Y);
+    //values.X() = ToFloat(cameraLookAtXEdit_);
+    //values.Y() = ToFloat(cameraLookAtYEdit_);
+    //values.Z() = ToFloat(cameraLookAtZEdit_);
+    //World().GetCamera().LookAt(values.X(), values.Y(), values.Z());
 
-    values.X = ToFloat(cameraUpXEdit_);
-    values.Y = ToFloat(cameraUpYEdit_);
-    values.Z = ToFloat(cameraUpZEdit_);
-    World().GetCamera().SetUpVector(values.Z, values.X, values.Y);*/
+    //values.X() = ToFloat(cameraUpXEdit_);
+    //values.Y() = ToFloat(cameraUpYEdit_);
+    //values.Z() = ToFloat(cameraUpZEdit_);
+    //World().GetCamera().SetUpVector(values.X(), values.Y(), values.Z());
     //World().GetCamera().Apply();
 	
     // 
@@ -838,13 +833,15 @@ void CBasicFunctionsDlg::OnEditChange()
 void CBasicFunctionsDlg::OnBnClickedTestButton()
 {
     //World().GetBall().Load(L"HappyBuddha.obj");
-    CFileDialog fileDialog(TRUE, L"obj", NULL, OFN_FILEMUSTEXIST | OFN_LONGNAMES, L"Object (*.obj) | *.obj", this);
-    INT_PTR result = fileDialog.DoModal();
-    if(result == IDOK)
-    {
-        CString pathName = fileDialog.GetPathName();
-        MessageBox(pathName);
-    }
+    //CFileDialog fileDialog(TRUE, L"obj", NULL, OFN_FILEMUSTEXIST | OFN_LONGNAMES, L"Object (*.obj) | *.obj", this);
+    //INT_PTR result = fileDialog.DoModal();
+    //if(result == IDOK)
+    //{
+    //    CString pathName = fileDialog.GetPathName();
+    //    MessageBox(pathName);
+    //}
+
+    World().GetBall().Position().Z() = 10.0f;
 }
 
 
@@ -990,8 +987,9 @@ void CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck()
 
 void CBasicFunctionsDlg::OnBnClickedTest2Button()
 {
+    World().GetBall().GetRigidBody().AppendInternalForce(Vector3(0.0f, 10000.0f, 0.0f));
     //World().GetBall().SetVelocity(Vector3(0.0f, 1.0f, 0.0f), 0.5f);
-    World().GetBall().GetRigidBody().ApplyForce(Vector3(-100.0, 0.0, 0.0));
+    //World().GetBall().GetRigidBody().ApplyForce(Vector3(-100.0, 0.0, 0.0));
 }
 
 
@@ -1003,7 +1001,8 @@ void CBasicFunctionsDlg::OnBnClickedTest3Button()
 
 void CBasicFunctionsDlg::OnBnClickedTest4Button()
 {
-    World().Update(TimeSpan(100));
+    lastTime_ += 100;
+    World().Update(lastTime_ - firstTime_, TimeSpan(100));
 }
 
 
@@ -1018,4 +1017,10 @@ void CBasicFunctionsDlg::OnBnClickedButtonCameraRight()
 {
 	World().GetCamera().RotateZMore(-10.0);
 	UpdateAndDraw();
+}
+
+
+void CBasicFunctionsDlg::OnBnClickedTest5Button()
+{
+    World().GetPin(0).Position().Z() = 10.0f;
 }

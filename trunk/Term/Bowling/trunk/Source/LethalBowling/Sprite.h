@@ -33,7 +33,7 @@ class Sprite
 {
 public:
     Sprite(void);
-    ~Sprite(void);
+    virtual ~Sprite(void);
 
     bool Load(const String& fileName, const String& textureName);
 
@@ -47,7 +47,7 @@ public:
     void ScaleFrom(const Vector3& from, float x, float y, float z);
     void Reset();
 
-    Vector3 Location() const;
+    Vector3& Position();
 
     void Draw();
     void SetMeshMode(MeshMode mode);
@@ -61,11 +61,11 @@ public:
     void DrawCoveringSphere();
 
     void SetVelocity(Vector3 direction, float speed);
-    void Update(TimeSpan timeSpan);
+    void Update(TimeSpan time, TimeSpan timeDelta);
     RigidBody& GetRigidBody();
 
-    static void InitializeRigidBodyForBall(RigidBody& rigidBody);
-    static void InitializeRigidBodyForPin(RigidBody& rigidBody);
+    //static void InitializeRigidBodyForBall(RigidBody& rigidBody);
+    //static void InitializeRigidBodyForPin(RigidBody& rigidBody);
 
 private:
     std::vector<Vector3> vertice_;
@@ -73,17 +73,14 @@ private:
 	std::vector<Vector3> normals_;
     std::vector<QuadVertice> faces_;
     std::vector<QuadVertice> textureFaces_;
-	//std::vector<QuadVertice> normalFaces_;
 	std::vector<QuadVertice> normalVertices_;
 	std::vector<TriangleVertice> triFaces_;
     std::vector<TriangleVertice> triTextureFaces_;
-    //std::vector<TriangleVertice> triFaceNormals_;
 	std::vector<TriangleVertice> triNormalVertices_;
 
     std::vector<Vector3> faceNormals_;
     std::vector<Vector3> vertexNormals_;
 
-    //Vector3 location_;
     Vector3 anglesForEachAxis_;
 
     float rotateAngle_;

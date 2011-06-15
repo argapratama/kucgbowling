@@ -15,7 +15,7 @@ Camera::Camera(void)
     , top_(0.0)
     , bottom_(0.0)
     , near_(1.5)
-    , far_(100.0)
+    , far_(1000.0)
     , rotateAngle_(0.0)
     , rotateX_(0.0)
     , rotateY_(0.0)
@@ -34,13 +34,13 @@ Camera::~Camera(void)
 
 void Camera::MoveTo(float x, float y, float z)
 {
-    location_.X = x;
-    location_.Y = y;
-    location_.Z = z;
+    location_.X() = x;
+    location_.Y() = y;
+    location_.Z() = z;
 }
 void Camera::MoveMore(float x, float y, float z)
 {
-    MoveTo(location_.X + x, location_.Y + y, location_.Z + z);
+    MoveTo(location_.X() + x, location_.Y() + y, location_.Z() + z);
 }
 
 void Camera::SetAspect(double aspect)
@@ -78,42 +78,42 @@ void Camera::Apply()
     //glRotatef(rotateAngle_, rotateX_, rotateY_, rotateZ_);
     //gluLookAt(0.0, 0.0, 6.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
     
-    gluLookAt(location_.X, location_.Y, location_.Z, lookingAt_.X, lookingAt_.Y, lookingAt_.Z, up_.X, up_.Y, up_.Z);
+    gluLookAt(location_.X(), location_.Y(), location_.Z(), lookingAt_.X(), lookingAt_.Y(), lookingAt_.Z(), up_.X(), up_.Y(), up_.Z());
 
-    glRotatef(anglesForEachAxis_.X, 1.0, 0.0, 0.0);
-    glRotatef(anglesForEachAxis_.Y, 0.0, 1.0, 0.0);
-    glRotatef(anglesForEachAxis_.Z, 0.0, 0.0, 1.0);
+    glRotatef(anglesForEachAxis_.X(), 1.0, 0.0, 0.0);
+    glRotatef(anglesForEachAxis_.Y(), 0.0, 1.0, 0.0);
+    glRotatef(anglesForEachAxis_.Z(), 0.0, 0.0, 1.0);
 
     glMatrixMode(GL_MODELVIEW);
 }
 
 void Camera::LookAt(float x, float y, float z)
 {
-    lookingAt_.X = x;
-    lookingAt_.Y = y;
-    lookingAt_.Z = z;
+    lookingAt_.X() = x;
+    lookingAt_.Y() = y;
+    lookingAt_.Z() = z;
 }
 
 void Camera::SetUpVector(float x, float y, float z)
 {
-    up_.X = x;
-    up_.Y = y;
-    up_.Z = z;
+    up_.X() = x;
+    up_.Y() = y;
+    up_.Z() = z;
 }
 
 void Camera::RotateXMore(float angle)
 {
-    anglesForEachAxis_.X += angle;
+    anglesForEachAxis_.X() += angle;
 }
 
 void Camera::RotateYMore(float angle)
 {
-    anglesForEachAxis_.Y += angle;
+    anglesForEachAxis_.Y() += angle;
 }
 
 void Camera::RotateZMore(float angle)
 {
-    anglesForEachAxis_.Z += angle;
+    anglesForEachAxis_.Z() += angle;
 }
 
 void Camera::SetToOrthographicView(double left, double right, double bottom, double top, double zNear, double zFar)
@@ -149,7 +149,7 @@ void Camera::SetToPerspectiveView(double fov, double aspect, double zNear, doubl
 
 void Camera::ResetRotation()
 {
-    anglesForEachAxis_.Reset();
+    anglesForEachAxis_ = Vector3::ZERO;
 }
 
 }

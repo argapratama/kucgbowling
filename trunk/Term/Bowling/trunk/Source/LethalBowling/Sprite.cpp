@@ -278,26 +278,15 @@ void Sprite::Draw()
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
     glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 
-//    glScalef(scales_.X, scales_.Y, scales_.Z);
-    //glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
-    glTranslatef(rigidBody_.location_.Z, rigidBody_.location_.X, rigidBody_.location_.Y);
-    
-    glRotatef(rigidBody_.eulerAngles_.Z, 0.0, 0.0, 1.0);
-    glRotatef(rigidBody_.eulerAngles_.Y, 0.0, 1.0, 0.0);
-    glRotatef(rigidBody_.eulerAngles_.X, 1.0, 0.0, 0.0);
+//    glScalef(scales_.X(), scales_.Y(), scales_.Z());
+    glTranslatef(rigidBody_.Position().X(), rigidBody_.Position().Y(), rigidBody_.Position().Z());
 
-    //// Pivot-Point Scaling
-    //glTranslatef(pivotPointForScaling_.X, pivotPointForScaling_.Y, pivotPointForScaling_.Z);
-    //glScalef(pivotPointScales_.X, pivotPointScales_.Y, pivotPointScales_.Z);
-    //glTranslatef(-pivotPointForScaling_.X, -pivotPointForScaling_.Y, -pivotPointForScaling_.Z);
-
-    //// Arbitrary Axis Rotation
-    //glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
-    //glRotatef(rotateAngle_, rotateAxisEnd_.X - rotateAxisBegin_.X, rotateAxisEnd_.Y - rotateAxisBegin_.Y, rotateAxisEnd_.Z - rotateAxisBegin_.Z);
-    //glTranslatef(-rotateAxisBegin_.X, -rotateAxisBegin_.Y, -rotateAxisBegin_.Z);
+    glRotatef(rigidBody_.GetQOrientation().Z(), 0.0, 0.0, 1.0);
+    glRotatef(rigidBody_.GetQOrientation().Y(), 0.0, 1.0, 0.0);
+    glRotatef(rigidBody_.GetQOrientation().X(), 1.0, 0.0, 0.0);
 
     // Model Center 만큼을 보정해서 원점으로 이동
-    glTranslatef(-modelCenter_.X, -modelCenter_.Y, -modelCenter_.Z);
+    glTranslatef(-modelCenter_.X(), -modelCenter_.Y(), -modelCenter_.Z());
 
     if(meshMode_ == MeshMode_Point)
     {
@@ -311,19 +300,19 @@ void Sprite::Draw()
             const Vector3& vertex3 = vertice_[faces_[i].Index[2]];
             const Vector3& vertex4 = vertice_[faces_[i].Index[3]];
 
-            glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
-            glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
-            glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
-            glVertex3f(vertex4.X, vertex4.Y, vertex4.Z);
+            glVertex3f(vertex1.X(), vertex1.Y(), vertex1.Z());
+            glVertex3f(vertex2.X(), vertex2.Y(), vertex2.Z());
+            glVertex3f(vertex3.X(), vertex3.Y(), vertex3.Z());
+            glVertex3f(vertex4.X(), vertex4.Y(), vertex4.Z());
 
             glEnd();
 
             //if(doDrawNormal_)
             //{
             //    // 시작점은 4점의 평균
-            //    Vector3 normalBegin((vertex1.X + vertex2.X + vertex3.X + vertex4.X)/4, 
-            //        (vertex1.Y + vertex2.Y + vertex3.Y + vertex4.Y)/4, 
-            //        (vertex1.Z + vertex2.Z + vertex3.Z + vertex4.Z)/4);
+            //    Vector3 normalBegin((vertex1.X() + vertex2.X() + vertex3.X() + vertex4.X())/4, 
+            //        (vertex1.Y() + vertex2.Y() + vertex3.Y() + vertex4.Y())/4, 
+            //        (vertex1.Z() + vertex2.Z() + vertex3.Z() + vertex4.Z())/4);
 
             //    Vector3 normal = faceNormals_[i];
             //    normal = normal * 0.05;
@@ -331,8 +320,8 @@ void Sprite::Draw()
             //    
             //    glColor3f(0.0, 0.0, 1.0);
             //    glBegin(GL_LINES);
-            //        glVertex3f(normalBegin.X, normalBegin.Y, normalBegin.Z);
-            //        glVertex3f(normalEnd.X, normalEnd.Y, normalEnd.Z);
+            //        glVertex3f(normalBegin.X(), normalBegin.Y(), normalBegin.Z());
+            //        glVertex3f(normalEnd.X(), normalEnd.Y(), normalEnd.Z());
             //    glEnd();
             //    glColor3f(1.0, 1.0, 1.0);
             //}
@@ -351,9 +340,9 @@ void Sprite::Draw()
             //if(doDrawNormal_)
             //{
             //    // 시작점은 4점의 평균
-            //    Vector3 normalBegin((vertex1.X + vertex2.X + vertex3.X + vertex4.X)/4, 
-            //        (vertex1.Y + vertex2.Y + vertex3.Y + vertex4.Y)/4, 
-            //        (vertex1.Z + vertex2.Z + vertex3.Z + vertex4.Z)/4);
+            //    Vector3 normalBegin((vertex1.X() + vertex2.X() + vertex3.X() + vertex4.X())/4, 
+            //        (vertex1.Y() + vertex2.Y() + vertex3.Y() + vertex4.Y())/4, 
+            //        (vertex1.Z() + vertex2.Z() + vertex3.Z() + vertex4.Z())/4);
 
             //    Vector3 normal = faceNormals_[i];
             //    normal = normal * 0.05;
@@ -361,17 +350,17 @@ void Sprite::Draw()
 
             //    glColor3f(0.0, 0.0, 1.0);
             //    glBegin(GL_LINES);
-            //        glVertex3f(normalBegin.X, normalBegin.Y, normalBegin.Z);
-            //        glVertex3f(normalEnd.X, normalEnd.Y, normalEnd.Z);
+            //        glVertex3f(normalBegin.X(), normalBegin.Y(), normalBegin.Z());
+            //        glVertex3f(normalEnd.X(), normalEnd.Y(), normalEnd.Z());
             //    glEnd();
             //    glColor3f(1.0, 1.0, 1.0);
             //}
 
             glBegin(GL_LINE_LOOP);
-            glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
-            glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
-            glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
-            glVertex3f(vertex4.X, vertex4.Y, vertex4.Z);
+            glVertex3f(vertex1.X(), vertex1.Y(), vertex1.Z());
+            glVertex3f(vertex2.X(), vertex2.Y(), vertex2.Z());
+            glVertex3f(vertex3.X(), vertex3.Y(), vertex3.Z());
+            glVertex3f(vertex4.X(), vertex4.Y(), vertex4.Z());
             glEnd();
 
             
@@ -403,17 +392,17 @@ void Sprite::Draw()
             //if(doDrawNormal_)
             //{
             //    // 시작점은 4점의 평균
-            //    Vector3 normalBegin((vertex1.X + vertex2.X + vertex3.X + vertex4.X)/4, 
-            //        (vertex1.Y + vertex2.Y + vertex3.Y + vertex4.Y)/4, 
-            //        (vertex1.Z + vertex2.Z + vertex3.Z + vertex4.Z)/4);
+            //    Vector3 normalBegin((vertex1.X() + vertex2.X() + vertex3.X() + vertex4.X())/4, 
+            //        (vertex1.Y() + vertex2.Y() + vertex3.Y() + vertex4.Y())/4, 
+            //        (vertex1.Z() + vertex2.Z() + vertex3.Z() + vertex4.Z())/4);
             //    Vector3 normal = faceNormals_[i];
             //    normal = normal * 0.05;
             //    Vector3 normalEnd = normalBegin + normal;
             //    
             //    glColor3f(0.0, 0.0, 1.0);
             //    glBegin(GL_LINES);
-            //        glVertex3f(normalBegin.X, normalBegin.Y, normalBegin.Z);
-            //        glVertex3f(normalEnd.X, normalEnd.Y, normalEnd.Z);
+            //        glVertex3f(normalBegin.X(), normalBegin.Y(), normalBegin.Z());
+            //        glVertex3f(normalEnd.X(), normalEnd.Y(), normalEnd.Z());
             //    glEnd();
             //    glColor3f(1.0, 1.0, 1.0);
             //}
@@ -435,24 +424,24 @@ void Sprite::Draw()
                 glBindTexture(GL_TEXTURE_2D, 0);
 
             glBegin(GL_QUADS);
-			glNormal3f(normal1.X, normal1.Y, normal1.Z);
+			glNormal3f(normal1.X(), normal1.Y(), normal1.Z());
             if(doDrawTexture_)
-                glTexCoord2f(texel1.X, texel1.Y); 
-            glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
-			glNormal3f(normal2.X, normal2.Y, normal2.Z);
+                glTexCoord2f(texel1.X(), texel1.Y()); 
+            glVertex3f(vertex1.X(), vertex1.Y(), vertex1.Z());
+			glNormal3f(normal2.X(), normal2.Y(), normal2.Z());
             if(doDrawTexture_)
-                glTexCoord2f(texel2.X, texel2.Y); 
-            glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
+                glTexCoord2f(texel2.X(), texel2.Y()); 
+            glVertex3f(vertex2.X(), vertex2.Y(), vertex2.Z());
 
-			glNormal3f(normal3.X, normal3.Y, normal3.Z);
+			glNormal3f(normal3.X(), normal3.Y(), normal3.Z());
             if(doDrawTexture_) 
-                glTexCoord2f(texel3.X, texel3.Y); 
-            glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
+                glTexCoord2f(texel3.X(), texel3.Y()); 
+            glVertex3f(vertex3.X(), vertex3.Y(), vertex3.Z());
 
-			glNormal3f(normal4.X, normal4.Y, normal4.Z);
+			glNormal3f(normal4.X(), normal4.Y(), normal4.Z());
             if(doDrawTexture_) 
-                glTexCoord2f(texel4.X, texel4.Y); 
-            glVertex3f(vertex4.X, vertex4.Y, vertex4.Z);
+                glTexCoord2f(texel4.X(), texel4.Y()); 
+            glVertex3f(vertex4.X(), vertex4.Y(), vertex4.Z());
             
             /*glNormal3f(normal1.X, normal1.Y, normal1.Z);
             if(doDrawTexture_)
@@ -489,20 +478,20 @@ void Sprite::Draw()
 
 			glBegin(GL_TRIANGLES);
 
-           // glNormal3f(normal1.X, normal1.Y, normal1.Z);
+           // glNormal3f(normal1.X(), normal1.Y(), normal1.Z());
             if(doDrawTexture_)
-                glTexCoord2f(texel1.Z, texel1.Y); 
-            glVertex3f(vertex1.X, vertex1.Y, vertex1.Z);
+                glTexCoord2f(texel1.X(), texel1.Y()); 
+            glVertex3f(vertex1.X(), vertex1.Y(), vertex1.Z());
             
-           // glNormal3f(normal2.X, normal2.Y, normal2.Z);
+           // glNormal3f(normal2.X(), normal2.Y(), normal2.Z());
             if(doDrawTexture_)
-                glTexCoord2f(texel1.Z, texel1.Y); 
-            glVertex3f(vertex2.X, vertex2.Y, vertex2.Z);
+                glTexCoord2f(texel2.X(), texel2.Y()); 
+            glVertex3f(vertex2.X(), vertex2.Y(), vertex2.Z());
 
-           // glNormal3f(normal3.X, normal3.Y, normal3.Z);
+           // glNormal3f(normal3.X(), normal3.Y(), normal3.Z());
             if(doDrawTexture_) 
-                glTexCoord2f(texel1.Z, texel1.Y); 
-            glVertex3f(vertex3.X, vertex3.Y, vertex3.Z);
+                glTexCoord2f(texel3.X(), texel3.Y()); 
+            glVertex3f(vertex3.X(), vertex3.Y(), vertex3.Z());
 
             glEnd();
 		}
@@ -513,17 +502,17 @@ void Sprite::Draw()
 
 void Sprite::RotateXMore(float angle)
 {
-    anglesForEachAxis_.X += angle;
+    anglesForEachAxis_.X() += angle;
 }
 
 void Sprite::RotateYMore(float angle)
 {
-    anglesForEachAxis_.Y += angle;
+    anglesForEachAxis_.Y() += angle;
 }
 
 void Sprite::RotateZMore(float angle)
 {
-    anglesForEachAxis_.Z += angle;
+    anglesForEachAxis_.Z() += angle;
 }
 
 void Sprite::RotateAxis(float angle, const Vector3& axisBegin, const Vector3& axisEnd)
@@ -535,50 +524,50 @@ void Sprite::RotateAxis(float angle, const Vector3& axisBegin, const Vector3& ax
 
 void Sprite::TranslateMore(float x, float y, float z)
 {
-    rigidBody_.location_.X += x;
-    rigidBody_.location_.Y += y;
-    rigidBody_.location_.Z += z;
+    rigidBody_.Position().X() += x;
+    rigidBody_.Position().Y() += y;
+    rigidBody_.Position().Z() += z;
 }
 
 void Sprite::Scale(float x, float y, float z)
 {
-    scales_.X = x;
-    scales_.Y = y;
-    scales_.Z = z;
+    scales_.X() = x;
+    scales_.Y() = y;
+    scales_.Z() = z;
 }
 
 void Sprite::ScaleRate(float x, float y, float z)
 {
-    scales_.X *= x;
-    scales_.Y *= y;
-    scales_.Z *= z;
+    scales_.X() *= x;
+    scales_.Y() *= y;
+    scales_.Z() *= z;
 }
 
 void Sprite::ScaleFrom(const Vector3& from, float x, float y, float z)
 {
     pivotPointForScaling_ = from;
-    pivotPointScales_.X = x;
-    pivotPointScales_.Y = y;
-    pivotPointScales_.Z = z;
+    pivotPointScales_.X() = x;
+    pivotPointScales_.Y() = y;
+    pivotPointScales_.Z() = z;
 }
 
 void Sprite::Reset()
 {
-    rigidBody_.location_.Reset();
-    anglesForEachAxis_.Reset();
+    rigidBody_.Position() = Vector3::ZERO;
+    anglesForEachAxis_ = Vector3::ZERO;
 
     rotateAngle_ = 0.0;
-    rotateAxisBegin_.Reset();
-    rotateAxisEnd_.Reset();
+    rotateAxisBegin_ = Vector3::ZERO;
+    rotateAxisEnd_ = Vector3::ZERO;
 
-    scales_.X = 1.0;
-    scales_.Y = 1.0;
-    scales_.Z = 1.0;
+    scales_.X() = 1.0;
+    scales_.Y() = 1.0;
+    scales_.Z() = 1.0;
 
-    pivotPointForScaling_.Reset();
-    pivotPointScales_.X = 1.0;
-    pivotPointScales_.Y = 1.0;
-    pivotPointScales_.Z = 1.0;
+    pivotPointForScaling_ = Vector3::ZERO;
+    pivotPointScales_.X() = 1.0;
+    pivotPointScales_.Y() = 1.0;
+    pivotPointScales_.Z() = 1.0;
 }
 
 void Sprite::SetMeshMode(MeshMode mode)
@@ -598,14 +587,15 @@ void Sprite::CopyTo(Sprite& rhs) const
 	rhs.normals_ = normals_;
     rhs.faces_ = faces_;
     rhs.textureFaces_ = textureFaces_;
-	//rhs.normalFaces_ = normalFaces_;
 	rhs.normalVertices_ = normalVertices_;
     rhs.faceNormals_ = faceNormals_;
     rhs.vertexNormals_ = vertexNormals_;
 	rhs.triFaces_ = triFaces_;
     rhs.triTextureFaces_ = triTextureFaces_;
-    //rhs.triFaceNormals_ = triFaceNormals_;
 	rhs.triNormalVertices_ = triNormalVertices_;
+
+    rhs.modelCenter_ = modelCenter_;   
+    rhs.radius_ = radius_;
 
     for(int i = 0; i < 3; ++i)
         rhs.texture_[i] = texture_[i];
@@ -616,9 +606,9 @@ void Sprite::SetDrawTexture(bool drawTexture)
     doDrawTexture_ = drawTexture;
 }
 
-Vector3 Sprite::Location() const
+Vector3& Sprite::Position()
 {
-    return rigidBody_.location_;
+    return rigidBody_.Position();
 }
 
 void Sprite::CalculateModelCenterAndRadius()
@@ -634,19 +624,19 @@ void Sprite::CalculateModelCenterAndRadius()
     // X, Y, Z의 최대/최소값을 구한 다음 중간값 구함
     for(uint i = 0; i < vertice_.size(); ++i)
     {
-        maxVertex.X = Math::Max(maxVertex.X, vertice_[i].X);
-        maxVertex.Y = Math::Max(maxVertex.Y, vertice_[i].Y);
-        maxVertex.Z = Math::Max(maxVertex.Z, vertice_[i].Z);
+        maxVertex.X() = Math::Max(maxVertex.X(), vertice_[i].X());
+        maxVertex.Y() = Math::Max(maxVertex.Y(), vertice_[i].Y());
+        maxVertex.Z() = Math::Max(maxVertex.Z(), vertice_[i].Z());
 
-        minVertex.X = Math::Min(minVertex.X, vertice_[i].X);
-        minVertex.Y = Math::Min(minVertex.Y, vertice_[i].Y);
-        minVertex.Z = Math::Min(minVertex.Z, vertice_[i].Z);
+        minVertex.X() = Math::Min(minVertex.X(), vertice_[i].X());
+        minVertex.Y() = Math::Min(minVertex.Y(), vertice_[i].Y());
+        minVertex.Z() = Math::Min(minVertex.Z(), vertice_[i].Z());
     }
 
     modelCenter_ = (maxVertex + minVertex) / 2;
 
     // 반지름은 간단하게 계산. 물체를 Cube로 보았을 때 X, Y, Z 중 가장 긴 쪽 / 2
-    radius_ = Math::Max(Math::Max(maxVertex.X - minVertex.X, maxVertex.Y - minVertex.Y), maxVertex.Z - minVertex.Z) / 2;
+    radius_ = Math::Max(Math::Max(maxVertex.X() - minVertex.X(), maxVertex.Y() - minVertex.Y()), maxVertex.Z() - minVertex.Z()) / 2;
 }
 
 void Sprite::DrawCoveringSphere()
@@ -655,7 +645,7 @@ void Sprite::DrawCoveringSphere()
     glMaterialfv(GL_FRONT, GL_EMISSION, SphereMaterial);
 
     glPushMatrix();
-    glTranslatef(rigidBody_.location_.X, rigidBody_.location_.Y, rigidBody_.location_.Z);
+    glTranslatef(rigidBody_.Position().X(), rigidBody_.Position().Y(), rigidBody_.Position().Z());
     glutWireSphere(radius_+0.03f, 20, 20);
     glPopMatrix();    
 }
@@ -663,13 +653,14 @@ void Sprite::DrawCoveringSphere()
 // * 강체가 Force 기반으로 구현되면 제거될 수 있음
 void Sprite::SetVelocity(Vector3 direction, float speed)
 {
-    rigidBody_.velocity_ = direction;
-    rigidBody_.speed_ = speed;
+    direction.Normalize();
+    direction *= speed;
+    rigidBody_.SetLinearVelocity(direction);
 }
 
-void Sprite::Update(TimeSpan timeSpan)
+void Sprite::Update(TimeSpan time, TimeSpan timeDelta)
 {
-    rigidBody_.Update(timeSpan);
+    rigidBody_.Update(time.TotalSeconds(), timeDelta.TotalSeconds());
 }
 
 RigidBody& Sprite::GetRigidBody()
