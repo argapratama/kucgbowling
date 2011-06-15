@@ -7,15 +7,23 @@
 namespace Virgin
 {
 
+enum 
+{
+    BoxVerticeCount = 8
+};
+
 class Pin : public Sprite
 {
 public:
     Sphere& CoveringSphere();
-    Box& BoundingBox();
+    Vector3* GetBox();
+
+    //virtual void Update(TimeSpan time, TimeSpan timeDelta);
+    void GetBox(Vector3 box[8]);
 
 private:
     Sphere coverSphere_;
-    Box box_;
+    Vector3 box_[BoxVerticeCount];
 };
 
 }

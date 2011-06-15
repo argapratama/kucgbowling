@@ -66,6 +66,7 @@ public:
     void ComputeImpulseMagnitude(std::vector<float>& preRelVel, std::vector<float>& impulseMag);
     void DoImpulse(std::vector<float>& impulseMag);
     void DoMotion();
+    static float CalcKE(const RigidBody& rigidBody);
 
     // ½Ã°¢È­
     void DoVisual();

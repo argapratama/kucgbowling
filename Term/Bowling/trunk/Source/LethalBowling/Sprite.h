@@ -61,7 +61,7 @@ public:
     void DrawCoveringSphere();
 
     void SetVelocity(Vector3 direction, float speed);
-    void Update(TimeSpan time, TimeSpan timeDelta);
+    virtual void Update(TimeSpan time, TimeSpan timeDelta);
     RigidBody& GetRigidBody();
 
     //static void InitializeRigidBodyForBall(RigidBody& rigidBody);

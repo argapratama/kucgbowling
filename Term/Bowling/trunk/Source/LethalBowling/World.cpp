@@ -322,7 +322,14 @@ void World::Update(TimeSpan time, TimeSpan timeDelta)
 {
     DoPhysical();
     ball_.Update(time, timeDelta);
+
+    for(uint i = 0; i < pins_.size(); ++i)
+    {
+        pins_[i].Update(time, timeDelta);
+    }
     
+
+
     // 
     // 
     //
@@ -353,22 +360,11 @@ void World::DoPhysical()
     DoCollisionResponse();
     
     totalKE_ = 0.0f;
-    //for (uint i = 0; i < NUM_TETRA; i++)
+
+    totalKE_ += CalcKE(ball_.GetRigidBody());
+    for (uint i = 0; i < pins_.size(); i++)
     {
-        //const RigidTetra& rkTetra = *m_apkTetra[i];
-        RigidBody& rkTetra = ball_.GetRigidBody();
-        float fInvMass = rkTetra.GetInverseMass();
-        const Matrix3& rkInertia = rkTetra.GetWorldInertia();
-        const Vector3& rkPos = rkTetra.GetPosition();
-        const Vector3& rkLinMom = rkTetra.GetLinearMomentum();
-        const Matrix3& rkROrient = rkTetra.GetROrientation();
-        const Vector3& rkAngVel = rkTetra.GetAngularVelocity();
-
-        /*m_aspkTetra[i]->Translate() = rkPos;
-        m_aspkTetra[i]->Rotate() = rkROrient;*/
-
-        totalKE_ += fInvMass*rkLinMom.Dot(rkLinMom) +
-            rkAngVel.Dot(rkInertia*rkAngVel);
+        totalKE_ += CalcKE(pins_[i].GetRigidBody());
     }
     totalKE_ *= 0.5f;
 
@@ -381,7 +377,6 @@ void World::DoPhysical()
 
 void World::DoCollisionDetection()
 {
-    Contact kContact;
     contacts_.clear();
 
     // 공 - 바닥 충돌 검사
@@ -410,8 +405,38 @@ void World::DoCollisionDetection()
     // 핀을 Box로 보고... Box의 각 점(8개)들이 바닥과 위인지 검사
     for(uint i = 0; i < pins_.size(); ++i)
     {
-        /*for(uint j = 0; j < 
-        Vector3 position = pins_[i].GetRigidBody().GetPosition().Z();*/
+        pins_[i].GetRigidBody().Moved() = false;
+
+        Vector3 box[BoxVerticeCount];
+        pins_[i].GetBox(box);
+
+        int hitIndex = -1;
+        float distanceFromFloorMax = 0.0f;
+        for(uint j = 0; j < BoxVerticeCount; ++j)
+        {
+            float distanceFromFloor = box[j].Z() - floor_.GetPosition().Z();
+            if(distanceFromFloor < distanceFromFloorMax)
+            {
+                hitIndex = j;
+                distanceFromFloorMax = distanceFromFloor;
+            }
+        }
+
+        if(hitIndex != -1)
+        {
+            Contact contact;
+            contact.A = &floor_;
+            contact.B = &pins_[i].GetRigidBody();
+            contact.isVFContact = true;
+            contact.N = Vector3::UNIT_Z;
+            contact.PA = Vector3::ZERO;
+            contact.PB = Vector3(box[hitIndex]);
+
+            pins_[i].GetRigidBody().SetPosition(pins_[i].GetRigidBody().GetPosition() - distanceFromFloorMax*contact.N);
+            pins_[i].GetRigidBody().Moved() = true;
+
+            contacts_.push_back(contact);
+        }
     }
     
 
@@ -554,7 +579,7 @@ void World::ComputePreimpulseVelocity(std::vector<float>& preRelVel)
 void World::ComputeImpulseMagnitude(std::vector<float>& preRelVel, std::vector<float>& impulseMag)
 {
     // coefficient of restitution
-    float fRestitution = 0.8f;
+    float fRestitution = 0.4f;
     float fTemp = 20.0f * (pins_.size() + 1/*ball count*/);
     if(totalKE_ < fTemp)
     {
@@ -642,6 +667,19 @@ Vector3 World::Torque (float fTime, float fMass, const Vector3& rkPos,
     const Vector3& rkLinVel, const Vector3& rkAngVel)
 {
     return Vector3::ZERO;
+}
+
+float World::CalcKE(const RigidBody& rigidBody)
+{
+    float fInvMass = rigidBody.GetInverseMass();
+    const Matrix3& rkInertia = rigidBody.GetWorldInertia();
+    const Vector3& rkPos = rigidBody.GetPosition();
+    const Vector3& rkLinMom = rigidBody.GetLinearMomentum();
+    const Matrix3& rkROrient = rigidBody.GetROrientation();
+    const Vector3& rkAngVel = rigidBody.GetAngularVelocity();
+
+    return fInvMass*rkLinMom.Dot(rkLinMom) +
+        rkAngVel.Dot(rkInertia*rkAngVel);
 }
 
 }
