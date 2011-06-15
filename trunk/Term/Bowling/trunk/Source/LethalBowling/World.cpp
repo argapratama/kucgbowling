@@ -294,9 +294,10 @@ void World::DrawScene()
 
     glLoadIdentity();
     pins_[0].Draw();
-    glLoadIdentity();
     //glTranslatef(-pins_[0].ModelCenter().X(), -pins_[0].ModelCenter().Y(), -pins_[0].ModelCenter().Z());
     DrawBox(box);
+
+    //DrawSphere();
     glEnable(GL_LIGHTING);
 }
 
