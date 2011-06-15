@@ -342,8 +342,6 @@ void CBasicFunctionsDlg::InitializeSpriteMassProperties()
 	Pin& pin9 = World().GetPin(9);
     InitializePin(pin9);
 
-    UpdateAndDraw();
-
     pin.GetRigidBody().SetPosition(Vector3(0.0, -2.0, 0.0));
     pin1.GetRigidBody().SetPosition(Vector3(0.5, -2.6, 0.0));
     pin2.GetRigidBody().SetPosition(Vector3(-0.5, -2.6, 0.0));
@@ -354,9 +352,6 @@ void CBasicFunctionsDlg::InitializeSpriteMassProperties()
     pin7.GetRigidBody().SetPosition(Vector3(0.5, -3.8, 0.0));
     pin8.GetRigidBody().SetPosition(Vector3(-0.5, -3.8, 0.0));
     pin9.GetRigidBody().SetPosition(Vector3(-1.5, -3.8, 0.0));
-    /*pin.GetRigidBody().SetPosition(Vector3(-2.0, 0.0, 0.0));
-    pin1.GetRigidBody().SetPosition(Vector3(0.0, 2.0, 0.0));*/
-
 	
 }
 
@@ -384,43 +379,49 @@ void CBasicFunctionsDlg::InitializePin(Pin& pin)
     RigidBody& pinBody = pin.GetRigidBody();
     pinBody.SetMass(10.0f);
 
+    pinBody.SetPosition(Vector3(0.0f, 0.0f, 0.0));
+    pinBody.SetInternalForce(Vector3::ZERO);
+    pinBody.SetInternalTorque(Vector3::ZERO);
+    pinBody.SetExternalForce(Vector3::ZERO);
+    pinBody.SetExternalTorque(Vector3::ZERO);
+
     float length = 0.31128 * 2;  // X
     float height = 0.97743 * 2;  // Y
     float width = 0.31128 * 2;   // Z
-
+    
 	pinBody.radius_ = length/2;
-/*
-	pinBody.vertexList_[0].X() = length / 2.0f;
-    pinBody.vertexList_[0].Y() = -height / 2.0f;
-    pinBody.vertexList_[0].Z() = width / 2.0f;
 
-    pinBody.vertexList_[1].X() = length / 2.0f;
-    pinBody.vertexList_[1].Y() = height / 2.0f;
-    pinBody.vertexList_[1].Z() = width / 2.0f;
+    pin.GetBox()[0].X() = length / 2.0f;
+    pin.GetBox()[0].Y() = -height / 2.0f;
+    pin.GetBox()[0].Z() = width / 2.0f;
 
-    pinBody.vertexList_[2].X() = -length / 2.0f;
-    pinBody.vertexList_[2].Y() = height / 2.0f;
-    pinBody.vertexList_[2].Z() = width / 2.0f;
+    pin.GetBox()[1].X() = length / 2.0f;
+    pin.GetBox()[1].Y() = height / 2.0f;
+    pin.GetBox()[1].Z() = width / 2.0f;
 
-    pinBody.vertexList_[3].X() = -length / 2.0f;
-    pinBody.vertexList_[3].Y() = -height / 2.0f;
-    pinBody.vertexList_[3].Z() = width / 2.0f;
+    pin.GetBox()[2].X() = -length / 2.0f;
+    pin.GetBox()[2].Y() = height / 2.0f;
+    pin.GetBox()[2].Z() = width / 2.0f;
 
-    pinBody.vertexList_[4].X() = length / 2.0f;
-    pinBody.vertexList_[4].Y() = -height / 2.0f;
-    pinBody.vertexList_[4].Z() = -width / 2.0f;
+    pin.GetBox()[3].X() = -length / 2.0f;
+    pin.GetBox()[3].Y() = -height / 2.0f;
+    pin.GetBox()[3].Z() = width / 2.0f;
 
-    pinBody.vertexList_[5].X() = length / 2.0f;
-    pinBody.vertexList_[5].Y() = height / 2.0f;
-    pinBody.vertexList_[5].Z() = -width / 2.0f;
+    pin.GetBox()[4].X() = length / 2.0f;
+    pin.GetBox()[4].Y() = -height / 2.0f;
+    pin.GetBox()[4].Z() = -width / 2.0f;
 
-    pinBody.vertexList_[6].X() = -length / 2.0f;
-    pinBody.vertexList_[6].Y() = height / 2.0f;
-    pinBody.vertexList_[6].Z() = -width / 2.0f;
+    pin.GetBox()[5].X() = length / 2.0f;
+    pin.GetBox()[5].Y() = height / 2.0f;
+    pin.GetBox()[5].Z() = -width / 2.0f;
 
-    pinBody.vertexList_[7].X() = -length / 2.0f;
-    pinBody.vertexList_[7].Y() = -height / 2.0f;
-    pinBody.vertexList_[7].Z() = -width / 2.0f;*/
+    pin.GetBox()[6].X() = -length / 2.0f;
+    pin.GetBox()[6].Y() = height / 2.0f;
+    pin.GetBox()[6].Z() = -width / 2.0f;
+
+    pin.GetBox()[7].X() = -length / 2.0f;
+    pin.GetBox()[7].Y() = -height / 2.0f;
+    pin.GetBox()[7].Z() = -width / 2.0f;
 
     pinBody.SetQOrientation(Quaternion::IDENTITY);
 
