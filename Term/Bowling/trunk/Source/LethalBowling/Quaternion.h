@@ -9,84 +9,109 @@ namespace Virgin
 class Quaternion
 {
 public:
-    Quaternion();
-    Quaternion(float e0, float e1, float e2, float e3);
+    // A quaternion is q = w + x*i + y*j + z*k where (w,x,y,z) is not
+    // necessarily a unit length vector in 4D.
 
-    float Size() const;
-    Vector3 GetVector() const;
-    float GetScalar() const;
-    Quaternion operator+=(const Quaternion& q);
-    Quaternion operator-=(const Quaternion& q);
-    Quaternion operator*=(float s);
-    Quaternion operator/=(float s);
-    Quaternion operator~() const;
+    // construction
+    Quaternion ();  // uninitialized
+    Quaternion (float fW, float fX, float fY, float fZ);
+    Quaternion (const Quaternion& rkQ);
 
-    float GetAngle() const;
-    Vector3 GetAxis() const;
-    Quaternion Rotate(const Quaternion& rhs) const;
-    Vector3 VRotate(const Vector3& v) const;
+    // quaternion for the input rotation matrix
+    Quaternion (const Matrix3& rkRot);
 
-    static Quaternion FromEulerAngles(float x, float y, float z);
-    Vector3 ToEulerAngles() const;
-    Matrix3 ToMatrix() const;
+    // quaternion for the rotation of the axis-angle pair
+    Quaternion (const Vector3& rkAxis, float fAngle);
 
-public:
-    float n;
-    Vector3 v;
+    // quaternion for the rotation matrix with specified columns
+    Quaternion (const Vector3 akRotColumn[3]);
+
+    // member access:  0 = w, 1 = x, 2 = y, 3 = z
+    operator const float* () const;
+    operator float* ();
+    float operator[] (int i) const;
+    float& operator[] (int i);
+    float W () const;
+    float& W ();
+    float X () const;
+    float& X ();
+    float Y () const;
+    float& Y ();
+    float Z () const;
+    float& Z ();
+
+    // assignment and comparison
+    Quaternion& operator= (const Quaternion& rkQ);
+    bool operator== (const Quaternion& rkQ) const;
+    bool operator!= (const Quaternion& rkQ) const;
+    bool operator<  (const Quaternion& rkQ) const;
+    bool operator<= (const Quaternion& rkQ) const;
+    bool operator>  (const Quaternion& rkQ) const;
+    bool operator>= (const Quaternion& rkQ) const;
+
+    // arithmetic operations
+    Quaternion operator+ (const Quaternion& rkQ) const;
+    Quaternion operator- (const Quaternion& rkQ) const;
+    Quaternion operator* (const Quaternion& rkQ) const;
+    Quaternion operator* (float fScalar) const;
+    Quaternion operator/ (float fScalar) const;
+    Quaternion operator- () const;
+
+    // arithmetic updates
+    Quaternion& operator+= (const Quaternion& rkQ);
+    Quaternion& operator-= (const Quaternion& rkQ);
+    Quaternion& operator*= (float fScalar);
+    Quaternion& operator/= (float fScalar);
+
+    // conversion between quaternions, matrices, and axis-angle
+    void FromRotationMatrix (const Matrix3& rkRot);
+    void ToRotationMatrix (Matrix3& rkRot) const;
+    void FromRotationMatrix (const Vector3 akRotColumn[3]);
+    void ToRotationMatrix (Vector3 akRotColumn[3]) const;
+    void FromAxisAngle (const Vector3& rkAxis,float fAngle);
+    void ToAxisAngle (Vector3& rkAxis, float& rfAngle) const;
+
+    // functions of a quaternion
+    float Dot (const Quaternion& rkQ) const;  // dot product
+    Quaternion Inverse () const;  // apply to non-zero quaternion
+    Quaternion Conjugate () const;
+    Quaternion Exp () const;  // apply to quaternion with w = 0
+    Quaternion Log () const;  // apply to unit-length quaternion
+
+    // rotation of a vector by a quaternion
+    Vector3 operator* (const Vector3& rkVector) const;
+
+    // spherical linear interpolation
+    static Quaternion Slerp (float fT, const Quaternion& rkP,
+        const Quaternion& rkQ);
+
+    static Quaternion SlerpExtraSpins (float fT, const Quaternion& rkP,
+        const Quaternion& rkQ, int iExtraSpins);
+
+    // intermediate terms for spherical quadratic interpolation
+    static Quaternion GetIntermediate (const Quaternion& rkQ0,
+        const Quaternion& rkQ1,  const Quaternion& rkQ2);
+
+    // spherical quadratic interpolation
+    static Quaternion Squad (float fT, const Quaternion& rkQ0,
+        const Quaternion& rkA0, const Quaternion& rkA1,
+        const Quaternion& rkQ1);
+
+    // special values
+    static const Quaternion IDENTITY;  // the identity rotation
+    static const Quaternion ZERO;
+
+protected:
+    // support for comparisons
+    int CompareArrays (const Quaternion& rkQ) const;
+
+    // support for FromRotationMatrix
+    static int ms_iNext[3];
+
+    float m_afTuple[4];
 };
 
-//
-// Quaterion 다룰 때 사용할 함수들
-//
-inline Quaternion operator+(const Quaternion& q1, const Quaternion& q2)
-{
-    return Quaternion(q1.n + q2.n, q1.v.X + q2.v.X, q1.v.Y + q2.v.Y, q1.v.Z + q2.v.Z);
-}
-
-inline Quaternion operator-(const Quaternion& q1, const Quaternion& q2)
-{
-    return Quaternion(q1.n - q2.n, q1.v.X - q2.v.X, q1.v.Y - q2.v.Y, q1.v.Z - q2.v.Z);
-}
-
-inline Quaternion operator*(const Quaternion& q1, const Quaternion& q2)
-{
-    return Quaternion(q1.n*q2.n - q1.v.X*q2.v.X - q1.v.Y*q2.v.Y - q1.v.Z*q2.v.Z,
-                      q1.n*q2.v.X + q1.v.X*q2.n + q1.v.Y*q2.v.Z - q1.v.Z*q2.v.Y,
-                      q1.n*q2.v.Y + q1.v.Y*q2.n + q1.v.Z*q2.v.X - q1.v.X*q2.v.Z,
-                      q1.n*q2.v.Z + q1.v.Z*q2.n + q1.v.X*q2.v.Y - q1.v.Y*q2.v.X);
-}
-
-inline Quaternion operator*(const Quaternion& q, float s)
-{
-    return Quaternion(q.n*s, q.v.X*s, q.v.Y*s, q.v.Z*s);
-}
-
-inline Quaternion operator*(float s, const Quaternion& q)
-{
-    return Quaternion(q.n*s, q.v.X*s, q.v.Y*s, q.v.Z*s);
-}
-
-inline Quaternion operator*(const Quaternion& q, const Vector3& v)
-{
-    return Quaternion( -(q.v.X*v.X + q.v.Y*v.Y + q.v.Z*v.Z),
-                         q.n*v.X + q.v.Y*v.Z - q.v.Z*v.Y,
-                         q.n*v.Y + q.v.Z*v.X - q.v.X*v.Z,
-                         q.n*v.Z + q.v.X*v.Y - q.v.Y*v.X);
-}
-
-inline Quaternion operator*(const Vector3& v, const Quaternion& q)
-{
-    return Quaternion( -(q.v.X*v.X + q.v.Y*v.Y + q.v.Z*v.Z),
-                         q.n*v.X + q.v.Z*v.Y - q.v.Y*v.Z,
-                         q.n*v.Y + q.v.X*v.Z - q.v.Z*v.X,
-                         q.n*v.Z + q.v.Y*v.X - q.v.X*v.Y);
-}
-
-inline Quaternion operator/(const Quaternion& q, float s)
-{
-    return Quaternion(q.n/s, q.v.X/s, q.v.Y/s, q.v.Z/s);
-}
-
+Quaternion operator* (float fScalar, const Quaternion& rkQ);
 
 
 }

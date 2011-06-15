@@ -143,7 +143,7 @@ void OpenGlPanel::SetupPixelFormat(HDC hDC)
     PixelFormatController controller;
     controller.SetPixelFormat(hDC, PixelFormat(
         1,
-        PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER, 
+        PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER | PFD_GENERIC_ACCELERATED, 
         PFD_TYPE_RGBA,
         bits,
         0, 0, 0, 0, 0, 0,
@@ -151,7 +151,7 @@ void OpenGlPanel::SetupPixelFormat(HDC hDC)
         0,
         0,
         0, 0, 0, 0,
-        16,
+        32,
         1,
         0,
         PFD_MAIN_PLANE,
@@ -176,7 +176,7 @@ void OpenGlPanel::OnMouseMove(UINT nFlags, CPoint point)
         CPoint pointDelta = point - lastPoint;
         float moveX = (float)pointDelta.x / 100.0;
         float moveY = (float)pointDelta.y / 100.0;
-        GetManipulatingSprite().TranslateMore(moveX, -moveY, 0.0);
+        GetManipulatingSprite().TranslateMore(moveX, 0.0F, -moveY);
     }
     else if(isRButtonDown_)
     {
@@ -184,7 +184,7 @@ void OpenGlPanel::OnMouseMove(UINT nFlags, CPoint point)
         float moveX = (float)pointDelta.x / 5.0;
         float moveY = (float)pointDelta.y / 5.0;
         GetManipulatingSprite().RotateXMore(moveY);
-        GetManipulatingSprite().RotateYMore(moveX);
+        GetManipulatingSprite().RotateZMore(moveX);
     }
     else if(isMButtonDown_)
     {

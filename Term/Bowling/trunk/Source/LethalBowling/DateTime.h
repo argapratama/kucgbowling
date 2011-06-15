@@ -15,6 +15,7 @@ public:
     static DateTime SinceSystemStarted();
 
     TimeSpan operator-(const DateTime& rhs) const;
+    DateTime operator+=(const uint32 timeMs);
 
 private:
     uint32 timeMs_;

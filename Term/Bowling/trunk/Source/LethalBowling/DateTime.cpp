@@ -20,6 +20,10 @@ TimeSpan DateTime::operator-(const DateTime& rhs) const
     return TimeSpan(this->timeMs_ - rhs.timeMs_);
 }
 
-
+DateTime DateTime::operator+=(const uint32 timeMs)
+{
+    timeMs_ += timeMs;
+    return *this;
+}
 
 }

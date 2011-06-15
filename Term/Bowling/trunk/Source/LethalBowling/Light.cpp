@@ -59,9 +59,9 @@ void Light::SetSpecular(float r, float g, float b)
 
 void Light::MoveTo(float x, float y, float z)
 {
-    location_.X = x;
-    location_.Y = y;
-    location_.Z = z;
+    location_.X() = x;
+    location_.Y() = y;
+    location_.Z() = z;
 
     float values[] = { x, y, z, 0.0/* 1: Point Light 0: Directional Light */ };
     glLightfv(GL_LIGHT1, GL_POSITION, values);

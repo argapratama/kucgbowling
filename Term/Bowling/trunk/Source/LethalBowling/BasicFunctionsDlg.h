@@ -4,6 +4,8 @@
 #include "afxcmn.h"
 #include "World.h"
 #include "Sprite.h"
+#include "DateTime.h"
+
 
 class CBasicFunctionsDlg : public CDialogEx
 {
@@ -29,7 +31,8 @@ private:
     Virgin::Sprite& GetSelectedSprite();
     void InitializeWorld();
     void InitializeSpriteMassProperties();
-    void InitializePin(Virgin::Sprite& pin);
+    void InitializeBall(Virgin::Ball& ball);
+    void InitializePin(Virgin::Pin& pin);
     void InitializeControls();
 
     static Virgin::World& World();
@@ -60,6 +63,9 @@ private:
 
     bool biggerButtonDown_;
     bool smallerButtonDown_;
+
+    Virgin::DateTime firstTime_;
+    Virgin::DateTime lastTime_;
 
 public:
     virtual BOOL DestroyWindow();
@@ -134,4 +140,5 @@ public:
 	afx_msg void OnBnClickedButtonCameraLeft();
 	CButton cameraRotateLeft_;
 	afx_msg void OnBnClickedButtonCameraRight();
+    afx_msg void OnBnClickedTest5Button();
 };
