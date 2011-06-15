@@ -196,9 +196,6 @@
     <ClInclude Include="Contact.h">
       <Filter>Source\Application Class\Physics</Filter>
     </ClInclude>
-    <ClInclude Include="Box3.h">
-      <Filter>Source\Application Class\Physics\Geometric</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicFunctionsDlg.cpp">
@@ -329,9 +326,6 @@
     </ClCompile>
     <ClCompile Include="Contact.cpp">
       <Filter>Source\Application Class\Physics</Filter>
-    </ClCompile>
-    <ClCompile Include="Box3.cpp">
-      <Filter>Source\Application Class\Physics\Geometric</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

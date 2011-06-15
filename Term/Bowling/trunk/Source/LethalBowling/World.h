@@ -71,6 +71,10 @@ public:
     // ½Ã°¢È­
     void DoVisual();
 
+    static void DrawBox(Box& box);
+    static void DrawSphere(Sphere& sphere);
+    static void DrawVertex(Vector3& vertex);
+
     static Vector3 Force (float fTime, float fMass, const Vector3& rkPos,
         const Quaternion& rkQOrient, const Vector3& rkLinMom,
         const Vector3& rkAngMom, const Matrix3& rkOrient,

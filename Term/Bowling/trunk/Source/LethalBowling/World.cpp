@@ -3,6 +3,8 @@
 #include "Exception.h"
 #include "TMath.h"
 #include "Physics.h"
+#include "IntrBoxSph.h"
+#include "IntrBoxBox.h"
 #include <gl/GL.h>
 #include <gl/GLU.h>
 #include <glut.h>
@@ -271,6 +273,31 @@ void World::DrawScene()
     DrawString3(GLUT_BITMAP_8_BY_13, "X Axis", 1, 0, 0);
     DrawString3(GLUT_BITMAP_8_BY_13, "Y Axis", 0, 1, 0);
     DrawString3(GLUT_BITMAP_8_BY_13, "Z Axis", 0, 0, 1);
+
+    //
+    // 디버그용, 충돌 상자
+    //
+    glDisable(GL_LIGHTING);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    Box box;
+    box.Center() = pins_[0].GetRigidBody().GetPosition();
+    box.Extent(0) = 1;
+    box.Extent(1) = 2;
+    box.Extent(2) = 3;
+    box.Axis(0) = Vector3(1.0, 0.0, 0.0);
+    box.Axis(1) = Vector3(0.0, 1.0, 0.0);
+    box.Axis(2) = Vector3(0.0, 0.0, 1.0);
+
+    box.Extent(0) = 0.31128f;
+    box.Extent(1) = 0.31128f;
+    box.Extent(2) = 0.97743f;
+
+    glLoadIdentity();
+    pins_[0].Draw();
+    glLoadIdentity();
+    //glTranslatef(-pins_[0].ModelCenter().X(), -pins_[0].ModelCenter().Y(), -pins_[0].ModelCenter().Z());
+    DrawBox(box);
+    glEnable(GL_LIGHTING);
 }
 
 Ball& World::GetBall()
@@ -400,7 +427,6 @@ void World::DoCollisionDetection()
         contacts_.push_back(contact);
     }
     
-
     // 핀 바닥 충돌 검사
     // 핀을 Box로 보고... Box의 각 점(8개)들이 바닥과 위인지 검사
     for(uint i = 0; i < pins_.size(); ++i)
@@ -439,73 +465,44 @@ void World::DoCollisionDetection()
         }
     }
     
-
-    //for(uint i = 0; i < pins_.size(); i++)
-    //{
-    //    
-    //    m_apkTetra[i]->Moved() = false;
-    //    if ( FarFromBoundary(i) )
-    //        continue;
-
-    //    // These checks are done in pairs under the assumption that the tetra 
-    //    // have smaller diameters than the separation of opposite boundaries, 
-    //    // hence only one of each opposite pair of boundaries may be touched 
-    //    // at any one time.
-    //    Vector3f akVertex[4];
-    //    float afDistance[4];
-    //    m_apkTetra[i]->GetVertices(akVertex);
-    //    float fRadius = m_apkTetra[i]->GetRadius();
-    //    Vector3f kPos = m_apkTetra[i]->GetPosition();
-
-    //    // rear [0] and front[5] boundaries
-    //    if ( kPos.X() - fRadius < m_akBLocation[0].X() )
-    //    {
-    //        for (j = 0; j < 4; j++)
-    //            afDistance[j] = akVertex[j].X() - m_akBLocation[0].X();
-    //        TetraBoundaryIntersection(i,0,afDistance,kContact);
-    //    }
-    //    else if ( kPos.X() + fRadius > m_akBLocation[5].X() )
-    //    {
-    //        for (j = 0; j < 4; j++)
-    //            afDistance[j] = m_akBLocation[5].X() - akVertex[j].X();
-    //        TetraBoundaryIntersection(i,5,afDistance,kContact);
-    //    }
-
-    //    // left [1] and right [3] boundaries
-    //    if ( kPos.Y() - fRadius < m_akBLocation[1].Y() )
-    //    {
-    //        for (j = 0; j < 4; j++)
-    //            afDistance[j] = akVertex[j].Y() - m_akBLocation[1].Y();
-    //        TetraBoundaryIntersection(i,1,afDistance,kContact);
-    //    }
-    //    else if ( kPos.Y() + fRadius > m_akBLocation[3].Y() )
-    //    {
-    //        for (j = 0; j < 4; j++)
-    //            afDistance[j] = m_akBLocation[3].Y() - akVertex[j].Y();
-    //        TetraBoundaryIntersection(i,3,afDistance,kContact);
-    //    }
-
-    //    // bottom [2] and top [4] boundaries
-    //    if ( kPos.Z() - fRadius < m_akBLocation[2].Z() )
-    //    {
-    //        for (j = 0; j < 4; j++)
-    //            afDistance[j] = akVertex[j].Z() - m_akBLocation[2].Z();
-    //        TetraBoundaryIntersection(i,2,afDistance,kContact);
-    //    }
-    //    else if ( kPos.Z()+fRadius > m_akBLocation[4].Z() )
-    //    {
-    //        for (j = 0; j < 4; j++)
-    //            afDistance[j] = m_akBLocation[4].Z() - akVertex[j].Z();
-    //        TetraBoundaryIntersection(i,4,afDistance,kContact);
-    //    }
-    //}    
-
+    //
     // 공과 핀 충돌 검사
+    //
+    for(uint i = 0; i < pins_.size(); ++i)
+    {
+        Box box;
+        box.Center() = pins_[i].GetRigidBody().GetPosition();
+        box.Extent(0) = 1;
+        box.Extent(1) = 2;
+        box.Extent(2) = 3;
+        box.Axis(0) = Vector3(1.0, 0.0, 0.0);
+        box.Axis(1) = Vector3(0.0, 1.0, 0.0);
+        box.Axis(2) = Vector3(0.0, 0.0, 1.0);
 
+        Sphere sphere;
 
+        Vector3 boxVelocity;
+        Vector3 sphereVelocity;
+        float outTFirst;
+        float inTMax = 10.0f;
+        int outQuantity;
+        Vector3 outP;
+
+        if(FindIntersection(box, boxVelocity, sphere, sphereVelocity, outTFirst, inTMax, outQuantity, outP))
+        {
+            int i = 12345;
+        }
+    }
+
+    //
     // 핀과 핀 충돌 검사
-
-
+    //
+    for(uint i = 0; i < pins_.size() - 1; ++i)
+    {
+        for(uint j = i + 1; j < pins_.size(); ++j)
+        {
+        }
+    }
 
     //// test for tetrahedron-tetrahedron collisions
     //m_iLCPCount = 0;
@@ -680,6 +677,67 @@ float World::CalcKE(const RigidBody& rigidBody)
 
     return fInvMass*rkLinMom.Dot(rkLinMom) +
         rkAngVel.Dot(rkInertia*rkAngVel);
+}
+
+void World::DrawBox(Box& box)
+{
+    Vector3 vertices[8];
+    box.ComputeVertices(vertices);
+
+    glBegin(GL_LINE_LOOP);
+        DrawVertex(vertices[0]);
+        DrawVertex(vertices[1]);
+        DrawVertex(vertices[2]);
+        DrawVertex(vertices[3]);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        DrawVertex(vertices[0]);
+        DrawVertex(vertices[4]);
+        DrawVertex(vertices[5]);
+        DrawVertex(vertices[1]);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        DrawVertex(vertices[7]);
+        DrawVertex(vertices[6]);
+        DrawVertex(vertices[5]);
+        DrawVertex(vertices[4]);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        DrawVertex(vertices[3]);
+        DrawVertex(vertices[2]);
+        DrawVertex(vertices[6]);
+        DrawVertex(vertices[7]);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        DrawVertex(vertices[1]);
+        DrawVertex(vertices[5]);
+        DrawVertex(vertices[6]);
+        DrawVertex(vertices[2]);
+    glEnd();
+
+    glBegin(GL_LINE_LOOP);
+        DrawVertex(vertices[0]);
+        DrawVertex(vertices[3]);
+        DrawVertex(vertices[7]);
+        DrawVertex(vertices[4]);
+    glEnd();
+
+}
+
+void World::DrawVertex(Vector3& vertex)
+{
+    glVertex3f(vertex.X(), vertex.Y(), vertex.Z());
+}
+
+void World::DrawSphere(Sphere& sphere)
+{
+    glLoadIdentity();
+
+    glutWireSphere(sphere.Radius(), 20, 20);
 }
 
 }

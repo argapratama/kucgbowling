@@ -386,8 +386,8 @@ void CBasicFunctionsDlg::InitializePin(Pin& pin)
     pinBody.SetExternalTorque(Vector3::ZERO);
 
     float length = 0.31128 * 2;  // X
-    float height = 0.97743 * 2;  // Y
-    float width = 0.31128 * 2;   // Z
+    float height = 0.31128 * 2;  // Y
+    float width = 0.97743 * 2;   // Z
     
 	pinBody.radius_ = length/2;
 
