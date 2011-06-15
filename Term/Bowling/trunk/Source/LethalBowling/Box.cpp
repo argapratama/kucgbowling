@@ -25,14 +25,14 @@ const Vector3& Box::Center () const
 
 Vector3& Box::Axis (int i)
 {
-    assert( 0 <= i && i < 3 );
+    //assert( 0 <= i && i < 3 );
     return m_akAxis[i];
 }
 //----------------------------------------------------------------------------
 
 const Vector3& Box::Axis (int i) const
 {
-    assert( 0 <= i && i < 3 );
+    //assert( 0 <= i && i < 3 );
     return m_akAxis[i];
 }
 //----------------------------------------------------------------------------
@@ -51,14 +51,14 @@ const Vector3* Box::Axes () const
 
 float& Box::Extent (int i)
 {
-    assert( 0 <= i && i < 3 );
+    //assert( 0 <= i && i < 3 );
     return m_afExtent[i];
 }
 //----------------------------------------------------------------------------
 
 const float& Box::Extent (int i) const
 {
-    assert( 0 <= i && i < 3 );
+    //assert( 0 <= i && i < 3 );
     return m_afExtent[i];
 }
 //----------------------------------------------------------------------------
