@@ -9,7 +9,7 @@ namespace Virgin
 class Ball : public Sprite
 {
 public:
-    Sphere& CoveringSphere() { return sphere_; }
+    Sphere& CoveringSphere();
 
 private:
     Sphere sphere_;
