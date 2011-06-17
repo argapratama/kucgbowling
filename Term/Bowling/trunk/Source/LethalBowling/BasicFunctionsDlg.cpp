@@ -802,6 +802,8 @@ void CBasicFunctionsDlg::OnBnClickedResetSpriteButton()
 {
     World().GetBall().Reset();
     World().GetBall2().Reset();
+
+    World().GetBall().Position().Y() = 10.0f;
 }
 
 
@@ -988,7 +990,7 @@ void CBasicFunctionsDlg::OnBnClickedShowCollisionInfoCheck()
 
 void CBasicFunctionsDlg::OnBnClickedTest2Button()
 {
-    World().GetBall().GetRigidBody().AppendInternalForce(Vector3(0.0f, -10000.0f, 0.0f));
+    World().GetBall().GetRigidBody().AppendInternalForce(Vector3(0.0f, -1000.0f, 0.0f));
     //World().GetBall().SetVelocity(Vector3(0.0f, 1.0f, 0.0f), 0.5f);
     //World().GetBall().GetRigidBody().ApplyForce(Vector3(-100.0, 0.0, 0.0));
 }

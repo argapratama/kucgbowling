@@ -314,7 +314,7 @@ void World::DoCollisionDetection()
         contact.isVFContact = true;
         contact.N = Vector3::UNIT_Z;
         contact.PA = Vector3::ZERO;
-        contact.PB = Vector3(ball_.CoveringSphere().Center() - Vector3(0.0f, 0.0f, -ball_.CoveringSphere().Radius()));
+        contact.PB = Vector3(ball_.CoveringSphere().Center() - Vector3(0.0f, 0.0f, ball_.CoveringSphere().Radius()));
 
         ball_.GetRigidBody().SetPosition(ball_.GetRigidBody().GetPosition() - distanceFromFloor*contact.N);
         ball_.GetRigidBody().Moved() = true;
@@ -366,26 +366,27 @@ void World::DoCollisionDetection()
     for(uint i = 0; i < pins_.size(); ++i)
     {
         Box box;
-        box.Center() = pins_[i].GetRigidBody().GetPosition();
-        box.Extent(0) = 1;
-        box.Extent(1) = 2;
-        box.Extent(2) = 3;
-        box.Axis(0) = Vector3(1.0, 0.0, 0.0);
-        box.Axis(1) = Vector3(0.0, 1.0, 0.0);
-        box.Axis(2) = Vector3(0.0, 0.0, 1.0);
+        pins_[i].GetBox(box);
 
-        Sphere sphere;
+        Sphere& sphere = ball_.CoveringSphere();
 
-        Vector3 boxVelocity;
-        Vector3 sphereVelocity;
+        Vector3 boxVelocity = pins_[i].GetRigidBody().GetLinearVelocity();
+        Vector3 sphereVelocity = ball_.GetRigidBody().GetLinearVelocity();
         float outTFirst;
-        float inTMax = 10.0f;
+        float inTMax = 0.1f;
         int outQuantity;
         Vector3 outP;
 
         if(FindIntersection(box, boxVelocity, sphere, sphereVelocity, outTFirst, inTMax, outQuantity, outP))
         {
-            int i = 12345;
+            Contact contact;
+            contact.isVFContact = true;
+            contact.A = &pins_[i].GetRigidBody();
+            contact.B = &ball_.GetRigidBody();
+            contact.PA = outP;
+            contact.PB = outP;
+            contact.N = Vector3(0.0f, 1.0f, 0.0f);  // * Todo: 위에서 구한 접점과 Box의 8면 사이 거리가 가장 짦은 면의 법선 벡터를 구함
+            contacts_.push_back(contact);
         }
     }
 
@@ -721,37 +722,24 @@ void World::DrawSprites()
 
 void World::DrawCollisionInfo()
 {
-    if(doShowCollisionInfo_)
+    if(!doShowCollisionInfo_)
     {
-        glPushMatrix();
-        glTranslatef(ball_.Position().X(), ball_.Position().Y(), ball_.Position().Z());
-        glutWireSphere(/*2.29934*//*1.9909358*/ 1.1496694, 10, 10);
-        glPopMatrix();
+        return;
     }
+
+    glLoadIdentity();
 
     // 디버그용, 충돌 상자
     glDisable(GL_LIGHTING);
-    glColor3f(1.0f, 0.0f, 0.0f);
+    glColor3f(1.0f, 1.0f, 0.0f);
+
     Box box;
-    box.Center() = pins_[0].GetRigidBody().GetPosition();
-    box.Extent(0) = 1;
-    box.Extent(1) = 2;
-    box.Extent(2) = 3;
-    box.Axis(0) = Vector3(1.0, 0.0, 0.0);
-    box.Axis(1) = Vector3(0.0, 1.0, 0.0);
-    box.Axis(2) = Vector3(0.0, 0.0, 1.0);
-
-    box.Extent(0) = 0.31128f;
-    box.Extent(1) = 0.31128f;
-    box.Extent(2) = 0.97743f;
-
-    glLoadIdentity();
+    pins_[0].GetBox(box);
     pins_[0].Draw();
     //glTranslatef(-pins_[0].ModelCenter().X(), -pins_[0].ModelCenter().Y(), -pins_[0].ModelCenter().Z());
     DrawBox(box);
 
     //DrawSphere();
-    glEnable(GL_LIGHTING);
 
     //
     // 각 스프라이트 별 정보
@@ -771,7 +759,32 @@ void World::DrawCollisionInfo()
         glutWireSphere(ball_.CoveringSphere().Radius(), 10, 10);
     glPopMatrix();
 
+    //
+    // 충돌 정보
+    //
+    for(uint i = 0; i < contacts_.size(); ++i)
+    {
+        const Contact& contact = contacts_[i];
+        
+        glColor3f(1.0f, 0.0f, 0.0f);
+        glLoadIdentity();
+        glTranslatef(contact.PB.X(), contact.PB.Y(), contact.PB.Z());
+        glutSolidSphere(0.1f, 10, 10);
+
+        glLoadIdentity();
+        glBegin(GL_LINES);
+            Vector3 begin = contact.PB;
+            glVertex3f(contact.PB.X(), contact.PB.Y(), contact.PB.Z());
+            
+            Vector3 end = begin + contact.N;
+            glVertex3f(end.X(), end.Y(), end.Z());
+        glEnd();
+    }
+
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+
+    
 }
 
 }
