@@ -242,15 +242,7 @@ void World::HideCollisionInfo()
 
 void World::Update(TimeSpan time, TimeSpan timeDelta)
 {
-    DoPhysical();
-    ball_.Update(time, timeDelta);
-
-    for(uint i = 0; i < pins_.size(); ++i)
-    {
-        pins_[i].Update(time, timeDelta);
-    }
-    
-
+    DoPhysical(time, timeDelta);
 
     // 
     // 
@@ -276,11 +268,18 @@ vector<Collision>& World::Collisions()
 }
 
 
-void World::DoPhysical()
+void World::DoPhysical(TimeSpan time, TimeSpan timeDelta)
 {
     DoCollisionDetection();
     DoCollisionResponse();
     
+    // DoMotion
+    ball_.Update(time, timeDelta);
+    for(uint i = 0; i < pins_.size(); ++i)
+    {
+        pins_[i].Update(time, timeDelta);
+    }
+
     totalKE_ = 0.0f;
 
     totalKE_ += CalcKE(ball_.GetRigidBody());
@@ -383,7 +382,7 @@ void World::DoCollisionDetection()
             contact.isVFContact = true;
             contact.A = &pins_[i].GetRigidBody();
             contact.B = &ball_.GetRigidBody();
-            contact.PA = outP;
+            contact.PA = outP + Vector3(0.2f, 0.0f, 0.0f);
             contact.PB = outP;
             contact.N = Vector3(0.0f, 1.0f, 0.0f);  // * Todo: 위에서 구한 접점과 Box의 8면 사이 거리가 가장 짦은 면의 법선 벡터를 구함
             contacts_.push_back(contact);
@@ -733,13 +732,13 @@ void World::DrawCollisionInfo()
     glDisable(GL_LIGHTING);
     glColor3f(1.0f, 1.0f, 0.0f);
 
-    Box box;
-    pins_[0].GetBox(box);
-    pins_[0].Draw();
-    //glTranslatef(-pins_[0].ModelCenter().X(), -pins_[0].ModelCenter().Y(), -pins_[0].ModelCenter().Z());
-    DrawBox(box);
-
-    //DrawSphere();
+    for(uint i = 0; i < pins_.size(); ++i)
+    {
+        Box box;
+        pins_[i].GetBox(box);
+        pins_[i].Draw();
+        DrawBox(box);
+    }
 
     //
     // 각 스프라이트 별 정보

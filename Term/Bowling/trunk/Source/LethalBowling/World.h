@@ -40,7 +40,7 @@ public:
     void DrawString3(void *font, const char *str, float x_position, float y_position, float z_position);
     
     // 물리 시뮬레이션
-    void DoPhysical();
+    void DoPhysical(TimeSpan time, TimeSpan timeDelta);
 
     // 충돌 감지
     void DoCollisionDetection();
