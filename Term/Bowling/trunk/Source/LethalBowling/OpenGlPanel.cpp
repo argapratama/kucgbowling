@@ -89,7 +89,7 @@ void OpenGlPanel::InitializeOpenGl()
 	glDisable(GL_BLEND);
 	glEnable(GL_ALPHA_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-	World::Instance().Init();
+	World::Instance().InitializeGL();
 }
 
 void OpenGlPanel::DrawScene()
