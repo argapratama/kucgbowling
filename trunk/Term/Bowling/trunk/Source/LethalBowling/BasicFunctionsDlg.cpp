@@ -1026,4 +1026,8 @@ void CBasicFunctionsDlg::OnBnClickedButtonCameraRight()
 void CBasicFunctionsDlg::OnBnClickedTest5Button()
 {
     World().GetPin(0).Position().Z() = 10.0f;
+    Vector3 tmp(1.0, 0.0, 0.0);
+    Quaternion ori;
+    ori.FromAxisAngle(tmp, 1.0f);
+    World().GetPin(0).GetRigidBody().SetQOrientation(ori);
 }

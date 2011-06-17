@@ -278,15 +278,24 @@ void Sprite::Draw()
     glMaterialfv(GL_FRONT, GL_SPECULAR, specular);
     glMaterialfv(GL_FRONT, GL_EMISSION, emission);
 
+    // Model Center 만큼을 보정해서 원점으로 이동
+    glTranslatef(-modelCenter_.X(), -modelCenter_.Y(), -modelCenter_.Z());
 //    glScalef(scales_.X(), scales_.Y(), scales_.Z());
     glTranslatef(rigidBody_.Position().X(), rigidBody_.Position().Y(), rigidBody_.Position().Z());
 
-    glRotatef(rigidBody_.GetQOrientation().Z(), 0.0, 0.0, 1.0);
-    glRotatef(rigidBody_.GetQOrientation().Y(), 0.0, 1.0, 0.0);
-    glRotatef(rigidBody_.GetQOrientation().X(), 1.0, 0.0, 0.0);
+    //float yaw;
+    //float pitch;
+    //float roll;
+    //rigidBody_.GetROrientation().ToEulerAnglesXYZ(yaw, pitch, roll);
+    //glRotatef(roll, 0.0, 0.0, 1.0);
+    //glRotatef(pitch, 0.0, 1.0, 0.0);
+    //glRotatef(yaw, 1.0, 0.0, 0.0);
 
-    // Model Center 만큼을 보정해서 원점으로 이동
-    glTranslatef(-modelCenter_.X(), -modelCenter_.Y(), -modelCenter_.Z());
+    Vector3 axis;
+    float angle;
+    rigidBody_.GetQOrientation().ToAxisAngle(axis, angle);
+    glRotatef(Math::RadiansToDegrees(angle), axis.X(), axis.Y(), axis.Z());
+    //glRotatef(10.0, 0.0, 1.0, 0.0);
 
     if(meshMode_ == MeshMode_Point)
     {
