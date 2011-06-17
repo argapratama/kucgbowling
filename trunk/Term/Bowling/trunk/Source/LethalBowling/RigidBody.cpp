@@ -11,7 +11,6 @@ namespace Virgin
 {
 
 RigidBody::RigidBody ()
-    : radius_(0.0f)
 {
     // default body is immovable
     m_fMass = Math::MAX_REAL;

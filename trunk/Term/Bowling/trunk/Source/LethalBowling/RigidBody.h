@@ -102,9 +102,6 @@ protected:
     // before call to ODE solver, ODE solver uses for motion of bodies,
     // then reset to zero for next pass.
     Vector3 m_kInternalForce, m_kInternalTorque;
-
-public:
-    float radius_;
 };
 
 }

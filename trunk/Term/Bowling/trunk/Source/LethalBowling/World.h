@@ -24,8 +24,6 @@ private:
 public:
     static World& Instance();
 
-    void DrawScene();
-
     Ball& GetBall();
     Ball& GetBall2();
     Pin& GetPin(int number);
@@ -34,18 +32,13 @@ public:
     Camera& GetCamera();
     Light& GetLight();
 
-    void ShowCollisionInfo();
-    void HideCollisionInfo();
-	void Init();
-	void DrawObject();
-	void DrawFloor();
-
 	void Update(TimeSpan time, TimeSpan timeDelta);
 
     vector<Sprite*>& Sprites();  
     vector<Collision>& Collisions();
 
     void DrawString3(void *font, const char *str, float x_position, float y_position, float z_position);
+    
     // 물리 시뮬레이션
     void DoPhysical();
 
@@ -68,8 +61,22 @@ public:
     void DoMotion();
     static float CalcKE(const RigidBody& rigidBody);
 
+    void ShowCollisionInfo();
+    void HideCollisionInfo();
+
+    //
     // 시각화
+    //
     void DoVisual();
+    void DrawScene();
+	void InitializeGL();
+	void DrawObject();
+	void DrawFloor();
+    void DrawShadows();
+    void DrawReflections();
+    void DrawSprites();
+    void DrawOrigin();
+    void DrawCollisionInfo();
 
     static void DrawBox(Box& box);
     static void DrawSphere(Sphere& sphere);

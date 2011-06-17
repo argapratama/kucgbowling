@@ -367,7 +367,7 @@ void CBasicFunctionsDlg::InitializeBall(Virgin::Ball& ball)
     float height = 1.1496694 * 2;  // Y
     float width = 1.1496694 * 2;   // Z
 
-    ballBody.radius_ = length/2;
+    ball.CoveringSphere().Radius() = length/2;
     
     ballBody.SetQOrientation(Quaternion::IDENTITY);
     ballBody.Force = World::Force;
@@ -389,7 +389,7 @@ void CBasicFunctionsDlg::InitializePin(Pin& pin)
     float height = 0.31128 * 2;  // Y
     float width = 0.97743 * 2;   // Z
     
-	pinBody.radius_ = length/2;
+	pin.CoveringSphere().Radius() = length/2;
 
     pin.GetBox()[0].X() = length / 2.0f;
     pin.GetBox()[0].Y() = -height / 2.0f;

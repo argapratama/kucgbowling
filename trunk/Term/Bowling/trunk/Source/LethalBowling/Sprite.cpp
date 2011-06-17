@@ -595,6 +595,7 @@ void Sprite::CopyTo(Sprite& rhs) const
 	rhs.triNormalVertices_ = triNormalVertices_;
 
     rhs.modelCenter_ = modelCenter_;   
+    rhs.rigidBody_ = rigidBody_;
     rhs.radius_ = radius_;
 
     for(int i = 0; i < 3; ++i)

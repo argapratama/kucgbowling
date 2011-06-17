@@ -83,7 +83,7 @@ void World::LoadGLTextures() {
 	free(image1);
 };
 
-void World::Init()
+void World::InitializeGL()
 {
 	memset(shadow_matrix, 16, 0);
 	LoadGLTextures();
@@ -151,7 +151,7 @@ void World::DrawString3(void *font, const char *str, float x_position, float y_p
      }*/
      glRasterPos3f(x_position, y_position, z_position);
      for(unsigned int i = 0; i < strlen(str); i++)
-      glutBitmapCharacter(font, str[i]);
+        glutBitmapCharacter(font, str[i]);
 
      /*if( z_position == 0.0f )
      {
@@ -174,55 +174,10 @@ void World::DrawScene()
     
     glLoadIdentity();
 
-	float shadow_plane[] = {0.0f, 0.0f, 100.0f, 1.0f};
-	Vector3 vec = light_.GetLocation();
-	float position[] = {vec.X(), vec.Y(), vec.Z(), 1.0f};
-	BuildShadowMatrix(shadow_matrix, position, shadow_plane);
-	
-    glTranslatef(1.0f, 0.0f, -3.6f);
-	glColorMask(0,0,0,0);
-	glEnable(GL_STENCIL_TEST);
-	glStencilFunc(GL_ALWAYS, 1, 1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	glDisable(GL_DEPTH_TEST);
-	DrawFloor();
-	glEnable(GL_DEPTH_TEST);
-	glColorMask(1,1,1,1);
-	glStencilFunc(GL_EQUAL, 1, 1);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
-	glPushMatrix();
-    glTranslatef(0.0f, 0.0f, -1.5f);
-	glScalef(1.0f, 1.0f, -1.0f);
-	
-    ball_.Draw();
-	for(uint i = 0; i < pins_.size(); ++i)
-	{
-		pins_[i].Draw();
-	}
-	
-    glPopMatrix();
+    DrawReflections();
+    DrawShadows();
 
-   glStencilFunc(GL_EQUAL, 1, 0xFFFFFFFF);
-   glStencilOp(GL_KEEP, GL_KEEP, GL_DECR);
-   glDisable(GL_LIGHTING);
-   glDisable(GL_DEPTH_TEST);
-   glEnable(GL_BLEND);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-   glColor4f(0.1f, 0.1f, 0.1f, 0.8f);
-   glPushMatrix();
-   glTranslatef(0.0f,-0.8f, 0.5f);
-   glMultMatrixf(shadow_matrix);
-   
-   ball_.Draw();
-   for(uint i = 0; i < pins_.size(); ++i)
-	{
-		pins_[i].Draw();
-	}
-   
-   glPopMatrix();
-   glDisable(GL_BLEND);
-   glEnable(GL_DEPTH_TEST);
-
+    // 바닥 그리기
 	glDisable(GL_STENCIL_TEST);
 	glEnable(GL_BLEND);
 	glDisable(GL_LIGHTING);
@@ -232,73 +187,12 @@ void World::DrawScene()
 	glEnable(GL_LIGHTING);
 	glDisable(GL_BLEND);
 
-    glTranslatef(0.0f, 0.0f, 1.5f);
-    ball_.Draw();
-	for(uint i = 0; i < pins_.size(); ++i)
-    {
-        pins_[i].Draw();
-    }
-    
-    if(doShowCollisionInfo_)
-    {
-        glPushMatrix();
-        glTranslatef(ball_.Position().X(), ball_.Position().Y(), ball_.Position().Z());
-        glutWireSphere(/*2.29934*//*1.9909358*/ 1.1496694, 10, 10);
-        glPopMatrix();
-    }
-	
-    //
-    // 원점 그리기
-    //
-   /* static float CenterPointMaterial[] = { 1.0f, 0.0f, 0.0f, 0.0f };
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, CenterPointMaterial);
-    glutSolidSphere(0.5f, 10, 10);*/
+    // 실물 스프라이트 그리기
+    //glTranslatef(0.0f, 0.0f, 1.5f);
+    DrawSprites();
 
-
-    glPushMatrix();
-		glColor3f(1.0f, 0.0f, 0.0f);
-		glBegin(GL_LINES);
-		glVertex3f(0, 1, 0);
-		glVertex3f(0, 0, 0);
-		glEnd();
-        glBegin(GL_LINES);
-		glVertex3f(0, 0, 0);
-		glVertex3f(1, 0, 0);
-		glEnd();
-        glBegin(GL_LINES);
-		glVertex3f(0, 0, 0);
-		glVertex3f(0, 0, 1);
-		glEnd();
-	glPopMatrix();
-    DrawString3(GLUT_BITMAP_8_BY_13, "X Axis", 1, 0, 0);
-    DrawString3(GLUT_BITMAP_8_BY_13, "Y Axis", 0, 1, 0);
-    DrawString3(GLUT_BITMAP_8_BY_13, "Z Axis", 0, 0, 1);
-
-    //
-    // 디버그용, 충돌 상자
-    //
-    glDisable(GL_LIGHTING);
-    glColor3f(1.0f, 0.0f, 0.0f);
-    Box box;
-    box.Center() = pins_[0].GetRigidBody().GetPosition();
-    box.Extent(0) = 1;
-    box.Extent(1) = 2;
-    box.Extent(2) = 3;
-    box.Axis(0) = Vector3(1.0, 0.0, 0.0);
-    box.Axis(1) = Vector3(0.0, 1.0, 0.0);
-    box.Axis(2) = Vector3(0.0, 0.0, 1.0);
-
-    box.Extent(0) = 0.31128f;
-    box.Extent(1) = 0.31128f;
-    box.Extent(2) = 0.97743f;
-
-    glLoadIdentity();
-    pins_[0].Draw();
-    //glTranslatef(-pins_[0].ModelCenter().X(), -pins_[0].ModelCenter().Y(), -pins_[0].ModelCenter().Z());
-    DrawBox(box);
-
-    //DrawSphere();
-    glEnable(GL_LIGHTING);
+    DrawOrigin();
+    DrawCollisionInfo();
 }
 
 Ball& World::GetBall()
@@ -739,6 +633,145 @@ void World::DrawSphere(Sphere& sphere)
     glLoadIdentity();
 
     glutWireSphere(sphere.Radius(), 20, 20);
+}
+
+void World::DrawShadows()
+{
+    float shadow_plane[] = { 0.0f, 0.0f, 100.0f, 1.0f };
+	Vector3 vec = light_.GetLocation();
+	float position[] = {vec.X(), vec.Y(), vec.Z(), 1.0f};
+	BuildShadowMatrix(shadow_matrix, position, shadow_plane);
+	
+    glStencilFunc(GL_EQUAL, 1, 0xFFFFFFFF);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_DECR);
+    glDisable(GL_LIGHTING);
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glColor4f(0.1f, 0.1f, 0.1f, 0.8f);
+    
+    glPushMatrix();
+    glTranslatef(0.0f, -0.8f, 0.5f);
+    glMultMatrixf(shadow_matrix);
+   
+    DrawSprites();
+   
+    glPopMatrix();
+    glDisable(GL_BLEND);
+    glEnable(GL_DEPTH_TEST);
+}
+
+void World::DrawReflections()
+{
+    //glTranslatef(1.0f, 0.0f, -3.6f);  // * 필요없는 Translate로 보임
+	glColorMask(0, 0, 0, 0);
+	glEnable(GL_STENCIL_TEST);
+	glStencilFunc(GL_ALWAYS, 1, 1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	glDisable(GL_DEPTH_TEST);
+	DrawFloor();
+	glEnable(GL_DEPTH_TEST);
+	glColorMask(1,1,1,1);
+	glStencilFunc(GL_EQUAL, 1, 1);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
+	
+    glPushMatrix();
+    glTranslatef(0.0f, 0.0f, -1.5f);
+	glScalef(1.0f, 1.0f, -1.0f);
+	
+    DrawSprites();
+	
+    glPopMatrix();
+}
+
+void World::DrawOrigin()
+{
+    glLoadIdentity();
+   /* static float CenterPointMaterial[] = { 1.0f, 0.0f, 0.0f, 0.0f };
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, CenterPointMaterial);
+    glutSolidSphere(0.5f, 10, 10);*/
+    glPushMatrix();
+		glColor3f(1.0f, 0.0f, 0.0f);
+		glBegin(GL_LINES);
+		glVertex3f(0, 1, 0);
+		glVertex3f(0, 0, 0);
+		glEnd();
+        glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(1, 0, 0);
+		glEnd();
+        glBegin(GL_LINES);
+		glVertex3f(0, 0, 0);
+		glVertex3f(0, 0, 1);
+		glEnd();
+	glPopMatrix();
+    DrawString3(GLUT_BITMAP_8_BY_13, "X Axis", 1, 0, 0);
+    DrawString3(GLUT_BITMAP_8_BY_13, "Y Axis", 0, 1, 0);
+    DrawString3(GLUT_BITMAP_8_BY_13, "Z Axis", 0, 0, 1);
+}
+
+void World::DrawSprites()
+{
+    ball_.Draw();
+	for(uint i = 0; i < pins_.size(); ++i)
+	{
+		pins_[i].Draw();
+	}
+}
+
+void World::DrawCollisionInfo()
+{
+    if(doShowCollisionInfo_)
+    {
+        glPushMatrix();
+        glTranslatef(ball_.Position().X(), ball_.Position().Y(), ball_.Position().Z());
+        glutWireSphere(/*2.29934*//*1.9909358*/ 1.1496694, 10, 10);
+        glPopMatrix();
+    }
+
+    // 디버그용, 충돌 상자
+    glDisable(GL_LIGHTING);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    Box box;
+    box.Center() = pins_[0].GetRigidBody().GetPosition();
+    box.Extent(0) = 1;
+    box.Extent(1) = 2;
+    box.Extent(2) = 3;
+    box.Axis(0) = Vector3(1.0, 0.0, 0.0);
+    box.Axis(1) = Vector3(0.0, 1.0, 0.0);
+    box.Axis(2) = Vector3(0.0, 0.0, 1.0);
+
+    box.Extent(0) = 0.31128f;
+    box.Extent(1) = 0.31128f;
+    box.Extent(2) = 0.97743f;
+
+    glLoadIdentity();
+    pins_[0].Draw();
+    //glTranslatef(-pins_[0].ModelCenter().X(), -pins_[0].ModelCenter().Y(), -pins_[0].ModelCenter().Z());
+    DrawBox(box);
+
+    //DrawSphere();
+    glEnable(GL_LIGHTING);
+
+    //
+    // 각 스프라이트 별 정보
+    //
+    const RigidBody& body = ball_.GetRigidBody();
+    const Vector3& position = body.GetPosition();
+    const Vector3& center = ball_.ModelCenter();
+
+    glDisable(GL_DEPTH_TEST);
+
+    CStringA str;
+    str.Format("Pos(%.2f, %.2f, %.2f", position.X(), position.Y(), position.Z());
+    DrawString3(GLUT_BITMAP_8_BY_13, str, position.X(), position.Y(), position.Z());
+
+    glPushMatrix();
+        glTranslatef(ball_.Position().X(), ball_.Position().Y(), ball_.Position().Z());
+        glutWireSphere(ball_.CoveringSphere().Radius(), 10, 10);
+    glPopMatrix();
+
+    glEnable(GL_DEPTH_TEST);
 }
 
 }
