@@ -1,0 +1,71 @@
+﻿빌드 시작: 2011-06-19 오전 12:16:08
+     1>4 노드의 "C:\Users\user\Documents\SVN\Term\Bowling\trunk\Source2\Graphics\Graphics.vcxproj" 프로젝트(build 대상)입니다.
+     1>InitializeBuildStatus:
+         "AlwaysCreate"이(가) 지정되었기 때문에 "Debug\Graphics.unsuccessfulbuild"을(를) 만들고 있습니다.
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _LIB /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt BumpMapFunction.cpp CameraView.cpp DirectLight.cpp Extents.cpp Material.cpp MaterialCookTorrance.cpp PixelArray.cpp RgbImage.cpp TextureAffineXform.cpp TextureBilinearXform.cpp TextureCheckered.cpp TextureMapBase.cpp TextureMultiFaces.cpp TextureRgbImage.cpp TextureSequence.cpp TransformViewable.cpp ViewableBase.cpp ViewableBezierSet.cpp ViewableCone.cpp ViewableCylinder.cpp ViewableEllipsoid.cpp ViewableParallelepiped.cpp ViewableParallelogram.cpp ViewableSphere.cpp ViewableTorus.cpp ViewableTriangle.cpp
+         ViewableTriangle.cpp
+         ViewableTorus.cpp
+         ViewableSphere.cpp
+         ViewableParallelogram.cpp
+         ViewableParallelepiped.cpp
+         ViewableEllipsoid.cpp
+         ViewableCylinder.cpp
+         ViewableCone.cpp
+         ViewableBezierSet.cpp
+         ViewableBase.cpp
+         TransformViewable.cpp
+         TextureSequence.cpp
+         TextureRgbImage.cpp
+         TextureMultiFaces.cpp
+         TextureMapBase.cpp
+         TextureCheckered.cpp
+         TextureBilinearXform.cpp
+         TextureAffineXform.cpp
+         RgbImage.cpp
+         PixelArray.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         MaterialCookTorrance.cpp
+         Material.cpp
+         Extents.cpp
+         DirectLight.cpp
+         CameraView.cpp
+         BumpMapFunction.cpp
+         코드를 생성하고 있습니다...
+       Lib:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\Lib.exe /OUT:"Debug\Graphics.lib" /NOLOGO Debug\BumpMapFunction.obj
+         Debug\CameraView.obj
+         Debug\DirectLight.obj
+         Debug\Extents.obj
+         Debug\Material.obj
+         Debug\MaterialCookTorrance.obj
+         Debug\PixelArray.obj
+         Debug\RgbImage.obj
+         Debug\TextureAffineXform.obj
+         Debug\TextureBilinearXform.obj
+         Debug\TextureCheckered.obj
+         Debug\TextureMapBase.obj
+         Debug\TextureMultiFaces.obj
+         Debug\TextureRgbImage.obj
+         Debug\TextureSequence.obj
+         Debug\TransformViewable.obj
+         Debug\ViewableBase.obj
+         Debug\ViewableBezierSet.obj
+         Debug\ViewableCone.obj
+         Debug\ViewableCylinder.obj
+         Debug\ViewableEllipsoid.obj
+         Debug\ViewableParallelepiped.obj
+         Debug\ViewableParallelogram.obj
+         Debug\ViewableSphere.obj
+         Debug\ViewableTorus.obj
+         Debug\ViewableTriangle.obj
+         Graphics.vcxproj -> C:\Users\user\Documents\SVN\Term\Bowling\trunk\Source2\Graphics\Debug\Graphics.lib
+       FinalizeBuildStatus:
+         "Debug\Graphics.unsuccessfulbuild" 파일을 삭제하고 있습니다.
+         "Debug\Graphics.lastbuildstate"에 연결(touching)하고 있습니다.
+     1>"C:\Users\user\Documents\SVN\Term\Bowling\trunk\Source2\Graphics\Graphics.vcxproj" 프로젝트를 빌드했습니다(build 대상).
+
+빌드했습니다.
+
+경과 시간: 00:00:11.96
