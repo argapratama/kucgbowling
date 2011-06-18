@@ -376,14 +376,9 @@ void CBasicFunctionsDlg::InitializeBall(Virgin::Ball& ball)
 
 void CBasicFunctionsDlg::InitializePin(Pin& pin)
 {
-    RigidBody& pinBody = pin.GetRigidBody();
-    pinBody.SetMass(10.0f);
+    const float mass = 10.0f;
 
-    pinBody.SetPosition(Vector3(0.0f, 0.0f, 0.0));
-    pinBody.SetInternalForce(Vector3::ZERO);
-    pinBody.SetInternalTorque(Vector3::ZERO);
-    pinBody.SetExternalForce(Vector3::ZERO);
-    pinBody.SetExternalTorque(Vector3::ZERO);
+    RigidBody& pinBody = pin.GetRigidBody();
 
     float length = 0.31128 * 2;  // X
     float height = 0.31128 * 2;  // Y
@@ -423,6 +418,20 @@ void CBasicFunctionsDlg::InitializePin(Pin& pin)
     pin.GetBox()[7].Y() = -height / 2.0f;
     pin.GetBox()[7].Z() = -width / 2.0f;
 
+    Matrix3 inertia = Matrix3::ZERO;
+    inertia[0][0] = mass * (width*width + height*height) / 3;
+    inertia[1][1] = mass * (length*length* + height*height) / 3;
+    inertia[2][2] = mass * (width*width + length*length) / 3;
+
+    pinBody.SetMass(mass);
+    pinBody.SetBodyInertia(inertia);
+    pinBody.SetPosition(Vector3(0.0f, 0.0f, 0.0));
+    pinBody.SetInternalForce(Vector3::ZERO);
+    pinBody.SetInternalTorque(Vector3::ZERO);
+    pinBody.SetExternalForce(Vector3::ZERO);
+    pinBody.SetExternalTorque(Vector3::ZERO);
+    pinBody.SetLinearMomentum(Vector3::ZERO);
+    pinBody.SetAngularMomentum(Vector3::ZERO);
     pinBody.SetQOrientation(Quaternion::IDENTITY);
 
     pinBody.Force = World::Force;
@@ -550,7 +559,12 @@ void CBasicFunctionsDlg::UpdateAndDraw()
 
     if(!pauseCheck_.GetCheck())
     {
-        World().Update(lastTime_ - firstTime_, timeDelta);
+        static TimeSpan fakeTime(0);
+        static const TimeSpan fakeTimeDelta(30);
+
+        //World().Update(lastTime_ - firstTime_, timeDelta);
+        World().Update(fakeTime, fakeTimeDelta);
+        fakeTime += fakeTimeDelta;
     }
 
     const float Speed = static_cast<float>(speedSlider_.GetPos() / 100.0);

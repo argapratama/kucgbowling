@@ -270,15 +270,24 @@ vector<Collision>& World::Collisions()
 
 void World::DoPhysical(TimeSpan time, TimeSpan timeDelta)
 {
+    
+    // DoMotion
+   /* ball_.Update(time, timeDelta);
+    for(uint i = 0; i < pins_.size(); ++i)
+    {
+        pins_[i].Update(time, timeDelta);
+    }*/
+    
     DoCollisionDetection();
     DoCollisionResponse();
     
-    // DoMotion
     ball_.Update(time, timeDelta);
     for(uint i = 0; i < pins_.size(); ++i)
     {
         pins_[i].Update(time, timeDelta);
     }
+    // * 일단 Pin0 부터 테스트. 왜 회전이 안되는지.
+    //pins_[0].Update(time, timeDelta);
 
     totalKE_ = 0.0f;
 
@@ -330,32 +339,39 @@ void World::DoCollisionDetection()
         Vector3 box[BoxVerticeCount];
         pins_[i].GetBox(box);
 
-        int hitIndex = -1;
+        int hitDeepestIndex = -1;
         float distanceFromFloorMax = 0.0f;
         for(uint j = 0; j < BoxVerticeCount; ++j)
         {
             float distanceFromFloor = box[j].Z() - floor_.GetPosition().Z();
+
+            // Vertex가 지면과 접촉하거나 아래에 있다면
+            if(distanceFromFloor < Math::EPSILON)
+            {
+                Contact contact;
+                contact.A = &floor_;
+                contact.B = &pins_[i].GetRigidBody();
+                contact.isVFContact = true;
+                contact.N = Vector3::UNIT_Z;        // 지면 법선
+                contact.PA = Vector3::ZERO;
+                contact.PB = Vector3(box[j]);
+            
+                pins_[i].GetRigidBody().Moved() = true;
+
+                contacts_.push_back(contact);
+            }
+
+            // 여러 Vertex들이 지면 아래에 있을 경우 가장 아래인 Vertex를 구해둠(아래에서 그 만큼 지면으로 끌어올림)
             if(distanceFromFloor < distanceFromFloorMax)
             {
-                hitIndex = j;
+                hitDeepestIndex = j;
                 distanceFromFloorMax = distanceFromFloor;
             }
         }
 
-        if(hitIndex != -1)
+        if(hitDeepestIndex != -1)
         {
-            Contact contact;
-            contact.A = &floor_;
-            contact.B = &pins_[i].GetRigidBody();
-            contact.isVFContact = true;
-            contact.N = Vector3::UNIT_Z;
-            contact.PA = Vector3::ZERO;
-            contact.PB = Vector3(box[hitIndex]);
-
-            pins_[i].GetRigidBody().SetPosition(pins_[i].GetRigidBody().GetPosition() - distanceFromFloorMax*contact.N);
-            pins_[i].GetRigidBody().Moved() = true;
-
-            contacts_.push_back(contact);
+            pins_[i].GetRigidBody().SetPosition(pins_[i].GetRigidBody().GetPosition() - distanceFromFloorMax*Vector3::UNIT_Z);
         }
     }
     
@@ -471,7 +487,7 @@ void World::ComputePreimpulseVelocity(std::vector<float>& preRelVel)
 void World::ComputeImpulseMagnitude(std::vector<float>& preRelVel, std::vector<float>& impulseMag)
 {
     // coefficient of restitution
-    float fRestitution = 0.4f;
+    float fRestitution = 0.2f;
     float fTemp = 20.0f * (pins_.size() + 1/*ball count*/);
     if(totalKE_ < fTemp)
     {
@@ -713,10 +729,11 @@ void World::DrawOrigin()
 void World::DrawSprites()
 {
     ball_.Draw();
-	for(uint i = 0; i < pins_.size(); ++i)
+    pins_[0].Draw();
+	/*for(uint i = 0; i < pins_.size(); ++i)
 	{
 		pins_[i].Draw();
-	}
+	}*/
 }
 
 void World::DrawCollisionInfo()
