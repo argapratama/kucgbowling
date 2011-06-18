@@ -3,6 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LethalBowling", "LethalBowling\LethalBowling.vcxproj", "{003ED073-43D2-4684-A71A-FD665BC51C9D}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "OpenglRender", "OpenglRender\OpenglRender.vcxproj", "{77E4FB4E-BD90-499A-81E0-60B2A1736AD5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DataStructs", "DataStructs\DataStructs.vcxproj", "{A62A7AD8-E2BC-40B8-943D-58CB300E5A2A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Graphics", "Graphics\Graphics.vcxproj", "{8071E214-584E-4FF4-AF82-61CE9FCD6701}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTrace", "RayTrace\RayTrace.vcxproj", "{A8184171-45B8-46EA-83D0-438331143201}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTraceKd", "RayTraceKd\RayTraceKd.vcxproj", "{7EB20FD1-2FA2-411A-8D7D-FB37AD166368}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTraceMgr", "RaytraceMgr\RayTraceMgr.vcxproj", "{0D0A9C43-9C08-4107-9D74-E00A2AB7A9F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VrMath", "VrMath\VrMath.vcxproj", "{29BCE164-20FC-472D-BFE0-F0BDB9BFABD9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -13,6 +27,34 @@ Global
 		{003ED073-43D2-4684-A71A-FD665BC51C9D}.Debug|Win32.Build.0 = Debug|Win32
 		{003ED073-43D2-4684-A71A-FD665BC51C9D}.Release|Win32.ActiveCfg = Release|Win32
 		{003ED073-43D2-4684-A71A-FD665BC51C9D}.Release|Win32.Build.0 = Release|Win32
+		{77E4FB4E-BD90-499A-81E0-60B2A1736AD5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{77E4FB4E-BD90-499A-81E0-60B2A1736AD5}.Debug|Win32.Build.0 = Debug|Win32
+		{77E4FB4E-BD90-499A-81E0-60B2A1736AD5}.Release|Win32.ActiveCfg = Release|Win32
+		{77E4FB4E-BD90-499A-81E0-60B2A1736AD5}.Release|Win32.Build.0 = Release|Win32
+		{A62A7AD8-E2BC-40B8-943D-58CB300E5A2A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A62A7AD8-E2BC-40B8-943D-58CB300E5A2A}.Debug|Win32.Build.0 = Debug|Win32
+		{A62A7AD8-E2BC-40B8-943D-58CB300E5A2A}.Release|Win32.ActiveCfg = Release|Win32
+		{A62A7AD8-E2BC-40B8-943D-58CB300E5A2A}.Release|Win32.Build.0 = Release|Win32
+		{8071E214-584E-4FF4-AF82-61CE9FCD6701}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8071E214-584E-4FF4-AF82-61CE9FCD6701}.Debug|Win32.Build.0 = Debug|Win32
+		{8071E214-584E-4FF4-AF82-61CE9FCD6701}.Release|Win32.ActiveCfg = Release|Win32
+		{8071E214-584E-4FF4-AF82-61CE9FCD6701}.Release|Win32.Build.0 = Release|Win32
+		{A8184171-45B8-46EA-83D0-438331143201}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A8184171-45B8-46EA-83D0-438331143201}.Debug|Win32.Build.0 = Debug|Win32
+		{A8184171-45B8-46EA-83D0-438331143201}.Release|Win32.ActiveCfg = Release|Win32
+		{A8184171-45B8-46EA-83D0-438331143201}.Release|Win32.Build.0 = Release|Win32
+		{7EB20FD1-2FA2-411A-8D7D-FB37AD166368}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7EB20FD1-2FA2-411A-8D7D-FB37AD166368}.Debug|Win32.Build.0 = Debug|Win32
+		{7EB20FD1-2FA2-411A-8D7D-FB37AD166368}.Release|Win32.ActiveCfg = Release|Win32
+		{7EB20FD1-2FA2-411A-8D7D-FB37AD166368}.Release|Win32.Build.0 = Release|Win32
+		{0D0A9C43-9C08-4107-9D74-E00A2AB7A9F0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0D0A9C43-9C08-4107-9D74-E00A2AB7A9F0}.Debug|Win32.Build.0 = Debug|Win32
+		{0D0A9C43-9C08-4107-9D74-E00A2AB7A9F0}.Release|Win32.ActiveCfg = Release|Win32
+		{0D0A9C43-9C08-4107-9D74-E00A2AB7A9F0}.Release|Win32.Build.0 = Release|Win32
+		{29BCE164-20FC-472D-BFE0-F0BDB9BFABD9}.Debug|Win32.ActiveCfg = Debug|Win32
+		{29BCE164-20FC-472D-BFE0-F0BDB9BFABD9}.Debug|Win32.Build.0 = Debug|Win32
+		{29BCE164-20FC-472D-BFE0-F0BDB9BFABD9}.Release|Win32.ActiveCfg = Release|Win32
+		{29BCE164-20FC-472D-BFE0-F0BDB9BFABD9}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
