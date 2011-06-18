@@ -196,6 +196,15 @@
     <ClInclude Include="Contact.h">
       <Filter>Source\Application Class\Physics</Filter>
     </ClInclude>
+    <ClInclude Include="RayTraceSetup2.h">
+      <Filter>Source\External</Filter>
+    </ClInclude>
+    <ClInclude Include="RayTraceStats.h">
+      <Filter>Source\External</Filter>
+    </ClInclude>
+    <ClInclude Include="RayTraceKd.h">
+      <Filter>Source\External</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BasicFunctionsDlg.cpp">
@@ -326,6 +335,15 @@
     </ClCompile>
     <ClCompile Include="Contact.cpp">
       <Filter>Source\Application Class\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTraceSetup2.cpp">
+      <Filter>Source\External</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTraceStats.cpp">
+      <Filter>Source\External</Filter>
+    </ClCompile>
+    <ClCompile Include="RayTraceKd.cpp">
+      <Filter>Source\External</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
