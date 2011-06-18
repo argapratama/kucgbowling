@@ -68,6 +68,8 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>opengl32.lib;glu32.lib;glaux.lib;glut32.lib</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
@@ -142,6 +144,9 @@
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Pin.h" />
     <ClInclude Include="Plane.h" />
+    <ClInclude Include="RayTraceKd.h" />
+    <ClInclude Include="RayTraceSetup2.h" />
+    <ClInclude Include="RayTraceStats.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="TMath.h" />
     <ClInclude Include="OpenGlException.h" />
@@ -196,6 +201,11 @@
     <ClCompile Include="Pin.cpp" />
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point.h" />
+    <ClCompile Include="RayTraceKd.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="RayTraceSetup2.cpp" />
+    <ClCompile Include="RayTraceStats.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="TMath.cpp" />
     <ClCompile Include="OpenGlException.cpp" />
@@ -218,6 +228,31 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BasicFunctions.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataStructs\DataStructs.vcxproj">
+      <Project>{a62a7ad8-e2bc-40b8-943d-58cb300e5a2a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\Graphics\Graphics.vcxproj">
+      <Project>{8071e214-584e-4ff4-af82-61ce9fcd6701}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenglRender\OpenglRender.vcxproj">
+      <Project>{77e4fb4e-bd90-499a-81e0-60b2a1736ad5}</Project>
+      <Private>true</Private>
+      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
+      <CopyLocalSatelliteAssemblies>false</CopyLocalSatelliteAssemblies>
+      <LinkLibraryDependencies>true</LinkLibraryDependencies>
+      <UseLibraryDependencyInputs>true</UseLibraryDependencyInputs>
+    </ProjectReference>
+    <ProjectReference Include="..\RaytraceMgr\RayTraceMgr.vcxproj">
+      <Project>{0d0a9c43-9c08-4107-9d74-e00a2ab7a9f0}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RayTrace\RayTrace.vcxproj">
+      <Project>{a8184171-45b8-46ea-83d0-438331143201}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\VrMath\VrMath.vcxproj">
+      <Project>{29bce164-20fc-472d-bfe0-f0bdb9bfabd9}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

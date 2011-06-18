@@ -6,6 +6,8 @@
 #include "World.h"
 #include <gl/GLU.h>
 #include <glut.h>
+#include "RayTraceSetup2.h"
+#include "RayTraceKd.cpp"
 
 using namespace OpenGl;
 using namespace Virgin;
@@ -67,13 +69,14 @@ void OpenGlPanel::OnSize(UINT nType, int cx, int cy)
     {
         cy = 1;
     }
-    //glViewport(0, 0, cx, cy);
     width_ = cx;
     height_ = cy;
 
     double aspect = static_cast<double>(cx / cy);
-    World::Instance().GetCamera().SetAspect(aspect);
-    World::Instance().GetCamera().Apply();
+    /*World::Instance().GetCamera().SetAspect(aspect);
+    World::Instance().GetCamera().Apply();*/
+    ResizeWindow(cx, cy);
+	DrawScene();
 }
 
 void OpenGlPanel::InitializeOpenGl()
@@ -89,16 +92,42 @@ void OpenGlPanel::InitializeOpenGl()
 	glDisable(GL_BLEND);
 	glEnable(GL_ALPHA_TEST);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+    InitializeSceneGeometry();
 	World::Instance().InitializeGL();
+
 }
 
 void OpenGlPanel::DrawScene()
 {
-    renderingContext_->SetThisCurrent(clientDc_->m_hDC);
-    glViewport(0, 0, width_, height_);
-    World::Instance().GetCamera().Apply();
-
-    World::Instance().DrawScene();
+	renderingContext_->SetThisCurrent(clientDc_->m_hDC);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+	glViewport(0, 0, width_, height_);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	glDisable(GL_LIGHTING);
+	if(isRButtonDown_)
+	{
+		
+		Camera camera;
+		camera.MoveTo(1.0, 2.0, 1.0);
+		camera.SetUpVector(0.0, 0.0, 1.0);
+		camera.LookAt(0.0, 0.0, 0.0);
+		camera.SetToOrthographicView(0, width_, 0, height_, -10, 10);
+		camera.Apply();
+		RayTraceView();
+	}
+	else
+	{
+		double aspect = static_cast<double>(width_ / height_);
+		World::Instance().GetCamera().SetAspect(aspect);
+		World::Instance().GetCamera().SetUpVector(0.0, 0.0, 1.0);
+		World::Instance().GetCamera().MoveTo(10.0, 1.0, 2.0);
+		World::Instance().GetCamera().SetToPerspectiveView(100.0, aspect, 1.5, 1000);
+		World::Instance().GetCamera().Apply();    
+		World::Instance().DrawScene();
+	}
 
     SwapBuffers(clientDc_->m_hDC);
 }
@@ -110,6 +139,7 @@ void OpenGlPanel::OnPaint()
     // 그리기 메시지에 대해서는 CWnd::OnPaint()을(를) 호출하지 마십시오.
 
     DrawScene();
+
 }
 
 
