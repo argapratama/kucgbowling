@@ -1,0 +1,6 @@
+﻿Moore M, Wilhelms J. Collision detection and response
+for computer animation, proc SIGGRAPH ’88. Computer
+Graphics, 1988;22(4):289–98
+
+물리 모델링 책 사야됨
+
