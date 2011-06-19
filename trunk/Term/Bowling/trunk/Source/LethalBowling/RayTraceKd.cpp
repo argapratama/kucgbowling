@@ -401,3 +401,16 @@ static void ResizeWindow(int w, int h)
 	ActiveScene->CalcNewScreenDims( (double)w / (double)h );
 	ActiveScene->GetCameraView().SetScreenPixelSize( *pixels );
 }
+
+void InitializeSceneGeometry()
+{
+	SetUpScene2();
+	ActiveScene = &TheScene2;
+
+	pixels = new PixelArray(10,10);		// Array of pixels
+	ActiveScene->GetCameraView().SetScreenPixelSize( *pixels );
+	ActiveScene->RegisterCameraView();
+
+	// Build the kd-Tree.
+	myBuildKdTree();
+}
