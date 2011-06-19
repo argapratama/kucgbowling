@@ -729,11 +729,10 @@ void World::DrawOrigin()
 void World::DrawSprites()
 {
     ball_.Draw();
-    pins_[0].Draw();
-	/*for(uint i = 0; i < pins_.size(); ++i)
+	for(uint i = 0; i < pins_.size(); ++i)
 	{
 		pins_[i].Draw();
-	}*/
+	}
 }
 
 void World::DrawCollisionInfo()
